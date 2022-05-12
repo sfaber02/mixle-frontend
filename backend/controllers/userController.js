@@ -10,7 +10,6 @@ const {
     deleteUser,
     getUser,
 } = require("../queries/users.js");
-const e = require("express");
 
 // CONFIGURATION
 const user = express.Router();
@@ -43,13 +42,27 @@ user.post("/login", async (req, res) => {
     try {
         const user = await getUser(email);
         console.log(user);
-        if (user.email) {
+        if (!user.email) {
             res.status(400).send("Email not found.");
         } else {
             const isValidPassword = await bcrypt.compare(
                 password,
                 user.password
             );
+            if (isValidPassword) {
+                const token = jwt.sign({ email }, process.env.SECRET_KEY);
+
+                res.status(200).json({
+                    message: "USER signed in!",
+                    user: user.username,
+                    email: user.email,
+                    token,
+                });
+            } else {
+                res.status(400).json({
+                    error: "Enter correct password!",
+                });
+            }
         }
     } catch (error) {
         res.status(404).json({ error: error });
@@ -67,11 +80,6 @@ user.delete("/:id", async (req, res) => {
     }
 });
 
-/* REQUIRED ROUTES
-create user *DONE
-delete user *DONE
-authenticate user
-update user
-*/
+// UPDATE USER
 
 module.exports = user;
