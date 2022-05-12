@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS mixle;
 CREATE DATABASE mixle;
 
-/c mixle;
+\c mixle;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -17,7 +17,7 @@ CREATE TABLE audio (
     artist VARCHAR,
     album VARCHAR,
     audio_key VARCHAR,
-    user INTEGER REFERENCES users (user_id) ON DELETE CASCADE,
+    users INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     totalVotes INTEGER
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE effects (
     compressor_ratio INTEGER,
     compressor_threshold INTEGER,
     delay_time INTEGER,
-    delay_feedback INTEGER ,
+    delay_feedback INTEGER,
     play_speed INTEGER,
     audio INTEGER REFERENCES audio (audio_id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users (user_id) ON DELETE CASCADE
