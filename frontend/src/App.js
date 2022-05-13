@@ -1,5 +1,5 @@
 import React from 'react';
-import { MixerWrapper } from './Components/MixerSplashWrapper.js';
+import { MixerWrapper } from './Components/mixersplashwrapper.js';
 
 
 

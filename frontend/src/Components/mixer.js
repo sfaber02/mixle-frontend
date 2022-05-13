@@ -46,11 +46,9 @@ const Mixer = props => {
       track.current.buffer = audio;
       //ALL THE EFFECTS GO HERE
       track.current.connect(ctx.current.destination);
-      // track.current.start(ctx.current.currentTime);
    };
 
    //Transport control click handlers
-   
    const handlePlayPause = () => {
     if (playState.state === 'stopped') {
       track.current.start(ctx.current.currentTime);
