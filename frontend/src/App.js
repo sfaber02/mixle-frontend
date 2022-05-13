@@ -1,13 +1,12 @@
 import React from 'react';
-
-import { Mixer } from './Components/mixer.js';
+import { MixerWrapper } from './Components/MixerSplashWrapper.js';
 
 
 
 function App() {
     return (
         <div className="App">
-            <Mixer />
+            <MixerWrapper />
         </div>
     );
 }
