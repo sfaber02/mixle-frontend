@@ -1,9 +1,12 @@
-import AudioExp from "./Components/audioExp";
+import React from 'react';
+import { MixerWrapper } from './Components/MixerSplashWrapper.js';
+
+
+
 function App() {
     return (
         <div className="App">
-            <h3>MIXLE</h3>
-            <AudioExp />
+            <MixerWrapper />
         </div>
     );
 }
