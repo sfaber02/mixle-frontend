@@ -43,14 +43,13 @@ user.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await getUser(email);
-    console.log(user);
     if (!user.email) {
       res.status(400).send("Email not found.");
     } else {
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (isValidPassword) {
         const token = jwt.sign({ email }, process.env.SECRET_KEY);
-
+        
         res.status(200).json({
           message: "USER signed in!",
           user: user.username,

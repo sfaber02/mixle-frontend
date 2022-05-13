@@ -16,9 +16,9 @@ CREATE TABLE audio (
     title VARCHAR,
     artist VARCHAR,
     album VARCHAR,
-    audio_key VARCHAR,
-    users INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-    totalVotes INTEGER
+    audio_key TEXT,
+    totalVotes INTEGER DEFAULT 0,
+    used BOOLEAN DEFAULT false
 );
 
 CREATE TABLE effects (
