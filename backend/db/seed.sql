@@ -1,5 +1,5 @@
 /c mixle;
-
+// yerrr
 INSERT INTO users (username, email, password, avaliableVotes)VALUES ();
 
 INSERT INTO audio (title, artist, album, audio_key, user, totalVotes) VALUES ();
