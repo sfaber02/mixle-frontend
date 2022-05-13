@@ -7,7 +7,7 @@ import React, { useEffect, useState, useRef } from "react";
 /**
  * TO DO:
  * Need to add loading progress and have buttons be disabled until song is loaded
- * Add pause button
+ * Seek bar
  * Make current track time display
  * 
  * 
@@ -16,7 +16,8 @@ import React, { useEffect, useState, useRef } from "react";
  */
 const Mixer = props => {
   const [playPause, setPlayPause] = useState(false);
-  const [playStop, setPlayStop] = useState(false);
+  const [playState, setPlayState] = useState({ state: 'stopped' });
+
 
   // ctx = audio context element
 // track = the current audio track
@@ -43,18 +44,34 @@ const Mixer = props => {
       if (!decodedAudio.current) decodedAudio.current = audio;
       track.current = ctx.current.createBufferSource();
       track.current.buffer = audio;
+      //ALL THE EFFECTS GO HERE
       track.current.connect(ctx.current.destination);
       // track.current.start(ctx.current.currentTime);
    };
 
    //Transport control click handlers
-   const handlePlay = () => track.current.start(ctx.current.currentTime);
+   
    const handlePlayPause = () => {
-    playPause ? ctx.current.suspend() : ctx.current.resume();
+    if (playState.state === 'stopped') {
+      track.current.start(ctx.current.currentTime);
+      setPlayState({state: 'playing'});
+    } else if (playState.state === 'playing') {
+      ctx.current.suspend();
+      setPlayState({state: 'paused'});
+    } else if (playState.state === 'paused') {
+      ctx.current.resume();
+      setPlayState({state: 'playing'});
+    }
+
+
     setPlayPause(prev => !prev);
    } 
+
+
    const handleStop = () => {
     track.current.stop(0);
+    setPlayState({state: 'stopped'});
+    setPlayPause(false);
     createTrackNode(decodedAudio.current);
    }
 
@@ -63,7 +80,7 @@ const Mixer = props => {
    return (
       <div id="mainMixerContainer">
          <h1>MIXER</h1>
-         <button onClick={handlePlay}>Play</button>
+         {/* <button onClick={handlePlay}>Play</button> */}
          <button onClick={handlePlayPause}>{playPause ? "Pause" : "Play"}</button>
          <button onClick={handleStop}>Stop</button>
       </div>
