@@ -1,10 +1,13 @@
-import AudioExp from "./Components/audioExp";
+import React from 'react';
+
+import { Mixer } from './Components/mixer.js';
+
+
+
 function App() {
     return (
         <div className="App">
-            <h3>MIXLE</h3>
-            <h3>GITHUB IS WORKING</h3>
-            <AudioExp />
+            <Mixer />
         </div>
     );
 }
