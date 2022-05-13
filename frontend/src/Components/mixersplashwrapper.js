@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Mixer } from "./Mixer";
-import { SplashPage } from "./SplashPage";
+import { Mixer } from "./Mixer.js";
+import { SplashPage } from "./SplashPage.js";
 
 const MixerWrapper = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -19,3 +19,6 @@ const MixerWrapper = () => {
 };
 
 export { MixerWrapper };
+
+
+// frontend/src/Components/Mixer.js
