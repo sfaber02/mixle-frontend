@@ -22,22 +22,26 @@ const Mixer = (props) => {
   const [firstLoad, setFirstLoad] = useState(true);
   const [fx, setFx] = useState(() => {
     return {
+      speed: {
+         rate: .5,
+         detune: 0,
+      },
       delay: {
         time: 0,
         feedback: 0.2,
-        dry: 0.2,
+        dry: .8,
         wet: 1,
       },
       compressor: {
-        threshold: -50,
-        ratio: 10,
+        threshold: -100,
+        ratio: 1,
         attack: 0.02,
-        release: 1,
+        release: .02,
       },
       eq: {
         band1: {
           frequency: 100,
-          gain: 0,
+          gain: -10,
         },
         band2: {
           frequency: 500,
@@ -114,9 +118,9 @@ const Mixer = (props) => {
 
       // Changing default filters
       band1.current.type = "lowshelf";
-      band2.current.type = "notch";
-      band3.current.type = "notch";
-      band4.current.type = "notch";
+      band2.current.type = "peaking";
+      band3.current.type = "peaking";
+      band4.current.type = "peaking";
       band5.current.type = "highshelf";
 
       // //Create Compressor Node
@@ -124,7 +128,7 @@ const Mixer = (props) => {
 
       //Fetch Song from Server and decode audio for playback
       fetch(
-        "http://www.shawnfaber.com/audio/01%20-%20Metronomic%20Underground%20-%20USEE19694710%20-%20355425551.flac"
+        "http://www.shawnfaber.com/audio/B5%20Tomorrow%20Never%20Knows.mp3"
       )
         .then((data) => {
           console.log(data);
@@ -188,6 +192,10 @@ const Mixer = (props) => {
   //SET FX settings
   useEffect(() => {
     if (!loading) {
+       //Set play speed
+      track.current.playbackRate.value = fx.speed.rate;
+      track.current.detune.value = fx.speed.detune;
+      
       //Set Delay settings
       delayNode.current.delayTime.value = fx.delay.time;
       feedbackNode.current.gain.value = fx.delay.feedback;
@@ -217,15 +225,13 @@ const Mixer = (props) => {
   }, [loading, firstLoad, fx]);
 
   // CHANGE FX SETTINGS HANDLERS
-  const setDelayTime = (e) => {
+  const setDelayFx = (e) => {
     setFx((prev) => {
       return {
         ...prev,
         delay: {
-          time: e.target.valueAsNumber,
-          feedback: prev.delay.feedback,
-          dry: prev.delay.dry,
-          wet: prev.delay.wet,
+           ...prev.delay,
+           [e.target.id]: e.target.value,
         },
       };
     });
@@ -287,9 +293,7 @@ const Mixer = (props) => {
             {playPause ? "Pause" : "Play"}
           </button>
           <button onClick={handleStop}>Stop</button>
-          <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
-            2
-          )}`}</div>
+          <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</div>
           <input
             type="range"
             min="0"
@@ -300,12 +304,13 @@ const Mixer = (props) => {
           <br />
           <label>Delay Time {fx.delay.time * 1000}ms</label>
           <input
+            id="time"
             type="range"
             min="0"
             max="1"
             step=".01"
             value={fx.delay.time}
-            onChange={setDelayTime}
+            onChange={setDelayFx}
           />
         </div>
       )}
