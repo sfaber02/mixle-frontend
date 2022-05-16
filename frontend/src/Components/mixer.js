@@ -34,6 +34,28 @@ const Mixer = (props) => {
         attack: 0.02,
         release: 1,
       },
+      eq: {
+        band1: {
+          frequency: 100,
+          gain: 0,
+        },
+        band2: {
+          frequency: 500,
+          gain: 0,
+        },
+        band3: {
+          frequency: 1500,
+          gain: 0,
+        },
+        band4: {
+          frequency: 4000,
+          gain: 0,
+        },
+        band5: {
+          frequency: 8000,
+          gain: 0,
+        },
+      },
     };
   });
 
@@ -89,6 +111,13 @@ const Mixer = (props) => {
       band3.current = ctx.current.createBiquadFilter();
       band4.current = ctx.current.createBiquadFilter();
       band5.current = ctx.current.createBiquadFilter();
+
+      // Changing default filters
+      band1.current.type = "lowshelf";
+      band2.current.type = "notch";
+      band3.current.type = "notch";
+      band4.current.type = "notch";
+      band5.current.type = "highshelf";
 
       // //Create Compressor Node
       compressorNode.current = ctx.current.createDynamicsCompressor();
@@ -164,6 +193,20 @@ const Mixer = (props) => {
       feedbackNode.current.gain.value = fx.delay.feedback;
       dryNode.current.gain.value = fx.delay.dry;
       wetNode.current.gain.value = fx.delay.wet;
+
+      // SET EQ settings
+      band1.current.frequency.value = fx.eq.band1.frequency;
+      band2.current.frequency.value = fx.eq.band2.frequency;
+      band3.current.frequency.value = fx.eq.band3.frequency;
+      band4.current.frequency.value = fx.eq.band4.frequency;
+      band5.current.frequency.value = fx.eq.band5.frequency;
+
+      band1.current.frequency.value = fx.eq.band1.gain;
+      band2.current.gain.value = fx.eq.band2.gain;
+      band3.current.gain.value = fx.eq.band3.gain;
+      band4.current.gain.value = fx.eq.band4.gain;
+      band5.current.gain.value = fx.eq.band5.gain;
+
 
       //Set compressor settings
       compressorNode.current.threshold.value = fx.compressor.threshold;
