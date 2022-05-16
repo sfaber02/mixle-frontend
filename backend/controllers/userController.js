@@ -19,6 +19,7 @@ const user = express.Router();
 // REGISTER POST REQUEST
 user.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
+  // console.log(await doesUserExist(email));
   try {
     if (await doesUserExist(email)) {
       res.status(400).send("User with that email already exists");
@@ -27,14 +28,14 @@ user.post("/register", async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
     try {
       await addUser(username, email, hashPassword);
+      console.log(addUser);
       res.status(200).send("User has been created!");
-
       const token = jwt.sign({ email: email }, process.env.SECRET_KEY);
     } catch (err) {
       res.status(500).send(err, "Failed User creation");
     }
   } catch (err) {
-    res.status(404).send("Post failed.", err);
+    res.status(404).send("Post failed");
   }
 });
 

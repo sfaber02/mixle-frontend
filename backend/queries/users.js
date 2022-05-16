@@ -33,6 +33,7 @@ const getUserById = async (id) => {
 
 // CREATE A USER
 const addUser = async (name, email, password) => {
+  console.log(name, email, password);
   try {
     const newUser = await db.one(
       "INSERT INTO users (username, email, password) VALUES ($1,$2,$3) RETURNING username, email",
