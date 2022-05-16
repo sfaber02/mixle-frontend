@@ -14,7 +14,6 @@ const Mixer = props => {
     * play/pause - boolean state for play/pause toggling
     * playstate - object state for tracking the current play state (e.g. 'playing', 'paused')
     * time - object state for current time of track / total duration of track
-   
     */
    const [playPause, setPlayPause] = useState(false);
    const [playState, setPlayState] = useState({ state: "stopped" });
@@ -39,12 +38,11 @@ const Mixer = props => {
       });
    });
 
-   /**
-    * timer - ref for timer interval
-    * track = ref for current audio track
-    * decodedaudio = ref to store decoded audio (used to restart buffer)
-    */
+   //Refs for time display
    const timer = useRef();
+   const timeStart = useRef();
+
+   //Refs for audio node and decoded audio array
    const track = useRef();
    const decodedAudio = useRef(false);
 
@@ -59,6 +57,9 @@ const Mixer = props => {
    const wetNode = useRef();
    const delayOutNode = useRef();
 
+   //Refs for EQ nodes
+   const band1 = useRef();
+
    //Ref for Compressor node
    const compressorNode = useRef();
 
@@ -67,10 +68,7 @@ const Mixer = props => {
       if (!props.showSplash) {
          //Create audio context and canvas context
          ctx.current = new (window.AudioContext || window.webkitAudioContext)();
-         // const canvas = document.getElementById('visualizer');
-         // canvas.width = window.innerWidth;
-         // canvas.height = window.innerHeight;
-         // canvasCtx.current = canvas.getContext('2d');
+         timeStart.current = Date.now();
 
          //Create Delay Nodes
          delayNode.current = ctx.current.createDelay();
@@ -94,9 +92,18 @@ const Mixer = props => {
  
          //Fetch Song from Server and decode audio for playback
          fetch("http://www.shawnfaber.com/audio/01%20Packt%20Like%20Sardines%20In%20A%20Crushd%20Tin%20Box.flac")
-            .then(data => data.arrayBuffer())
-            .then(arrayBuffer => ctx.current.decodeAudioData(arrayBuffer))
-            .then(decodedAudio => createTrackNode(decodedAudio))
+            .then((data) => {
+               console.log (data);
+               return data.arrayBuffer();
+            })
+            .then(arrayBuffer => {
+               console.log(arrayBuffer);
+               return ctx.current.decodeAudioData(arrayBuffer)
+            })
+            .then(decodedAudio => {
+               console.log (decodedAudio);
+               createTrackNode(decodedAudio)
+            })
             .catch(err => console.log(err));
       }
    }, [props.showSplash]);
@@ -106,11 +113,17 @@ const Mixer = props => {
     * @param {array} audio - decoded audio from fetch
     */
    const createTrackNode = audio => {
+      //store decoded audio in ref for future use
       if (!decodedAudio.current) decodedAudio.current = audio;
+
+      //create a new audio source from decoded audio
       track.current = ctx.current.createBufferSource();
       track.current.buffer = decodedAudio.current;
+
+      //intialize time state, set loading state
       setTime({ current: 0, duration: track.current.buffer.duration });
       setLoading(false);
+      
       connectNodes();
    };
    
@@ -137,7 +150,6 @@ const Mixer = props => {
    //SET FX settings
    useEffect(() => {
       if (!loading) {
-         console.log ('1');
          //Set Delay settings
          delayNode.current.delayTime.value = fx.delay.time;
          feedbackNode.current.gain.value = fx.delay.feedback;
@@ -154,9 +166,8 @@ const Mixer = props => {
    }, [loading, firstLoad, fx])
 
    
-   // Change FX settings handlers
+   // CHANGE FX SETTINGS HANDLERS
    const setDelayTime = (e) => {
-      console.log (e.target.valueAsNumber);
       setFx(prev => {
          return {
             ...prev,
@@ -173,6 +184,7 @@ const Mixer = props => {
    //handles start and stop of timer
    const startTimer = () => {
       timer.current = setInterval(() => {
+         console.log (ctx.current.currentTime);
          setTime(prev => {
             return {
                ...prev,
@@ -226,8 +238,10 @@ const Mixer = props => {
                </button>
                <button onClick={handleStop}>Stop</button>
                <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</div>
-               <label>Delay Time</label>
-               <input type="range" min='0' max='1' step='.01' value='0' onChange={setDelayTime} />
+               <input type="range" min='0' max={time.duration} step='1' value={time.current} />
+               <br />
+               <label>Delay Time {(fx.delay.time * 1000)}ms</label>
+               <input type="range" min='0' max='1' step='.01' value={fx.delay.time} onChange={setDelayTime} />
             </div>
          )}
       </>
