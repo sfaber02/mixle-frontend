@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // PAGES
 
 // COMPONENTS
-import SignUp from "./Components/SignUp";
+import SignUp from "./Components/signUp";
 import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 
 function App() {
