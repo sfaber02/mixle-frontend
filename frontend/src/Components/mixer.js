@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import { defaultfx } from "../settings/defaultfx";
 /**
  * TO DO:
  * Need to add loading progress and have buttons be disabled until song is loaded
@@ -20,48 +20,7 @@ const Mixer = (props) => {
   const [time, setTime] = useState({ current: 0, duration: 0 });
   const [loading, setLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [fx, setFx] = useState(() => {
-    return {
-      speed: {
-         rate: .5,
-         detune: 0,
-      },
-      delay: {
-        time: 0,
-        feedback: 0.2,
-        dry: .8,
-        wet: 1,
-      },
-      compressor: {
-        threshold: -100,
-        ratio: 1,
-        attack: 0.02,
-        release: .02,
-      },
-      eq: {
-        band1: {
-          frequency: 100,
-          gain: -10,
-        },
-        band2: {
-          frequency: 500,
-          gain: 0,
-        },
-        band3: {
-          frequency: 1500,
-          gain: 0,
-        },
-        band4: {
-          frequency: 4000,
-          gain: 0,
-        },
-        band5: {
-          frequency: 8000,
-          gain: 0,
-        },
-      },
-    };
-  });
+  const [fx, setFx] = useState(defaultfx);
 
   //Refs for time display
   const timer = useRef();
@@ -128,7 +87,7 @@ const Mixer = (props) => {
 
       //Fetch Song from Server and decode audio for playback
       fetch(
-        "http://www.shawnfaber.com/audio/B5%20Tomorrow%20Never%20Knows.mp3"
+        "http://www.shawnfaber.com/audio/01%20-%20Metronomic%20Underground%20-%20USEE19694710%20-%20355425551.flac"
       )
         .then((data) => {
           console.log(data);
@@ -312,6 +271,41 @@ const Mixer = (props) => {
             value={fx.delay.time}
             onChange={setDelayFx}
           />
+          <br />
+          <label>Feedback</label>
+          <input 
+            id='feedback'
+            type='range'
+            min="0"
+            max='1'
+            step='.05'
+            value={fx.delay.feedback}
+            onChange={setDelayFx}
+          />
+          <br />
+          <label>Dry</label>
+          <input 
+            id='dry'
+            type='range'
+            min="0"
+            max='1'
+            step='.05'
+            value={fx.delay.dry}
+            onChange={setDelayFx}
+          />
+          <br />
+          <label>Wet</label>
+          <input 
+            id='wet'
+            type='range'
+            min="0"
+            max='1'
+            step='.05'
+            value={fx.delay.wet}
+            onChange={setDelayFx}
+          />
+
+
         </div>
       )}
     </>
