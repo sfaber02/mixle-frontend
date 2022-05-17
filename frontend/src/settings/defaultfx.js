@@ -26,11 +26,11 @@ const defaultfx =
         gain: 0,
       },
       band3: {
-        frequency: 1500,
+        frequency: 1000,
         gain: 0,
       },
       band4: {
-        frequency: 4000,
+        frequency: 2500,
         gain: 0,
       },
       band5: {
