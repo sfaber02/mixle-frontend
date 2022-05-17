@@ -1,11 +1,11 @@
 // DEPENDENCIES
-import { Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 
 // PAGES
 
 // COMPONENTS
-import SignUp from "./Components/signUp"
-import {MixerWrapper} from './Components/mixersplashwrapper.js';
+import SignUp from "./Components/SignUp";
+import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 
 function App() {
     return (

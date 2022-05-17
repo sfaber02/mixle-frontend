@@ -41,7 +41,7 @@ const getUserById = async (id) => {
 const addUser = async (name, email, password) => {
     try {
         const newUser = await db.one(
-            "INSERT INTO users (username, email, password) VALUES ($1,$2,$3) RETURNING username, email",
+            "INSERT INTO users (username, email, password) VALUES ($1,$2,$3) RETURNING user_id, username",
             [name, email, password]
         );
         return newUser;

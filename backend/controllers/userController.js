@@ -27,8 +27,11 @@ user.post("/register", async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10);
         try {
             const user = await addUser(username, email, hashPassword);
-            res.status(200).send("User has been created!");
-            const token = jwt.sign({ email: email }, process.env.SECRET_KEY);
+            const token = jwt.sign(
+                { id: user.user_id },
+                process.env.SECRET_KEY
+            );
+            res.status(200).json({ userInfo: user, token: token });
         } catch (err) {
             res.status(500).send(err, "Failed User creation");
         }
