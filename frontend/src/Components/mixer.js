@@ -207,6 +207,18 @@ const Mixer = (props) => {
     });
   };
 
+  const setCompressorFx = (e) => {
+    setFx((prev) => {
+      return {
+        ...prev,
+        compressor: {
+          ...prev.compressor,
+          [e.target.id]: e.target.value,
+        },
+      };
+    });
+  };
+
   //handles start and stop of timer
   const startTimer = () => {
     timer.current = setInterval(() => {
@@ -338,6 +350,52 @@ const Mixer = (props) => {
               step="100"
               value={fx.speed.detune}
               onChange={setSpeedFx}
+            />
+          </div>
+          <br />
+          <div id="compressorContainer">
+            <label>Threshold</label>
+            <input
+              id="threshold"
+              type="range"
+              min="-60"
+              max="0"
+              step="1"
+              value={fx.compressor.threshold}
+              onChange={setCompressorFx}
+            />
+            <br />
+            <label>Ratio</label>
+            <input
+              id="ratio"
+              type="range"
+              min="1"
+              max="100"
+              step="1"
+              value={fx.compressor.ratio}
+              onChange={setCompressorFx}
+            />
+            <br />
+            <label>Attack</label>
+            <input
+              id="attack"
+              type="range"
+              min="0"
+              max="1"
+              step=".001"
+              value={fx.compressor.attack}
+              onChange={setCompressorFx}
+            />
+            <br />
+            <label>Release</label>
+            <input
+              id="release"
+              type="range"
+              min="0"
+              max="1"
+              step=".001"
+              value={fx.compressor.release}
+              onChange={setCompressorFx}
             />
           </div>
         </div>

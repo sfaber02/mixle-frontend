@@ -7,14 +7,14 @@ const defaultfx =
     delay: {
       time: 0,
       feedback: 0,
-      dry: .8,
-      wet: 1,
+      dry: 1,
+      wet: 0,
     },
     compressor: {
-      threshold: -100,
+      threshold: -60,
       ratio: 1,
-      attack: 0.02,
-      release: .02,
+      attack: 0,
+      release: 0,
     },
     eq: {
       band1: {
