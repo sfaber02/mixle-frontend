@@ -151,10 +151,10 @@ const Mixer = (props) => {
   //SET FX settings
   useEffect(() => {
     if (!loading) {
-       //Set play speed
+      //Set play speed
       track.current.playbackRate.value = fx.speed.rate;
       track.current.detune.value = fx.speed.detune;
-      
+
       //Set Delay settings
       delayNode.current.delayTime.value = fx.delay.time;
       feedbackNode.current.gain.value = fx.delay.feedback;
@@ -174,7 +174,6 @@ const Mixer = (props) => {
       band4.current.gain.value = fx.eq.band4.gain;
       band5.current.gain.value = fx.eq.band5.gain;
 
-
       //Set compressor settings
       compressorNode.current.threshold.value = fx.compressor.threshold;
       compressorNode.current.ratio.value = fx.compressor.ratio;
@@ -189,8 +188,20 @@ const Mixer = (props) => {
       return {
         ...prev,
         delay: {
-           ...prev.delay,
-           [e.target.id]: e.target.value,
+          ...prev.delay,
+          [e.target.id]: e.target.value,
+        },
+      };
+    });
+  };
+
+  const setSpeedFx = (e) => {
+    setFx((prev) => {
+      return {
+        ...prev,
+        speed: {
+          ...prev.speed,
+          [e.target.id]: e.target.value,
         },
       };
     });
@@ -252,7 +263,9 @@ const Mixer = (props) => {
             {playPause ? "Pause" : "Play"}
           </button>
           <button onClick={handleStop}>Stop</button>
-          <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</div>
+          <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
+            2
+          )}`}</div>
           <input
             type="range"
             min="0"
@@ -273,39 +286,60 @@ const Mixer = (props) => {
           />
           <br />
           <label>Feedback</label>
-          <input 
-            id='feedback'
-            type='range'
+          <input
+            id="feedback"
+            type="range"
             min="0"
-            max='1'
-            step='.05'
+            max="1"
+            step=".05"
             value={fx.delay.feedback}
             onChange={setDelayFx}
           />
           <br />
           <label>Dry</label>
-          <input 
-            id='dry'
-            type='range'
+          <input
+            id="dry"
+            type="range"
             min="0"
-            max='1'
-            step='.05'
+            max="1"
+            step=".05"
             value={fx.delay.dry}
             onChange={setDelayFx}
           />
           <br />
           <label>Wet</label>
-          <input 
-            id='wet'
-            type='range'
+          <input
+            id="wet"
+            type="range"
             min="0"
-            max='1'
-            step='.05'
+            max="1"
+            step=".05"
             value={fx.delay.wet}
             onChange={setDelayFx}
           />
-
-
+          <div id="playSpeed">
+            <label>Speed</label>
+            <input
+              id="rate"
+              type="range"
+              min=".1"
+              max="4"
+              step=".1"
+              value={fx.speed.rate}
+              onChange={setSpeedFx}
+            />
+            <br />
+            <label>Detune</label>
+            <input
+              id="detune"
+              type="range"
+              min="-2400"
+              max="2400"
+              step="100"
+              value={fx.speed.detune}
+              onChange={setSpeedFx}
+            />
+          </div>
         </div>
       )}
     </>
