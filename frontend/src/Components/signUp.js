@@ -27,8 +27,9 @@ function SignUp() {
                 },
                 body: JSON.stringify(user),
             });
+            const content = await response.json();
+            console.log(content.userInfo.user_id);
             return navigate("/");
-            // const content = await response.json();
         } catch (error) {
             return error;
         }

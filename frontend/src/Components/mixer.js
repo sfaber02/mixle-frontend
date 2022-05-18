@@ -87,7 +87,7 @@ const Mixer = props => {
 
          //Fetch Song from Server and decode audio for playback
          fetch(
-            "http://www.shawnfaber.com/audio/01%20-%20Metronomic%20Underground%20-%20USEE19694710%20-%20355425551.flac"
+            "http://www.shawnfaber.com/audio/101%20-%20New%20Order%20-%20Ceremony.flac"
          )
             .then(data => {
                console.log(data);
@@ -279,6 +279,11 @@ const Mixer = props => {
       stopTimer();
       createTrackNode(decodedAudio.current);
    };
+
+   //Save click handler
+   const handleSaveClick = () => {
+      
+   }
 
    return (
       <>
@@ -527,6 +532,7 @@ const Mixer = props => {
                      />
                   </div>
                </div>
+               <button onClick={handleSaveClick}>Save Mix</button>
             </div>
          )}
       </>
