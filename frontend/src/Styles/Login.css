@@ -6,7 +6,7 @@
     transition: all .2s linear;
 }
 
-.signup-container {
+.login-container {
     min-height: 100vh;
     width: 100vw;
     display: flex;
@@ -17,7 +17,7 @@
     background-position: center;
 }
 
-.signup-container form {
+.login-container form{
     height: 450px;
     width: 350px;
     background: rgba(255, 255, 255, 0);
@@ -26,10 +26,10 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
     border-top: 1px solid rgba(255, 255, 255, .3);
     border-left: 1px solid rgba(255, 255, 255, .3);
-    /* backdrop-filter: blur(5px); */
+    backdrop-filter: blur(5px);
 }
 
-.signup-container form h3 {
+.login-container form h3 {
     font-size: 30px;
     padding: 30px 0px;
     color: #ccc;
@@ -37,13 +37,13 @@
 
 }
 
-.signup-container form i{
+.login-container form i{
     padding-right: 7px;
     font-size: 20px;
     color: #bbb;
 }
 
-.signup-container form input {
+.login-container form input{
     outline: none;
     border: none;
     height: 40px;
@@ -57,7 +57,7 @@
     letter-spacing: 1px;
 }
 
-.signup-container form input[type="submit"]{
+.login-container form input[type="submit"]{
     width: 90%;
     cursor: pointer;
     background: linear-gradient(90deg, #776199, #323854);
@@ -65,22 +65,6 @@
     border-radius: 50px;
 }
 
-
-
-.signup-container form input[type="submit"]:hover{
- letter-spacing: 4px;
-}
-
-.signup-container form input[type="button"]{
-    width: 90%;
-    cursor: pointer;
-    background: linear-gradient(90deg, #776199, #323854);
-    margin-top: 5px;
-    border-radius: 50px;
-}
-
-
-
-.signup-container form input[type="button"]:hover{
+.login-container form input[type="submit"]:hover{
  letter-spacing: 4px;
 }
