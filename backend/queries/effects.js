@@ -40,5 +40,51 @@ const getUserAudioEffect = async (info) => {
     }
 };
 
+// CREATE
+const createEffect = async (effects, audio_id, user_id) => {
+    try {
+        const newEffects = await db.one(
+            "INSERT INTO effects (effects_data, audio, user_id) VALUES ($1,$2,$3) RETURNING *",
+            [effects, audio_id, user_id]
+        );
+        return newEffects;
+    } catch (error) {
+        return error;
+    }
+};
+
+// DELETE
+const deleteEffect = async (id) => {
+    try {
+        const deletedEffect = await db.one(
+            "DELETE FROM effects WHERE effects_id = $1 RETURNING *",
+            id
+        );
+        return deletedEffect;
+    } catch (error) {
+        return error;
+    }
+};
+
+// UPDATE
+const updateEffect = async (effects, id) => {
+    try {
+        const updatedEffects = await db.one(
+            "UPDATE effects SET effects_data=$1 WHERE effects_id=$2 RETURNING *",
+            [effects.data, id]
+        );
+        return updatedEffects;
+    } catch (error) {
+        return error;
+    }
+};
+
 // EXPORT
-module.exports = { getAllUserEffects, getAllAudioEffects, getUserAudioEffect };
+module.exports = {
+    getAllUserEffects,
+    getAllAudioEffects,
+    getUserAudioEffect,
+    createEffect,
+    deleteEffect,
+    updateEffect,
+};

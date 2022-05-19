@@ -16,7 +16,7 @@ const {
 // CONFIGURATION
 const user = express.Router();
 
-// REGISTER POST REQUEST
+// REGISTER CREATE REQUEST
 user.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
     try {
@@ -40,7 +40,7 @@ user.post("/register", async (req, res) => {
     }
 });
 
-// LOGIN POST REQUEST
+// LOGIN CREATE REQUEST
 user.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {

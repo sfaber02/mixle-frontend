@@ -15,7 +15,7 @@ INSERT INTO audio (title, artist, album, audio_key) VALUES
     ('Tomorrow Never Knows', 'The Beatles', 'Revolver', 'B5%20Tomorrow%20Never%20Knows.mp3'),
     ('The Beat Tape VANO 3000', 'VANO 3000', 'The Beat Tape', 'The%20Beat%20Tape%20VANO%203000.mp4');
  
-INSERT INTO effects (eq_band_1, eq_band_2, eq_band_3, eq_band_4, eq_band_5, compressor_attack, compressor_release, compressor_ratio, compressor_threshold, delay_time, delay_feedback, play_speed, audio, user_id) VALUES
-(1,2,3,4,5,6,7,8,9,10,11,12,1,1),
-(1,2,3,4,5,6,7,8,9,10,11,12,2,1),
-(1,2,3,4,5,6,7,8,9,10,11,12,3,1);
+INSERT INTO effects (effects_data, audio, user_id) VALUES
+('{"speed":{"rate":0.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
+('{"speed":{"rate":0.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',2,1),
+('{"speed":{"rate":0.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',3,1);

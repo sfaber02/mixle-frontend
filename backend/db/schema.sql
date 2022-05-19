@@ -23,18 +23,7 @@ CREATE TABLE audio (
 
 CREATE TABLE effects (
     effects_id SERIAL PRIMARY KEY,
-    eq_band_1 INTEGER,
-    eq_band_2 INTEGER,
-    eq_band_3 INTEGER,
-    eq_band_4 INTEGER,
-    eq_band_5 INTEGER,
-    compressor_attack INTEGER,
-    compressor_release INTEGER,
-    compressor_ratio INTEGER,
-    compressor_threshold INTEGER,
-    delay_time INTEGER,
-    delay_feedback INTEGER,
-    play_speed INTEGER,
+    effects_data JSON,
     audio INTEGER REFERENCES audio (audio_id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users (user_id) ON DELETE CASCADE
 );
