@@ -27,6 +27,7 @@ function Login() {
                 },
                 body: JSON.stringify(user),
             });
+            localStorage.setItem("user_id", JSON.stringify(response.body.JSON().user_id));
             return navigate("/");
         } catch (error) {
             return error;

@@ -56,10 +56,10 @@ user.post("/login", async (req, res) => {
                 const token = jwt.sign({ email }, process.env.SECRET_KEY);
 
                 res.status(200).json({
-                    message: "USER signed in!",
-                    user: user.username,
-                    email: user.email,
-                    token,
+                    message: `${user.username} signed in!`,
+                    username: user.username,
+                    user_id: user.user_id,
+                    token: token,
                 });
             } else {
                 res.status(400).json({
