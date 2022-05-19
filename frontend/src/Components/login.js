@@ -7,27 +7,32 @@ const API = process.env.REACT_APP_API_URL;
 function Login() {
     let navigate = useNavigate();
     const [user, setUser] = useState({
-        username: "",
         email: "",
         password: "",
+        user_id: null,
     });
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${API}/user/login`, {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            });
-            localStorage.setItem("user_id", JSON.stringify(response.body.JSON().user_id));
+            async function postFetch() {
+                const response = await fetch(`${API}/user/login`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                const data = await response.json();
+                localStorage.setItem("user_id", JSON.stringify(data.user_id));
+            }
+            postFetch();
             return navigate("/");
         } catch (error) {
             return error;
@@ -38,19 +43,6 @@ function Login() {
         <div className="login-container">
             <form onSubmit={handleSubmit}>
                 <h3>Login into Mixle!</h3>
-                <div>
-                    <i className="fas fa-user"></i>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        placeholder="username"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        value={user.username}
-                        required
-                    />
-                </div>
                 <div>
                     <i className="fas fa-at"></i>
                     <input
