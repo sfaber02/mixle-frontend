@@ -1,7 +1,7 @@
 const defaultfx = 
 {
     speed: {
-       rate: .5,
+       rate: 1,
        detune: 0,
     },
     delay: {
