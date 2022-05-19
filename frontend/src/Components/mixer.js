@@ -402,7 +402,6 @@ const Mixer = props => {
                <div id="delayContainer">
                   <label>Delay Time {fx.delay.time * 1000}ms</label>
                   <input
-                  className="input-knob"
                      id="time"
                      type="range"
                      min="0"
