@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../Styles/SignUp.css";
+import { useNavigate } from "react-router-dom";
+import "../Styles/Login.css";
 
 const API = process.env.REACT_APP_API_URL;
 
-function SignUp() {
+function Login() {
     let navigate = useNavigate();
     const [user, setUser] = useState({
         username: "",
@@ -19,7 +19,7 @@ function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${API}/user/register`, {
+            const response = await fetch(`${API}/user/login`, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -27,8 +27,6 @@ function SignUp() {
                 },
                 body: JSON.stringify(user),
             });
-            const content = await response.json();
-            console.log(content.userInfo.user_id);
             return navigate("/");
         } catch (error) {
             return error;
@@ -36,9 +34,9 @@ function SignUp() {
     };
 
     return (
-        <div className="signup-container">
+        <div className="login-container">
             <form onSubmit={handleSubmit}>
-                <h3>Register for Mixle!</h3>
+                <h3>Login into Mixle!</h3>
                 <div>
                     <i className="fas fa-user"></i>
                     <input
@@ -78,13 +76,10 @@ function SignUp() {
                         required
                     />
                 </div>
-                <input type="submit" value="SignUp" />
-            <Link to={`/login`}>
-                <input type={"button"} value="Login" />
-            </Link>    
+                <input type="submit" value="Login" />
             </form>
         </div>
     );
 }
 
-export default SignUp;
+export default Login;
