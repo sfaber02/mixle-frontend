@@ -13,8 +13,8 @@ const defaultfx =
     compressor: {
       threshold: -60,
       ratio: 1,
-      attack: 0,
-      release: 0,
+      attack: 0.001,
+      release: 0.001,
     },
     eq: {
       band1: {

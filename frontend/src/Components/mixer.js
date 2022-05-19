@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { defaultfx } from "../settings/defaultfx";
+import '../Styles/mixer.css';
+
+
 /**
  * TO DO:
- * Need to add loading progress and have buttons be disabled until song is loaded
  * Seek bar
  * Make current track time display
  *
@@ -113,14 +115,14 @@ const Mixer = props => {
      if (!loading && !firstLoad) {
          const canvas = document.getElementById("visualizer");
          canvas.width = window.innerWidth;
-         canvas.height = window.innerHeight;
+         canvas.height = window.innerHeight / 2;
          canvasCtx.current = canvas.getContext("2d");
 
-         analyserNode.current.fftSize = 32768;
+         analyserNode.current.fftSize = 4096;
          let bufferLength = analyserNode.current.frequencyBinCount;
          console.log (bufferLength);
          let dataArray = new Uint8Array(bufferLength);
-         const barWidth = (canvas.width / bufferLength) * 50;
+         const barWidth = (canvas.width / bufferLength) * 13;
          let barHeight;
          let x = 0;
 
@@ -139,7 +141,7 @@ const Mixer = props => {
          let bars = 100;
 
          for (let i = 0; i < bars; i++) {
-            barHeight = dataArray[i] * 2;
+            barHeight = dataArray[i] * 1.5;
             // console.log (dataArray[i]);
             if (dataArray[i] > 210) {
                // pink
@@ -176,7 +178,7 @@ const Mixer = props => {
                barHeight
             );
 
-            x += barWidth + 10;
+            x += barWidth + 5;
          }
       };   
       renderFrame();
@@ -366,7 +368,7 @@ const Mixer = props => {
       stopTimer();
       createTrackNode(decodedAudio.current);
    };
-
+   
    //Save click handler
    const handleSaveClick = () => {
       
@@ -377,22 +379,26 @@ const Mixer = props => {
          {loading && <h1>Loading Please Wait...</h1>}
          {!loading && (
             <div id="mainMixerContainer">
-               <canvas id="visualizer"></canvas>
-               <button onClick={handlePlayPause}>
-                  {playPause ? "Pause" : "Play"}
-               </button>
-               <button onClick={handleStop}>Stop</button>
-               <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
-                  2
-               )}`}</div>
-               <input
-                  type="range"
-                  min="0"
-                  max={time.duration}
-                  step="1"
-                  value={time.current}
-               />
-               <br />
+               <div id='visualizerContainer'>
+                  <canvas id="visualizer"></canvas>
+               </div>
+               <div id='transportContainer'>
+                  <button onClick={handlePlayPause}>
+                     {playPause ? "Pause" : "Play"}
+                  </button>
+                  <button onClick={handleStop}>Stop</button>
+                  <button onClick={handleSaveClick}>Save Mix</button>
+                  <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
+                     2
+                  )}`}</div>
+                  <input
+                     type="range"
+                     min="0"
+                     max={time.duration}
+                     step="1"
+                     value={time.current}
+                  />
+               </div>
                <div id="delayContainer">
                   <label>Delay Time {fx.delay.time * 1000}ms</label>
                   <input
@@ -461,7 +467,6 @@ const Mixer = props => {
                      onChange={setSpeedFx}
                   />
                </div>
-               <br />
                <div id="compressorContainer">
                   <label>Threshold</label>
                   <input
@@ -619,7 +624,6 @@ const Mixer = props => {
                      />
                   </div>
                </div>
-               <button onClick={handleSaveClick}>Save Mix</button>
             </div>
          )}
       </>
