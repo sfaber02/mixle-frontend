@@ -9,12 +9,10 @@ import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 
 function App() {
     return (
-        <div className="App">
-            <Routes>
-                <Route exact path="/" element={<MixerWrapper />} />
-                <Route path="register" element={<SignUp />} />
-            </Routes>
-        </div>
+        <Routes>
+            <Route exact path="/" element={<MixerWrapper />} />
+            <Route path="register" element={<SignUp />} />
+        </Routes>
     );
 }
 

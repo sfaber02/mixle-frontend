@@ -8,13 +8,13 @@ const MixerWrapper = () => {
   const handleStartClick = () => setShowSplash(false);
 
   return (
-    <div>
+    <>
       {showSplash ? (
         <SplashPage handleStartClick={handleStartClick} />
       ) : (
         <Mixer showSplash={showSplash}  />
       )}
-    </div>
+    </>
   );
 };
 
