@@ -9,8 +9,9 @@ html, body, #root {
     display: grid;
     grid-template-areas: "visualizer visualizer visualizer"
                          "delay transport compressor"
-                         ". speed ."
-                         "eq eq eq";
+                         ". speed compressor"
+                         ". eq .";
+    justify-items: center;
     /* grid-template-rows: 50% 7.5% 7.5% 35%; */
     /* grid-template-columns: 33% 33% 33%; */
 }
