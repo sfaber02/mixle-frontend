@@ -1,0 +1,46 @@
+html, body, #root {
+    height: 100%;
+}
+
+
+#mainMixerContainer {
+    height: 100%;
+    border: 5px solid purple;
+    display: grid;
+    grid-template-rows: 50% 7.5% 7.5% 35%;
+    grid-template-columns: 33% 33% 33%;
+}
+
+#visualizerContainer {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+}
+
+#transportContainer {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+#playSpeedContainer {
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+}
+
+#delayContainer {
+    grid-row: 2 / 4;
+    grid-column: 1 / 2;
+}
+
+#compressorContainer {
+    grid-row: 2 / 4;
+    grid-column: 3 / 4;
+}
+
+#eqContainer {
+    grid-row: 4 / 5;
+    grid-column: 1 / 4;
+}
+
+
+
+

@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { defaultfx } from "../settings/defaultfx";
+import '../Styles/mixer.css';
+
+
 /**
  * TO DO:
- * Need to add loading progress and have buttons be disabled until song is loaded
  * Seek bar
  * Make current track time display
  *
@@ -51,22 +53,25 @@ const Mixer = props => {
    //Ref for Compressor node
    const compressorNode = useRef();
 
+   //Ref for analyser node
+   const analyserNode = useRef();
+
    //trigger song fetch after a user interaction has occurred
    useEffect(() => {
       if (!props.showSplash) {
-         //Create audio context and canvas context
+         //Create audio context
          ctx.current = new (window.AudioContext || window.webkitAudioContext)();
-         timeStart.current = Date.now();
-
+         
          //Create Delay Nodes
          delayNode.current = ctx.current.createDelay();
          feedbackNode.current = ctx.current.createGain();
          dryNode.current = ctx.current.createGain();
          wetNode.current = ctx.current.createGain();
          delayOutNode.current = ctx.current.createGain();
-
+         
          // //Create Analyser Node
-         // const analyser = ctx.createAnalyser();
+         analyserNode.current = ctx.current.createAnalyser();
+         
 
          // //Create Filter Nodes
          band1.current = ctx.current.createBiquadFilter();
@@ -90,20 +95,96 @@ const Mixer = props => {
             "http://www.shawnfaber.com/audio/101%20-%20New%20Order%20-%20Ceremony.flac"
          )
             .then(data => {
-               console.log(data);
+               // console.log(data);
                return data.arrayBuffer();
             })
             .then(arrayBuffer => {
-               console.log(arrayBuffer);
+               // console.log(arrayBuffer);
                return ctx.current.decodeAudioData(arrayBuffer);
             })
             .then(decodedAudio => {
-               console.log(decodedAudio);
+               // console.log(decodedAudio);
                createTrackNode(decodedAudio);
             })
             .catch(err => console.log(err));
       }
    }, [props.showSplash]);
+
+   //trigger creation of visualizer after song load
+   useEffect(() => {
+     if (!loading && !firstLoad) {
+         const canvas = document.getElementById("visualizer");
+         canvas.width = window.innerWidth;
+         canvas.height = window.innerHeight / 2;
+         canvasCtx.current = canvas.getContext("2d");
+
+         analyserNode.current.fftSize = 4096;
+         let bufferLength = analyserNode.current.frequencyBinCount;
+         console.log (bufferLength);
+         let dataArray = new Uint8Array(bufferLength);
+         const barWidth = (canvas.width / bufferLength) * 13;
+         let barHeight;
+         let x = 0;
+
+       // render visualizer
+       const renderFrame = () => {
+         requestAnimationFrame(renderFrame);
+         x = 0;
+         // console.log (analyserNode.current);
+
+         analyserNode.current.getByteFrequencyData(dataArray);
+
+         canvasCtx.current.fillStyle = "rgba(0,0,0,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
+         canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height); // Fade effect, set opacity to 1 for sharper rendering of bars
+
+         let r, g, b;
+         let bars = 100;
+
+         for (let i = 0; i < bars; i++) {
+            barHeight = dataArray[i] * 1.5;
+            // console.log (dataArray[i]);
+            if (dataArray[i] > 210) {
+               // pink
+               r = 250;
+               g = 0;
+               b = 255;
+            } else if (dataArray[i] > 200) {
+               // yellow
+               r = 250;
+               g = 255;
+               b = 0;
+            } else if (dataArray[i] > 190) {
+               // yellow/green
+               r = 204;
+               g = 255;
+               b = 0;
+            } else if (dataArray[i] > 180) {
+               // blue/green
+               r = 0;
+               g = 219;
+               b = 131;
+            } else {
+               // light blue
+               r = 0;
+               g = 199;
+               b = 255;
+            }
+
+            canvasCtx.current.fillStyle = `rgb(${r},${g},${b})`;
+            canvasCtx.current.fillRect(
+               x,
+               canvas.height - barHeight,
+               barWidth,
+               barHeight
+            );
+
+            x += barWidth + 5;
+         }
+      };   
+      renderFrame();
+     }
+   }, [loading, firstLoad])
+   
 
    /**
     * Creates a track node from decoded audio
@@ -145,7 +226,10 @@ const Mixer = props => {
       band5.current.connect(compressorNode.current);
 
       //compressor path
-      compressorNode.current.connect(ctx.current.destination);
+      compressorNode.current.connect(analyserNode.current);
+
+      //analyser path
+      analyserNode.current.connect(ctx.current.destination);
    };
 
    //SET FX settings
@@ -174,13 +258,18 @@ const Mixer = props => {
          band4.current.gain.value = fx.eq.band4.gain;
          band5.current.gain.value = fx.eq.band5.gain;
 
+         //Analyzer Node Settings
+         // analyserNode.current.fftSize = 32768;
+         
          //Set compressor settings
          compressorNode.current.threshold.value = fx.compressor.threshold;
          compressorNode.current.ratio.value = fx.compressor.ratio;
          compressorNode.current.attack.value = fx.compressor.attack;
          compressorNode.current.release.value = fx.compressor.release;
+
+         setFirstLoad(false);
       }
-   }, [loading, firstLoad, fx]);
+   }, [loading, fx]);
 
    // CHANGE FX SETTINGS HANDLERS
    const setDelayFx = e => {
@@ -279,7 +368,7 @@ const Mixer = props => {
       stopTimer();
       createTrackNode(decodedAudio.current);
    };
-
+   
    //Save click handler
    const handleSaveClick = () => {
       
@@ -290,25 +379,30 @@ const Mixer = props => {
          {loading && <h1>Loading Please Wait...</h1>}
          {!loading && (
             <div id="mainMixerContainer">
-               <h1>MIXER</h1>
-               <button onClick={handlePlayPause}>
-                  {playPause ? "Pause" : "Play"}
-               </button>
-               <button onClick={handleStop}>Stop</button>
-               <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
-                  2
-               )}`}</div>
-               <input
-                  type="range"
-                  min="0"
-                  max={time.duration}
-                  step="1"
-                  value={time.current}
-               />
-               <br />
+               <div id='visualizerContainer'>
+                  <canvas id="visualizer"></canvas>
+               </div>
+               <div id='transportContainer'>
+                  <button onClick={handlePlayPause}>
+                     {playPause ? "Pause" : "Play"}
+                  </button>
+                  <button onClick={handleStop}>Stop</button>
+                  <button onClick={handleSaveClick}>Save Mix</button>
+                  <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
+                     2
+                  )}`}</div>
+                  <input
+                     type="range"
+                     min="0"
+                     max={time.duration}
+                     step="1"
+                     value={time.current}
+                  />
+               </div>
                <div id="delayContainer">
                   <label>Delay Time {fx.delay.time * 1000}ms</label>
                   <input
+                  className="input-knob"
                      id="time"
                      type="range"
                      min="0"
@@ -374,7 +468,6 @@ const Mixer = props => {
                      onChange={setSpeedFx}
                   />
                </div>
-               <br />
                <div id="compressorContainer">
                   <label>Threshold</label>
                   <input
@@ -532,7 +625,6 @@ const Mixer = props => {
                      />
                   </div>
                </div>
-               <button onClick={handleSaveClick}>Save Mix</button>
             </div>
          )}
       </>
