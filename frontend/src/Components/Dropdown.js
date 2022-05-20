@@ -1,33 +1,60 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Dropdown() {
-    const [drop, setDrop] = useState("dropdown-closed");
-
-    const handleClick = (event) => {
-        console.log(event.target);
-        if (drop === "dropdown-closed") {
-            setDrop("dropdown-open");
-        } else {
-            setDrop("dropdown-closed");
-        }
+export default function Dropdown({ username }) {
+    const navigate = useNavigate();
+    const handleSignOut = () => {
+        localStorage.clear();
+        return navigate("/");
     };
-    const userId = localStorage.getItem("user_id");
-    if (userId) {
+
+    if (username) {
         return (
             <div class="dropdown">
-                <button onClick={handleClick} className="dropbtn">
-                    {userId}
-                    <i class="fa-solid fa-caret-down"></i>
+                <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    {username + " "}
                 </button>
-
-                <div id="myDropdown" class={drop}>
-                    <a href="#home">My Mixes</a>
-                    <a href="#about">View All Mixes</a>
-                    <a href="#contact">Signout</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/">
+                        View Today's Mixes
+                    </a>
+                    <a class="dropdown-item" href="/">
+                        My Mixes
+                    </a>
+                    <a class="dropdown-item" href="/" onClick={handleSignOut}>
+                        Signout
+                    </a>
                 </div>
             </div>
         );
     } else {
-        return <></>;
+        return (
+            <div class="dropdown">
+                <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    Welcome
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/login">
+                        Login
+                    </a>
+                    <a class="dropdown-item" href="/register">
+                        Register
+                    </a>
+                </div>
+            </div>
+        );
     }
 }

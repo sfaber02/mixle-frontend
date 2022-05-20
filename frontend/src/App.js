@@ -1,7 +1,6 @@
 // DEPENDENCIES
 import { Routes, Route } from "react-router-dom";
-
-// PAGES
+import { useState, useEffect } from "react";
 
 // COMPONENTS
 import SignUp from "./Components/signUp";
@@ -10,13 +9,24 @@ import Login from "./Components/login";
 import NavBar from "./Components/navBar";
 
 function App() {
+    const [username, setUsername] = useState(
+        JSON.parse(localStorage.getItem("username"))
+    );
+
+    useEffect(() => {
+        setUsername(JSON.parse(localStorage.getItem("username")));
+    }, []);
+
     return (
         <main>
-            <NavBar />
+            <NavBar username={username} />
             <Routes>
                 <Route exact path="/" element={<MixerWrapper />} />
                 <Route path="register" element={<SignUp />} />
-                <Route path="login" element={<Login />} />
+                <Route
+                    path="login"
+                    element={<Login setUsername={setUsername} />}
+                />
             </Routes>
         </main>
     );
