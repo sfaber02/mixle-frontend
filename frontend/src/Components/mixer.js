@@ -61,7 +61,6 @@ const Mixer = props => {
    const analyserNode = useRef();
 
    useEffect(() => {
-      console.log ('1');
       const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
       if (storedFx) {
         setFx(storedFx);
@@ -381,15 +380,17 @@ const Mixer = props => {
       createTrackNode(decodedAudio.current);
    };
    
-   //Save click handler
-   const handleSaveClick = () => {
+   /**
+    * save mix button event handler
+    * if no user is logged in save mix settings and redirect to registration page
+    * if user is logged in save mix to DB and redirect to mixes page
+    */
+   const handleSaveClick = async () => {
       let user = JSON.parse(localStorage.getItem("user_id"));
       if (user) {
          console.log (user);
-         //SAVE IT
+         
       } else {
-         // SAVE THEIR MIX SETTINGS TEMPORARILY
-         // REDIRECT TO REGISTER PAGE
          localStorage.setItem("temp_fx", JSON.stringify(fx));
          navigate('/register')
       }
