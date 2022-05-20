@@ -381,7 +381,39 @@ const Mixer = props => {
   };
 
   //Save click handler
-  const handleSaveClick = () => {};
+  const handleSaveClick = async () => {
+   let user = JSON.parse(localStorage.getItem("user_id"));
+   if (user) {
+      try {
+         const data = {
+            effects: JSON.stringify(fx),
+            user_id: user,
+            audio_id: 1
+         }
+         const response = await fetch(`${API}/effects`, {
+             method: "POST",
+             headers: {
+                 Accept: "application/json",
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify(data)
+         });
+         const content = await response.json();
+         localStorage.setItem("user_id", JSON.stringify(content.userInfo.user_id));
+         return navigate("/");
+     } catch (error) {
+         return error;
+     }
+   } else {
+      localStorage.setItem("temp_fx", JSON.stringify(fx));
+      navigate('/register')
+   }
+}
+
+const clearUser = () => {
+   localStorage.setItem("user_id", null);
+   localStorage.setItem("temp_fx", null);
+}
 
   return (
     <>
@@ -397,6 +429,7 @@ const Mixer = props => {
             </button>
             <button onClick={handleStop}>Stop</button>
             <button onClick={handleSaveClick}>Save Mix</button>
+            <button onClick={clearUser}>Clear User</button>
             <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
               2
             )}`}</div>
