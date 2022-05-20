@@ -4,7 +4,7 @@ import "../Styles/Login.css";
 
 const API = process.env.REACT_APP_API_URL;
 
-function Login() {
+function Login({ setUsername }) {
     let navigate = useNavigate();
     const [user, setUser] = useState({
         email: "",
@@ -31,6 +31,8 @@ function Login() {
 
                 const data = await response.json();
                 localStorage.setItem("user_id", JSON.stringify(data.user_id));
+                localStorage.setItem("username", JSON.stringify(data.username));
+                setUsername(data.username);
             }
             postFetch();
             return navigate("/");
