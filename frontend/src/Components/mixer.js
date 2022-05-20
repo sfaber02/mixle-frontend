@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import effects from "../../../backend/controllers/effectsController";
 import { defaultfx } from "../settings/defaultfx";
 import '../Styles/mixer.css';
 
+const API = process.env.REACT_APP_API_URL;
 
 /**
  * TO DO:
@@ -389,7 +391,26 @@ const Mixer = props => {
       let user = JSON.parse(localStorage.getItem("user_id"));
       if (user) {
          console.log (user);
-         
+         try {
+            const response = await fetch(`${API}/effects`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: {
+                   "effects": JSON.stringify(fx), 
+                   "audio_id": 1, 
+                   "user_id": user
+                  },
+            });
+            const content = await response.json();
+            console.log(content.userInfo.user_id);
+            localStorage.setItem("user_id", JSON.stringify(content.userInfo.user_id));
+            return navigate("/");
+        } catch (error) {
+            return error;
+        }
       } else {
          localStorage.setItem("temp_fx", JSON.stringify(fx));
          navigate('/register')

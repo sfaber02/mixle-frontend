@@ -57,6 +57,7 @@ effects.put("/:id", async (req, res) => {
 // CREATE AN EFFECT
 effects.post("/", async (req, res) => {
     try {
+        const { effects, audio_id, user_id } = req.body
         const newEffect = await createEffect(effects, audio_id, user_id);
         res.status(200).json(newEffect);
     } catch (error) {
