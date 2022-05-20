@@ -392,6 +392,7 @@ const Mixer = props => {
                      2
                   )}`}</div>
                   <input
+                     class="transportSlider"
                      type="range"
                      min="0"
                      max={time.duration}
@@ -477,6 +478,7 @@ const Mixer = props => {
                   <label>Threshold</label>
                   <input
                      id="threshold"
+                     class="compressorSliders"
                      type="range"
                      min="-60"
                      max="0"
@@ -488,6 +490,7 @@ const Mixer = props => {
                   <label>Ratio</label>
                   <input
                      id="ratio"
+                     class="compressorSliders"
                      type="range"
                      min="1"
                      max="20"
@@ -499,6 +502,7 @@ const Mixer = props => {
                   <label>Attack</label>
                   <input
                      id="attack"
+                     class="compressorSliders"
                      type="range"
                      min="0"
                      max="1"
@@ -510,6 +514,7 @@ const Mixer = props => {
                   <label>Release</label>
                   <input
                      id="release"
+                     class="compressorSliders"
                      type="range"
                      min="0"
                      max="1"
