@@ -403,6 +403,7 @@ const Mixer = props => {
                   <label>Delay Time {fx.delay.time * 1000}ms</label>
                   <input
                      id="time"
+                     class="delaySliders"
                      type="range"
                      min="0"
                      max="1"
@@ -414,6 +415,7 @@ const Mixer = props => {
                   <label>Feedback</label>
                   <input
                      id="feedback"
+                     class="delaySliders"
                      type="range"
                      min="0"
                      max="1"
@@ -426,6 +428,7 @@ const Mixer = props => {
                   <input
                      id="dry"
                      type="range"
+                     class="delaySliders"
                      min="0"
                      max="1"
                      step=".05"
@@ -436,6 +439,7 @@ const Mixer = props => {
                   <label>Wet</label>
                   <input
                      id="wet"
+                     class="delaySliders"
                      type="range"
                      min="0"
                      max="1"
@@ -448,6 +452,7 @@ const Mixer = props => {
                   <label>Speed</label>
                   <input
                      id="rate"
+                     class="playSpeedSliders"
                      type="range"
                      min=".1"
                      max="4"
@@ -459,6 +464,7 @@ const Mixer = props => {
                   <label>Detune</label>
                   <input
                      id="detune"
+                     class="playSpeedSliders"
                      type="range"
                      min="-2400"
                      max="2400"
