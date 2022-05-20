@@ -20,6 +20,7 @@ const Mixer = props => {
    const [playPause, setPlayPause] = useState(false);
    const [playState, setPlayState] = useState({ state: "stopped" });
    const [time, setTime] = useState({ current: 0, duration: 0 });
+
    const [loading, setLoading] = useState(true);
    const [firstLoad, setFirstLoad] = useState(true);
    const [fx, setFx] = useState(defaultfx);
@@ -371,7 +372,8 @@ const Mixer = props => {
    
    //Save click handler
    const handleSaveClick = () => {
-      
+      let user = JSON.parse(localStorage.getItem("user_id"));
+      console.log(user);
    }
 
    return (
