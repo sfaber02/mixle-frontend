@@ -107,7 +107,7 @@ html, body, #root {
     -webkit-appearance: none;
     appearance: none;
     width: 5px;
-    height: 25px;
+    height: 10px;
     background: #000;
     cursor: pointer;
     border: 5px solid rgb(21, 252, 0);
@@ -198,3 +198,13 @@ html, body, #root {
    /* COMPRESSOR */
 
 /* ----------------- RANGE SLIDER CSS ------------- */
+
+
+
+
+
+/* ----------------- EQUALIZER CSS ------------- */
+
+
+
+/* ----------------- EQUALIZER CSS ------------- */
