@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { defaultfx } from "../settings/defaultfx";
 import '../Styles/mixer.css';
 
@@ -12,6 +13,8 @@ import '../Styles/mixer.css';
  * @param {object} props
  */
 const Mixer = props => {
+   const navigate = useNavigate();
+   
    /**
     * play/pause - boolean state for play/pause toggling
     * playstate - object state for tracking the current play state (e.g. 'playing', 'paused')
@@ -56,6 +59,15 @@ const Mixer = props => {
 
    //Ref for analyser node
    const analyserNode = useRef();
+
+   useEffect(() => {
+      console.log ('1');
+      const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
+      if (storedFx) {
+        setFx(storedFx);
+        localStorage.setItem("temp_fx", null);
+      }
+   }, [])
 
    //trigger song fetch after a user interaction has occurred
    useEffect(() => {
@@ -121,7 +133,6 @@ const Mixer = props => {
 
          analyserNode.current.fftSize = 4096;
          let bufferLength = analyserNode.current.frequencyBinCount;
-         console.log (bufferLength);
          let dataArray = new Uint8Array(bufferLength);
          const barWidth = (canvas.width / bufferLength) * 13;
          let barHeight;
@@ -373,7 +384,20 @@ const Mixer = props => {
    //Save click handler
    const handleSaveClick = () => {
       let user = JSON.parse(localStorage.getItem("user_id"));
-      console.log(user);
+      if (user) {
+         console.log (user);
+         //SAVE IT
+      } else {
+         // SAVE THEIR MIX SETTINGS TEMPORARILY
+         // REDIRECT TO REGISTER PAGE
+         localStorage.setItem("temp_fx", JSON.stringify(fx));
+         navigate('/register')
+      }
+   }
+
+   const clearUser = () => {
+      localStorage.setItem("user_id", null);
+      localStorage.setItem("temp_fx", null);
    }
 
    return (
@@ -390,6 +414,7 @@ const Mixer = props => {
                   </button>
                   <button onClick={handleStop}>Stop</button>
                   <button onClick={handleSaveClick}>Save Mix</button>
+                  <button onClick={clearUser}>Clear User</button>
                   <div>{`${time.current.toFixed(2)} / ${time.duration.toFixed(
                      2
                   )}`}</div>

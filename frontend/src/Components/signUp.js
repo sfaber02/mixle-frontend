@@ -29,6 +29,7 @@ function SignUp() {
             });
             const content = await response.json();
             console.log(content.userInfo.user_id);
+            localStorage.setItem("user_id", JSON.stringify(content.userInfo.user_id));
             return navigate("/");
         } catch (error) {
             return error;
