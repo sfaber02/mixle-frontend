@@ -44,7 +44,9 @@ function Login() {
             <form onSubmit={handleSubmit}>
                 <h3>Login into Mixle!</h3>
                 <div>
-                    <i className="fas fa-at"></i>
+                    <label htmlFor="email">
+                        <i className="fas fa-at"></i>
+                    </label>
                     <input
                         type="email"
                         id="email"
@@ -57,7 +59,9 @@ function Login() {
                     />
                 </div>
                 <div>
-                    <i className="fas fa-lock"></i>
+                    <label htmlFor="password">
+                        <i className="fas fa-lock"></i>
+                    </label>
                     <input
                         type="password"
                         name="password"

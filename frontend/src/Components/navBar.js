@@ -5,8 +5,9 @@
 export default function NavBar() {
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <i class="fa-solid fa-circle-info fa-lg"></i>
             <a class="navbar-brand" href="#">
-                Navbar
+                MIXLE
             </a>
             <button
                 class="navbar-toggler"
@@ -23,17 +24,18 @@ export default function NavBar() {
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">
-                            Home <span class="sr-only">(current)</span>
+                            View Today's Mixes{" "}
+                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            Features
+                            My Mixes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            Pricing
+                            Signout
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -47,20 +49,6 @@ export default function NavBar() {
                         >
                             Dropdown link
                         </a>
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="navbarDropdownMenuLink"
-                        >
-                            <a class="dropdown-item" href="#">
-                                Action
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                Another action
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                Something else here
-                            </a>
-                        </div>
                     </li>
                 </ul>
             </div>
@@ -68,7 +56,7 @@ export default function NavBar() {
         // <div className="navbar-container">
         //     <ul>
         //         <li>
-        //             <i class="fa-solid fa-circle-info fa-lg"></i>
+        //
         //         </li>
         //         <li>
         //             <Link to={"/"}>
