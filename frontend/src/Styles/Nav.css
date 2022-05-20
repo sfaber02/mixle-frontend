@@ -1,5 +1,7 @@
 .navbar-container{
-background-color: #323854;}
+position: absolute;
+max-height: 500px;
+}
 
 .navbar-container h1 {
     text-decoration: none;
@@ -10,7 +12,7 @@ background-color: #323854;}
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    column-gap: 30%;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -19,6 +21,10 @@ background-color: #323854;}
 .navbar-container li{
 display: inline;
 
+}
+
+.dropdown{
+    /* position: absolute; */
 }
 
 .dropbtn {
@@ -52,7 +58,7 @@ display: inline;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
-  
+
   #myDropdown a {
     color: purple;
     padding: 12px 16px;
