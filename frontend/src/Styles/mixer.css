@@ -1,11 +1,12 @@
 html, body, #root {
     height: 100%;
+    background-color: rgb(44, 42, 42);
+    color: white
 }
-
 
 #mainMixerContainer {
     height: 100%;
-    border: 5px solid purple;
+    /* border: 5px solid purple; */
     display: grid;
     grid-template-areas: "visualizer visualizer visualizer"
                          "delay transport compressor"
@@ -54,7 +55,156 @@ html, body, #root {
     /* grid-column: 1 / 4; */
 }
 
+/* ----------------- RANGE SLIDER CSS ------------- */
+
+/* DELAY */
+.delaySliders {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(244, 252, 0);
+    border-radius: 8px;
+}
+
+  /* for chrome/safari */
+  .delaySliders::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 25px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(252, 0, 0);
+    border-radius: 4px;
+  }
+
+   /* for firefox */
+   .delaySliders::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+  }
+    /* DELAY */
+
+    /* TRANSPORT */
+    .transportSlider{
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        background: #000;
+        outline: none;
+        border: 5px solid rgb(0, 0, 0);
+        border-radius: 8px;
+    }
+
+     /* for chrome/safari */
+  .transportSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 10px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(21, 252, 0);
+    border-radius: 4px;
+  }
+
+  .transportSlider::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+  }
+
+    /* TRANSPORT */
+
+    /* SPEED */
+
+   .playSpeedSliders {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(252, 0, 231);
+    border-radius: 8px;
+  }
+
+ /* for chrome/safari */
+   .playSpeedSliders::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 25px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(105, 0, 252);
+    border-radius: 4px;
+  }
+
+  /* for firefox */
+   .playSpeedSliders::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+  }
+  
+  /* SPEED */
+
+  /* COMPRESSOR */
+
+  .compressorSliders {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(0, 193, 252);
+    border-radius: 8px;
+  }
+
+  /* for chrome/safari */
+  .compressorSliders::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 25px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(8, 0, 252);
+    border-radius: 4px;
+  }
+
+  /* for firefox */
+   .compressorSliders::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+  }
+
+   /* COMPRESSOR */
+
+/* ----------------- RANGE SLIDER CSS ------------- */
 
 
 
 
+
+/* ----------------- EQUALIZER CSS ------------- */
+
+
+
+/* ----------------- EQUALIZER CSS ------------- */
