@@ -103,6 +103,7 @@ html, body, #root {
     border-radius: 8px;
   }
 
+ /* for chrome/safari */
    .playSpeedSliders::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -113,11 +114,21 @@ html, body, #root {
     border: 5px solid rgb(105, 0, 252);
     border-radius: 4px;
   }
+
+  /* for firefox */
+   .playSpeedSliders::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+  }
   
   /* SPEED */
 
   /* COMPRESSOR */
-  
+
   .compressorSliders {
     -webkit-appearance: none;
     width: 50%;
