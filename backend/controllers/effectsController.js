@@ -48,7 +48,7 @@ effects.put("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const updatedEffect = await updateEffect(effects, id);
-        res.status(200).json(updateEffect);
+        res.status(200).json(updatedEffect);
     } catch (error) {
         res.status(404).json({ error: error });
     }
