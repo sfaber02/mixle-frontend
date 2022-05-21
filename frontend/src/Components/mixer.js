@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultfx } from "../settings/defaultfx";
 // import {}
-import '../Styles/mixer.css';
+import "../Styles/mixer.css";
 import { Visualizer } from "./MixerSubComponents/Visualizer";
 
 const API = process.env.REACT_APP_API_URL;
@@ -16,118 +16,118 @@ const API = process.env.REACT_APP_API_URL;
  * @param {object} props
  */
 const Mixer = props => {
-   const navigate = useNavigate();
-   
-   /**
-    * play/pause - boolean state for play/pause toggling
-    * playstate - object state for tracking the current play state (e.g. 'playing', 'paused')
-    * time - object state for current time of track / total duration of track
-    */
-   const [playPause, setPlayPause] = useState(false);
-   const [playState, setPlayState] = useState({ state: "stopped" });
-   const [time, setTime] = useState({ current: 0, duration: 0 });
+  const navigate = useNavigate();
 
-   const [loading, setLoading] = useState(true);
-   const [firstLoad, setFirstLoad] = useState(true);
-   const [fx, setFx] = useState(defaultfx);
+  /**
+   * play/pause - boolean state for play/pause toggling
+   * playstate - object state for tracking the current play state (e.g. 'playing', 'paused')
+   * time - object state for current time of track / total duration of track
+   */
+  const [playPause, setPlayPause] = useState(false);
+  const [playState, setPlayState] = useState({ state: "stopped" });
+  const [time, setTime] = useState({ current: 0, duration: 0 });
 
-   //Refs for time display
-   const timer = useRef();
-   const timeStart = useRef();
+  const [loading, setLoading] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [fx, setFx] = useState(defaultfx);
 
-   //Refs for audio node and decoded audio array
-   const track = useRef();
-   const decodedAudio = useRef(false);
+  //Refs for time display
+  const timer = useRef();
+  const timeStart = useRef();
 
-   //Refs for context elements
-   const ctx = useRef();
+  //Refs for audio node and decoded audio array
+  const track = useRef();
+  const decodedAudio = useRef(false);
 
-   //Refs for delay nodes
-   const delayNode = useRef();
-   const feedbackNode = useRef();
-   const dryNode = useRef();
-   const wetNode = useRef();
-   const delayOutNode = useRef();
+  //Refs for context elements
+  const ctx = useRef();
 
-   //Refs for EQ nodes
-   const band1 = useRef();
-   const band2 = useRef();
-   const band3 = useRef();
-   const band4 = useRef();
-   const band5 = useRef();
+  //Refs for delay nodes
+  const delayNode = useRef();
+  const feedbackNode = useRef();
+  const dryNode = useRef();
+  const wetNode = useRef();
+  const delayOutNode = useRef();
 
-   //Ref for Compressor node
-   const compressorNode = useRef();
+  //Refs for EQ nodes
+  const band1 = useRef();
+  const band2 = useRef();
+  const band3 = useRef();
+  const band4 = useRef();
+  const band5 = useRef();
 
-   //Ref for analyser node
-   const analyserNode = useRef();
+  //Ref for Compressor node
+  const compressorNode = useRef();
 
-   useEffect(() => {
-      const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
-      if (storedFx) {
-        setFx(storedFx);
-        localStorage.setItem("temp_fx", null);
-      }
-   }, [])
+  //Ref for analyser node
+  const analyserNode = useRef();
 
-   //trigger song fetch after a user interaction has occurred
-   useEffect(() => {
-      if (!props.showSplash) {
-         //Create audio context
-         ctx.current = new (window.AudioContext || window.webkitAudioContext)();
-         
-         //Create Delay Nodes
-         delayNode.current = ctx.current.createDelay();
-         feedbackNode.current = ctx.current.createGain();
-         dryNode.current = ctx.current.createGain();
-         wetNode.current = ctx.current.createGain();
-         delayOutNode.current = ctx.current.createGain();
-         
-         // //Create Analyser Node
-         analyserNode.current = ctx.current.createAnalyser();
-         
-         // //Create Filter Nodes
-         band1.current = ctx.current.createBiquadFilter();
-         band2.current = ctx.current.createBiquadFilter();
-         band3.current = ctx.current.createBiquadFilter();
-         band4.current = ctx.current.createBiquadFilter();
-         band5.current = ctx.current.createBiquadFilter();
+  useEffect(() => {
+    const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
+    if (storedFx) {
+      setFx(storedFx);
+      localStorage.setItem("temp_fx", null);
+    }
+  }, []);
 
-         // Changing default filters
-         band1.current.type = "lowshelf";
-         band2.current.type = "peaking";
-         band3.current.type = "peaking";
-         band4.current.type = "peaking";
-         band5.current.type = "highshelf";
+  //trigger song fetch after a user interaction has occurred
+  useEffect(() => {
+    if (!props.showSplash) {
+      //Create audio context
+      ctx.current = new (window.AudioContext || window.webkitAudioContext)();
 
-         // //Create Compressor Node
-         compressorNode.current = ctx.current.createDynamicsCompressor();
+      //Create Delay Nodes
+      delayNode.current = ctx.current.createDelay();
+      feedbackNode.current = ctx.current.createGain();
+      dryNode.current = ctx.current.createGain();
+      wetNode.current = ctx.current.createGain();
+      delayOutNode.current = ctx.current.createGain();
 
-         //Fetch Song from Server and decode audio for playback
-         fetch(
-            "http://www.shawnfaber.com/audio/1987%20-%20Drumming%20-%2004%20-%20part%20IV.mp3"
-         )
-            .then(data => {
-               // console.log(data);
-               return data.arrayBuffer();
-            })
-            .then(arrayBuffer => {
-               // console.log(arrayBuffer);
-               return ctx.current.decodeAudioData(arrayBuffer);
-            })
-            .then(decodedAudio => {
-               // console.log(decodedAudio);
-               createTrackNode(decodedAudio);
-            })
-            .catch(err => console.log(err));
-      }
-   }, [props.showSplash]);
+      // //Create Analyser Node
+      analyserNode.current = ctx.current.createAnalyser();
+
+      // //Create Filter Nodes
+      band1.current = ctx.current.createBiquadFilter();
+      band2.current = ctx.current.createBiquadFilter();
+      band3.current = ctx.current.createBiquadFilter();
+      band4.current = ctx.current.createBiquadFilter();
+      band5.current = ctx.current.createBiquadFilter();
+
+      // Changing default filters
+      band1.current.type = "lowshelf";
+      band2.current.type = "peaking";
+      band3.current.type = "peaking";
+      band4.current.type = "peaking";
+      band5.current.type = "highshelf";
+
+      // //Create Compressor Node
+      compressorNode.current = ctx.current.createDynamicsCompressor();
+
+      //Fetch Song from Server and decode audio for playback
+      fetch(
+        "http://www.shawnfaber.com/audio/1987%20-%20Drumming%20-%2004%20-%20part%20IV.mp3"
+      )
+        .then(data => {
+          // console.log(data);
+          return data.arrayBuffer();
+        })
+        .then(arrayBuffer => {
+          // console.log(arrayBuffer);
+          return ctx.current.decodeAudioData(arrayBuffer);
+        })
+        .then(decodedAudio => {
+          // console.log(decodedAudio);
+          createTrackNode(decodedAudio);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [props.showSplash]);
 
   /**
    * Creates a track node from decoded audio
    * @param {array} audio - decoded audio from fetch
    */
-  const createTrackNode = (audio) => {
+  const createTrackNode = audio => {
     //store decoded audio in ref for future use
     if (!decodedAudio.current) decodedAudio.current = audio;
 
@@ -209,8 +209,8 @@ const Mixer = props => {
   }, [loading, fx]);
 
   // CHANGE FX SETTINGS HANDLERS
-  const setDelayFx = (e) => {
-    setFx((prev) => {
+  const setDelayFx = e => {
+    setFx(prev => {
       return {
         ...prev,
         delay: {
@@ -221,8 +221,8 @@ const Mixer = props => {
     });
   };
 
-  const setSpeedFx = (e) => {
-    setFx((prev) => {
+  const setSpeedFx = e => {
+    setFx(prev => {
       return {
         ...prev,
         speed: {
@@ -233,8 +233,8 @@ const Mixer = props => {
     });
   };
 
-  const setCompressorFx = (e) => {
-    setFx((prev) => {
+  const setCompressorFx = e => {
+    setFx(prev => {
       return {
         ...prev,
         compressor: {
@@ -245,8 +245,8 @@ const Mixer = props => {
     });
   };
 
-  const setEqFx = (e) => {
-    setFx((prev) => {
+  const setEqFx = e => {
+    setFx(prev => {
       return {
         ...prev,
         eq: {
@@ -260,11 +260,36 @@ const Mixer = props => {
     });
   };
 
+  const handleSetFx = e => {
+    setFx(prev => {
+      if (e.target.id.split(".").length === 3) {
+        return {
+          ...prev,
+          [e.target.id.split(".")[0]]: {
+            ...prev[e.target.id.split('.')[0]],
+            [e.target.id.split(".")[1]]: {
+              ...prev.eq[e.target.id.split(".")[1]],
+              [e.target.id.split(".")[2]]: e.target.value,
+            },
+          },
+        };
+      } else {
+        return {
+          ...prev,
+          [e.target.id.split('.')[0]]: {
+            ...prev[e.target.id.split('.')[0]],
+            [e.target.id.split('.')[1]]: e.target.value,
+          }
+        };
+      }
+    });
+  };
+
   //handles start and stop of timer
   const startTimer = () => {
     timer.current = setInterval(() => {
       //  console.log(ctx.current.currentTime);
-      setTime((prev) => {
+      setTime(prev => {
         return {
           ...prev,
           current: ctx.current.currentTime,
@@ -289,14 +314,14 @@ const Mixer = props => {
       ctx.current.resume();
       setPlayState({ state: "playing" });
     }
-    setPlayPause((prev) => !prev);
+    setPlayPause(prev => !prev);
   };
 
   const handleStop = () => {
     track.current.stop(0);
     setPlayState({ state: "stopped" });
     setPlayPause(false);
-    setTime((p) => {
+    setTime(p => {
       return {
         ...p,
         current: 0,
@@ -308,45 +333,48 @@ const Mixer = props => {
 
   //Save click handler
   const handleSaveClick = async () => {
-   let user = JSON.parse(localStorage.getItem("user_id"));
-   if (user) {
+    let user = JSON.parse(localStorage.getItem("user_id"));
+    if (user) {
       try {
-         const data = {
-            effects: JSON.stringify(fx),
-            user_id: user,
-            audio_id: 1
-         }
-         const response = await fetch(`${API}/effects`, {
-             method: "POST",
-             headers: {
-                 Accept: "application/json",
-                 "Content-Type": "application/json",
-             },
-             body: JSON.stringify(data)
-         });
-         const content = await response.json();
-         localStorage.setItem("user_id", JSON.stringify(content.userInfo.user_id));
-         return navigate("/");
-     } catch (error) {
-         return error;
-     }
-   } else {
+        const data = {
+          effects: JSON.stringify(fx),
+          user_id: user,
+          audio_id: 1,
+        };
+        const response = await fetch(`${API}/effects`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const content = await response.json();
+        localStorage.setItem(
+          "user_id",
+          JSON.stringify(content.userInfo.user_id)
+        );
+        return navigate("/");
+      } catch (error) {
+        return error;
+      }
+    } else {
       localStorage.setItem("temp_fx", JSON.stringify(fx));
-      navigate('/register')
-   }
-}
+      navigate("/register");
+    }
+  };
 
-const clearUser = () => {
-   localStorage.setItem("user_id", null);
-   localStorage.setItem("temp_fx", null);
-}
+  const clearUser = () => {
+    localStorage.setItem("user_id", null);
+    localStorage.setItem("temp_fx", null);
+  };
 
   return (
     <>
       {loading && <h1>Loading Please Wait...</h1>}
       {!loading && (
         <div id="mainMixerContainer">
-          <Visualizer  analyserNode={analyserNode.current} />
+          <Visualizer analyserNode={analyserNode.current} />
           <div id="transportContainer">
             <button onClick={handlePlayPause}>
               {playPause ? "Pause" : "Play"}
@@ -369,14 +397,14 @@ const clearUser = () => {
           <div id="delayContainer">
             <label>Delay Time {fx.delay.time * 1000}ms</label>
             <input
-              id="time"
+              id="delay.delay.time"
               class="delaySliders"
               type="range"
               min="0"
               max="1"
               step=".01"
               value={fx.delay.time}
-              onChange={setDelayFx}
+              onChange={handleSetFx}
             />
             <br />
             <label>Feedback</label>
