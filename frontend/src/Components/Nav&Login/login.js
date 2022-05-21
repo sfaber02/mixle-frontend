@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styles/Login.css";
+import "../../Styles/Login.css";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -16,7 +16,7 @@ function Login({ setUsername }) {
         setUser({ ...user, [event.target.id]: event.target.value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             async function postFetch() {
@@ -30,12 +30,22 @@ function Login({ setUsername }) {
                 });
 
                 const data = await response.json();
+                return data;
+            }
+
+            const data = await postFetch();
+            if (!data.error) {
                 localStorage.setItem("user_id", JSON.stringify(data.user_id));
                 localStorage.setItem("username", JSON.stringify(data.username));
                 setUsername(data.username);
+                return navigate("/");
+            } else if (data.error === "password") {
+                setUser({ ...user, password: "" });
+                alert("Incorrect Password Please Try Again");
+            } else if (data.error === "email") {
+                setUser({ ...user, email: "" });
+                alert("Incorrect Email Please Try Again");
             }
-            postFetch();
-            return navigate("/");
         } catch (error) {
             return error;
         }

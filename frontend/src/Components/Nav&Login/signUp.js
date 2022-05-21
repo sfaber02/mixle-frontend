@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../Styles/SignUp.css";
+import "../../Styles/SignUp.css";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -28,8 +28,10 @@ function SignUp() {
                 body: JSON.stringify(user),
             });
             const content = await response.json();
-            console.log(content.userInfo.user_id);
-            localStorage.setItem("user_id", JSON.stringify(content.userInfo.user_id));
+            localStorage.setItem(
+                "user_id",
+                JSON.stringify(content.userInfo.user_id)
+            );
             return navigate("/");
         } catch (error) {
             return error;
@@ -80,9 +82,9 @@ function SignUp() {
                     />
                 </div>
                 <input type="submit" value="SignUp" />
-            <Link to={`/login`}>
-                <input type={"button"} value="Login" />
-            </Link>    
+                <Link to={`/login`}>
+                    <input type={"button"} value="Login" />
+                </Link>
             </form>
         </div>
     );

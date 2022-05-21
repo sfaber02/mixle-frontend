@@ -3,10 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // COMPONENTS
-import SignUp from "./Components/signUp";
+import SignUp from "./Components/Nav&Login/signUp";
 import { MixerWrapper } from "./Components/mixersplashwrapper.js";
-import Login from "./Components/login";
-import NavBar from "./Components/navBar";
+import Login from "./Components/Nav&Login/login";
+import NavBar from "./Components/Nav&Login/navBar";
 import Mixes from "./Components/mixes";
 
 function App() {
@@ -25,7 +25,10 @@ function App() {
                 <Route exact path="/" element={<MixerWrapper />} />
                 <Route path="/audio" element={<Mixes />} />
                 <Route path="register" element={<SignUp />} />
-                <Route path="login" element={<Login setUsername={setUsername} />} />
+                <Route
+                    path="login"
+                    element={<Login setUsername={setUsername} />}
+                />
             </Routes>
         </main>
     );

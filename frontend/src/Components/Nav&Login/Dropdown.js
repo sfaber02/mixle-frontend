@@ -9,9 +9,9 @@ export default function Dropdown({ username }) {
 
     if (username) {
         return (
-            <div class="dropdown">
+            <div className="dropdown">
                 <button
-                    class="btn btn-secondary dropdown-toggle"
+                    className="btn btn-secondary dropdown-toggle"
                     type="button"
                     id="dropdownMenuButton"
                     data-toggle="dropdown"
@@ -20,14 +20,21 @@ export default function Dropdown({ username }) {
                 >
                     {username + " "}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/">
+                <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                >
+                    <a className="dropdown-item" href="/">
                         View Today's Mixes
                     </a>
-                    <a class="dropdown-item" href="/">
+                    <a className="dropdown-item" href="/">
                         My Mixes
                     </a>
-                    <a class="dropdown-item" href="/" onClick={handleSignOut}>
+                    <a
+                        className="dropdown-item"
+                        href="/"
+                        onClick={handleSignOut}
+                    >
                         Signout
                     </a>
                 </div>
@@ -35,9 +42,9 @@ export default function Dropdown({ username }) {
         );
     } else {
         return (
-            <div class="dropdown">
+            <div className="dropdown">
                 <button
-                    class="btn btn-secondary dropdown-toggle"
+                    className="btn btn-secondary dropdown-toggle"
                     type="button"
                     id="dropdownMenuButton"
                     data-toggle="dropdown"
@@ -46,11 +53,14 @@ export default function Dropdown({ username }) {
                 >
                     Welcome
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/login">
+                <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                >
+                    <a className="dropdown-item" href="/login">
                         Login
                     </a>
-                    <a class="dropdown-item" href="/register">
+                    <a className="dropdown-item" href="/register">
                         Register
                     </a>
                 </div>

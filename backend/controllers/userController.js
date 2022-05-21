@@ -46,7 +46,10 @@ user.post("/login", async (req, res) => {
     try {
         const user = await getUser(email);
         if (!user.email) {
-            res.status(400).send("Email not found.");
+            res.status(400).json({
+                error: "email",
+                errorMsg: "Incorrect email, please try again.",
+            });
         } else {
             const isValidPassword = await bcrypt.compare(
                 password,
@@ -63,7 +66,8 @@ user.post("/login", async (req, res) => {
                 });
             } else {
                 res.status(400).json({
-                    error: "Enter correct password!",
+                    error: "password",
+                    errorMsg: "Incorrect Password, please try again.",
                 });
             }
         }
