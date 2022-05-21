@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 /**
  * Renders music visualizer baseed on audio date form analyser node
+ * needs analyser node passed as a prop
  * @param {object} props 
  * @returns visualizer component
  */
