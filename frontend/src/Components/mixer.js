@@ -39,7 +39,10 @@ const Mixer = (props) => {
 
     //Refs for time display
     const timer = useRef();
-    const timeStart = useRef();
+    const timerStart = useRef();
+    const timerOffset = useRef();
+    const loadStart = useRef();
+    const seekOffset = useRef(0);
 
     //Refs for audio node and decoded audio array
     const track = useRef();
@@ -83,6 +86,8 @@ const Mixer = (props) => {
             ctx.current = new (window.AudioContext ||
                 window.webkitAudioContext)();
 
+            loadStart.current = Date.now();
+
             //Create Delay Nodes
             delayNode.current = ctx.current.createDelay();
             feedbackNode.current = ctx.current.createGain();
@@ -121,7 +126,9 @@ const Mixer = (props) => {
                     return ctx.current.decodeAudioData(arrayBuffer);
                 })
                 .then((decodedAudio) => {
-                    // console.log(decodedAudio);
+                    timerOffset.current =
+                        (Date.now() - loadStart.current) / 1000;
+                    console.log(timerOffset.current);
                     createTrackNode(decodedAudio);
                 })
                 .catch((err) => console.log(err));
@@ -238,12 +245,17 @@ const Mixer = (props) => {
 
     //handles start and stop of timer
     const startTimer = () => {
+        timerStart.current = Date.now();
         timer.current = setInterval(() => {
-            //  console.log(ctx.current.currentTime);
+            console.log(ctx.current.currentTime);
             setTime((prev) => {
+                console.log(seekOffset.current);
                 return {
                     ...prev,
-                    current: ctx.current.currentTime,
+                    current:
+                        ctx.current.currentTime -
+                        (timerStart.current - loadStart.current) / 1000 +
+                        seekOffset.current,
                 };
             });
         }, 50);
@@ -283,31 +295,32 @@ const Mixer = (props) => {
     };
 
     const handleSeek = (e) => {
-      console.log(e.target.value);
-      if (playState.state === 'playing') {
-        console.log('1');
-        track.current.stop();
-        createTrackNode(decodedAudio.current);
-        track.current.start(0, e.target.value);
-        setTime((prev) => {
-          return {
-            ...prev,
-            current: ctx.current.currentTime,
-          }
-        });
-      } else if (playState.state === 'stopped') {
-        console.log('2');
-        track.current.start(0, e.target.value);
-        startTimer();
-        setPlayState({ state: "playing" });
-        setPlayPause(true);
-      } else if (playState.state === 'paused') {
-        console.log('3');
-        track.current.stop();
-        createTrackNode(decodedAudio.current);
-        track.current.start(0, e.target.value);
-        ctx.current.suspend();
-      }
+        seekOffset.current = Number(e.target.value);
+        console.log(e.target.value);
+        if (playState.state === "playing") {
+            console.log("1");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0, e.target.value);
+            setTime((prev) => {
+                return {
+                    ...prev,
+                    current: ctx.current.currentTime,
+                };
+            });
+        } else if (playState.state === "stopped") {
+            console.log("2");
+            track.current.start(0, e.target.value);
+            startTimer();
+            setPlayState({ state: "playing" });
+            setPlayPause(true);
+        } else if (playState.state === "paused") {
+            console.log("3");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0, e.target.value);
+            ctx.current.suspend();
+        }
     };
 
     //Save click handler
