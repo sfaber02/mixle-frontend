@@ -55,6 +55,14 @@ html, body, #root {
     /* grid-column: 1 / 4; */
 }
 
+/* temp styling for seekbar testing */
+#seekBar {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+} 
+
 /* ----------------- RANGE SLIDER CSS ------------- */
 
 /* DELAY */

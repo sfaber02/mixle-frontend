@@ -43,6 +43,7 @@ const Mixer = (props) => {
     const timerOffset = useRef();
     const loadStart = useRef();
     const seekOffset = useRef(0);
+    const seekTimeStamp = useRef(0);
 
     //Refs for audio node and decoded audio array
     const track = useRef();
@@ -247,15 +248,16 @@ const Mixer = (props) => {
     const startTimer = () => {
         timerStart.current = Date.now();
         timer.current = setInterval(() => {
-            console.log(ctx.current.currentTime);
             setTime((prev) => {
-                console.log(seekOffset.current);
                 return {
                     ...prev,
                     current:
-                        ctx.current.currentTime -
-                        (timerStart.current - loadStart.current) / 1000 +
-                        seekOffset.current,
+                        seekOffset.current > 0
+                            ? seekOffset.current +
+                              (ctx.current.currentTime - seekTimeStamp.current)
+                            : ctx.current.currentTime -
+                              (timerStart.current - loadStart.current) / 1000 +
+                              seekOffset.current,
                 };
             });
         }, 50);
@@ -296,18 +298,13 @@ const Mixer = (props) => {
 
     const handleSeek = (e) => {
         seekOffset.current = Number(e.target.value);
+        seekTimeStamp.current = ctx.current.currentTime;
         console.log(e.target.value);
         if (playState.state === "playing") {
             console.log("1");
             track.current.stop();
             createTrackNode(decodedAudio.current);
             track.current.start(0, e.target.value);
-            setTime((prev) => {
-                return {
-                    ...prev,
-                    current: ctx.current.currentTime,
-                };
-            });
         } else if (playState.state === "stopped") {
             console.log("2");
             track.current.start(0, e.target.value);
@@ -372,7 +369,7 @@ const Mixer = (props) => {
                         <button onClick={handlePlayPause}>
                             {playPause ? "Pause" : "Play"}
                         </button>
-                        {/* <button onClick={handleStop}>Stop</button> */}
+                        <button onClick={stopTimer}>Stop TIMER</button>
                         <button onClick={handleSaveClick}>Save Mix</button>
                         <button onClick={clearUser}>Clear User</button>
                         <div>{`${time.current.toFixed(
@@ -380,6 +377,7 @@ const Mixer = (props) => {
                         )} / ${time.duration.toFixed(2)}`}</div>
                         <input
                             class="transportSlider"
+                            id="seekBar"
                             type="range"
                             min="0"
                             max={time.duration}
