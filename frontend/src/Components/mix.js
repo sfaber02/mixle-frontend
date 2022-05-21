@@ -1,10 +1,21 @@
 import React from 'react'
 
-export default function Mix() {
-    
+export default function Mix({ audio }) {
   return (
-    <div className='flex-grid'>
-        <div className="col">Mix</div>
-    </div>
-  )
+    <tr>
+      <td>
+          
+            {audio.title}
+      </td>
+      <td>
+            {audio.artist}
+      </td>
+      <td>
+            {audio.album}
+      </td>
+      <td>
+            {audio.totalVotes}
+      </td>
+    </tr>
+  );
 }

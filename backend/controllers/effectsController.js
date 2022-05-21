@@ -21,7 +21,7 @@ effects.get("/", async (req, res) => {
 });
 
 // GET ALL EFFECTS FOR USER
-effects.get("/allaudio/:id", async (req, res) => {
+effects.get("/allmixes/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const allEffects = await getAllUserEffects(id);
