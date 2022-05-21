@@ -7,6 +7,7 @@ import SignUp from "./Components/signUp";
 import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 import Login from "./Components/login";
 import NavBar from "./Components/navBar";
+import Mixes from "./Components/mixes";
 
 function App() {
     const [username, setUsername] = useState(
@@ -22,11 +23,9 @@ function App() {
             <NavBar username={username} />
             <Routes>
                 <Route exact path="/" element={<MixerWrapper />} />
+                <Route path="/audio" element={<Mixes />} />
                 <Route path="register" element={<SignUp />} />
-                <Route
-                    path="login"
-                    element={<Login setUsername={setUsername} />}
-                />
+                <Route path="login" element={<Login setUsername={setUsername} />} />
             </Routes>
         </main>
     );
