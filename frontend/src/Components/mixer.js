@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultfx } from "../settings/defaultfx";
-// import {}
+
 import "../Styles/mixer.css";
 
 //MIXER SUB COMPONENTS
@@ -10,7 +10,6 @@ import { Delay } from "./MixerSubComponents/Delay";
 import { PlaySpeed } from "./MixerSubComponents/PlaySpeed";
 import { Compressor } from "./MixerSubComponents/Compressor";
 import { Eq } from "./MixerSubComponents/Eq";
-
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -203,9 +202,6 @@ const Mixer = (props) => {
             band4.current.gain.value = fx.eq.band4.gain;
             band5.current.gain.value = fx.eq.band5.gain;
 
-            //Analyzer Node Settings
-            // analyserNode.current.fftSize = 32768;
-
             //Set compressor settings
             compressorNode.current.threshold.value = fx.compressor.threshold;
             compressorNode.current.ratio.value = fx.compressor.ratio;
@@ -288,6 +284,11 @@ const Mixer = (props) => {
         createTrackNode(decodedAudio.current);
     };
 
+  const handleSeek = (e) => {
+    console.log(e.target.value);
+    ctx.current.currentTime = e.target.value;
+    };
+
     //Save click handler
     const handleSaveClick = async () => {
         let user = JSON.parse(localStorage.getItem("user_id"));
@@ -321,6 +322,7 @@ const Mixer = (props) => {
         }
     };
 
+    //TEMP BUTTON FOR DEV PURPOSES
     const clearUser = () => {
         localStorage.setItem("user_id", null);
         localStorage.setItem("temp_fx", null);
@@ -349,6 +351,7 @@ const Mixer = (props) => {
                             max={time.duration}
                             step="1"
                             value={time.current}
+                            onChange={handleSeek}
                         />
                     </div>
                     <Delay handleSetFx={handleSetFx} fx={fx} />

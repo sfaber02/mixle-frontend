@@ -55,7 +55,6 @@ const Compressor = (props) => {
             />
         </div>
     );
-
-}
+};
 
 export { Compressor };
