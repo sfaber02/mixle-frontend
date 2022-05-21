@@ -111,9 +111,7 @@ const Mixer = (props) => {
             compressorNode.current = ctx.current.createDynamicsCompressor();
 
             //Fetch Song from Server and decode audio for playback
-            fetch(
-                "http://www.shawnfaber.com/audio/1987%20-%20Drumming%20-%2004%20-%20part%20IV.mp3"
-            )
+            fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
                 .then((data) => {
                     // console.log(data);
                     return data.arrayBuffer();
@@ -271,7 +269,7 @@ const Mixer = (props) => {
     };
 
     const handleStop = () => {
-        track.current.stop(0);
+        track.current.stop();
         setPlayState({ state: "stopped" });
         setPlayPause(false);
         setTime((p) => {
@@ -284,9 +282,32 @@ const Mixer = (props) => {
         createTrackNode(decodedAudio.current);
     };
 
-  const handleSeek = (e) => {
-    console.log(e.target.value);
-    ctx.current.currentTime = e.target.value;
+    const handleSeek = (e) => {
+      console.log(e.target.value);
+      if (playState.state === 'playing') {
+        console.log('1');
+        track.current.stop();
+        createTrackNode(decodedAudio.current);
+        track.current.start(0, e.target.value);
+        setTime((prev) => {
+          return {
+            ...prev,
+            current: ctx.current.currentTime,
+          }
+        });
+      } else if (playState.state === 'stopped') {
+        console.log('2');
+        track.current.start(0, e.target.value);
+        startTimer();
+        setPlayState({ state: "playing" });
+        setPlayPause(true);
+      } else if (playState.state === 'paused') {
+        console.log('3');
+        track.current.stop();
+        createTrackNode(decodedAudio.current);
+        track.current.start(0, e.target.value);
+        ctx.current.suspend();
+      }
     };
 
     //Save click handler
@@ -338,7 +359,7 @@ const Mixer = (props) => {
                         <button onClick={handlePlayPause}>
                             {playPause ? "Pause" : "Play"}
                         </button>
-                        <button onClick={handleStop}>Stop</button>
+                        {/* <button onClick={handleStop}>Stop</button> */}
                         <button onClick={handleSaveClick}>Save Mix</button>
                         <button onClick={clearUser}>Clear User</button>
                         <div>{`${time.current.toFixed(
