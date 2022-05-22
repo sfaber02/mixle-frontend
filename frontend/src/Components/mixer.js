@@ -72,6 +72,9 @@ const Mixer = (props) => {
     //Ref for analyser node
     const analyserNode = useRef();
 
+    //Ref for master out
+    const masterOutNode = useRef();
+
     useEffect(() => {
         const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
         if (storedFx) {
@@ -115,6 +118,9 @@ const Mixer = (props) => {
 
             // //Create Compressor Node
             compressorNode.current = ctx.current.createDynamicsCompressor();
+
+            // Create Master Out Node
+            masterOutNode.current = ctx.current.createGain();
 
             //Fetch Song from Server and decode audio for playback
             fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
@@ -179,7 +185,10 @@ const Mixer = (props) => {
         compressorNode.current.connect(analyserNode.current);
 
         //analyser path
-        analyserNode.current.connect(ctx.current.destination);
+        analyserNode.current.connect(masterOutNode.current);
+
+        //Master Out Node
+        masterOutNode.current.connect(ctx.current.destination);
     };
 
     //SET FX settings
@@ -244,6 +253,10 @@ const Mixer = (props) => {
         });
     };
 
+    const setMasterVolume = (e) => {
+        masterOutNode.current.gain.value = e.target.value; 
+    }
+
     //handles start and stop of timer
     const startTimer = () => {
         timerStart.current = Date.now();
@@ -304,7 +317,10 @@ const Mixer = (props) => {
             console.log("1");
             track.current.stop();
             createTrackNode(decodedAudio.current);
-            track.current.start(0, e.target.value);
+            track.current.start(0.01, e.target.value);
+            //Set play speed
+            track.current.playbackRate.value = fx.speed.rate;
+            track.current.detune.value = fx.speed.detune;
         } else if (playState.state === "stopped") {
             console.log("2");
             track.current.start(0, e.target.value);
@@ -372,6 +388,7 @@ const Mixer = (props) => {
                         <button onClick={stopTimer}>Stop TIMER</button>
                         <button onClick={handleSaveClick}>Save Mix</button>
                         <button onClick={clearUser}>Clear User</button>
+                        <input type='range' id="volume" min="0" max="1" step=".05" onChange={setMasterVolume} />
                         <div>{`${time.current.toFixed(
                             2
                         )} / ${time.duration.toFixed(2)}`}</div>
