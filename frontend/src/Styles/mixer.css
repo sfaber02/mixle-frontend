@@ -1,41 +1,46 @@
-html, body, #root {
+html, body, #root, main {
     height: 100%;
     background-color: rgb(44, 42, 42);
     color: white
 }
 
 #mainMixerContainer {
+  border: 2px solid purple;
     height: 100%;
     /* border: 5px solid purple; */
     display: grid;
     grid-template-areas: "visualizer visualizer visualizer"
                          "delay transport compressor"
-                         ". speed compressor"
-                         ". eq .";
+                         "delay speed compressor"
+                         "eq eq eq";
     justify-items: center;
     /* grid-template-rows: 50% 7.5% 7.5% 35%; */
     /* grid-template-columns: 33% 33% 33%; */
 }
 
 #visualizerContainer {
+  border: 1px solid blue;
     grid-area: visualizer;
     /* grid-row: 1 / 2; */
     /* grid-column: 1 / 4; */
 }
 
 #transportContainer {
+  border: 1px solid yellow;
     grid-area: transport;
     /* grid-row: 2 / 3; */
     /* grid-column: 2 / 3; */
 }
 
 #playSpeedContainer {
+  border: 1px solid yellow;
     grid-area: speed;
     /* grid-row: 3 / 4; */
     /* grid-column: 2 / 3; */
 }
 
 #delayContainer {
+  border: 1px solid yellow;
     grid-area: delay;
     /* width: 15%; */
     /* grid-row: 2 / 4; */
@@ -43,14 +48,16 @@ html, body, #root {
 }
 
 #compressorContainer {
+  border: 1px solid yellow;
     grid-area: compressor;
     /* grid-row: 2 / 4; */
     /* grid-column: 3 / 4; */
 }
 
 #eqContainer {
+  border: 1px solid yellow;
     grid-area: eq;
-    justify-items: center;
+    /* justify-items: center; */
     /* grid-row: 4 / 5; */
     /* grid-column: 1 / 4; */
 }
@@ -60,8 +67,26 @@ html, body, #root {
   width: 100%;
   position: absolute;
   left: 0;
-  bottom: 40px;
+  bottom: 10px;
 } 
+
+
+/* spacing for EQ bands */
+#eqContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  /* position: relative;
+  top: 75px; */
+}
+
+.eqBand {
+  display:flex;
+  flex-direction: column;
+}
+.eqGain {
+  /* transform: rotate(.75turn); */
+}
 
 /* ----------------- RANGE SLIDER CSS ------------- */
 
