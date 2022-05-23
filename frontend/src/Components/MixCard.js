@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import "../Styles/scss/MixCard.scss";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
@@ -39,10 +41,10 @@ export default function MixCard({ audio }) {
             </div>
                 :
                 <>
-                    <div onClick={handleClick} className={"musi-card-cover"} onMouseOver={handleResponse}>
-                        <img src={""} alt={""}/>
+                    <div onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse}>
+                        <img src={"https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ"} alt={""}/>
                         <div className='thumbs-up'>
-
+                            <ThumbUpAltIcon />
                         </div>
                     </div>
                     <React.Fragment>

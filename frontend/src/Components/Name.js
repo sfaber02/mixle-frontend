@@ -1,4 +1,5 @@
 import React from 'react'
+import "../Styles/scss/Name.scss"
 
 export default function Name({className, length, name}) {
   return (
