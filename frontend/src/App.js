@@ -7,7 +7,7 @@ import SignUp from "./Components/Nav&Login/signUp";
 import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 import Login from "./Components/Nav&Login/login";
 import NavBar from "./Components/Nav&Login/navBar";
-import Mixes from "./Components/mixes.js";
+import MixesCard from "./Components/MixesCard.js";
 
 function App() {
     const [userDetails, setUserDetails] = useState({
@@ -20,14 +20,14 @@ function App() {
             username: JSON.parse(localStorage.getItem("username")),
             user_id: JSON.parse(localStorage.getItem("user_id")),
         });
-    }, [userDetails]);
+    }, []);
 
     return (
         <main>
             <NavBar user={userDetails} />
             <Routes>
                 <Route exact path="/" element={<MixerWrapper />} />
-                <Route path="/audio" element={<Mixes />} />
+                <Route path="/audio" element={<MixesCard />} />
                 <Route path="/register" element={<SignUp />} />
                 <Route
                     path="/login"
