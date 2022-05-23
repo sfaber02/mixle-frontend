@@ -8,8 +8,10 @@ import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 import Login from "./Components/Nav&Login/login";
 import NavBar from "./Components/Nav&Login/navBar";
 import Mixes from "./Components/mixes.js";
+import AboutPopUp from "./Components/Nav&Login/AboutPopUp";
 
 function App() {
+    const [popupBtn, setPopupBtn] = useState(false);
     const [userDetails, setUserDetails] = useState({
         username: JSON.parse(localStorage.getItem("username")),
         user_id: JSON.parse(localStorage.getItem("user_id")),
@@ -20,15 +22,23 @@ function App() {
             username: JSON.parse(localStorage.getItem("username")),
             user_id: JSON.parse(localStorage.getItem("user_id")),
         });
-    }, [userDetails]);
+    }, []);
 
     return (
         <main>
-            <NavBar user={userDetails} />
+            <NavBar
+                user={userDetails}
+                trigger={popupBtn}
+                setTrigger={setPopupBtn}
+            />
+            <AboutPopUp trigger={popupBtn} setTrigger={setPopupBtn} />
             <Routes>
                 <Route exact path="/" element={<MixerWrapper />} />
                 <Route path="/audio" element={<Mixes />} />
-                <Route path="/register" element={<SignUp />} />
+                <Route
+                    path="/register"
+                    element={<SignUp userDetails={userDetails} />}
+                />
                 <Route
                     path="/login"
                     element={

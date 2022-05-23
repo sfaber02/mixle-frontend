@@ -10,6 +10,7 @@ import { Delay } from "./MixerSubComponents/Delay";
 import { PlaySpeed } from "./MixerSubComponents/PlaySpeed";
 import { Compressor } from "./MixerSubComponents/Compressor";
 import { Eq } from "./MixerSubComponents/Eq";
+import Loading from "./Loading";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -135,7 +136,7 @@ const Mixer = (props) => {
                 .then((decodedAudio) => {
                     timerOffset.current =
                         (Date.now() - loadStart.current) / 1000;
-                    console.log(timerOffset.current);
+                    // console.log(timerOffset.current);
                     createTrackNode(decodedAudio);
                 })
                 .catch((err) => console.log(err));
@@ -254,8 +255,8 @@ const Mixer = (props) => {
     };
 
     const setMasterVolume = (e) => {
-        masterOutNode.current.gain.value = e.target.value; 
-    }
+        masterOutNode.current.gain.value = e.target.value;
+    };
 
     //handles start and stop of timer
     const startTimer = () => {
@@ -312,9 +313,9 @@ const Mixer = (props) => {
     const handleSeek = (e) => {
         seekOffset.current = Number(e.target.value);
         seekTimeStamp.current = ctx.current.currentTime;
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if (playState.state === "playing") {
-            console.log("1");
+            // console.log("1");
             track.current.stop();
             createTrackNode(decodedAudio.current);
             track.current.start(0.01, e.target.value);
@@ -322,13 +323,13 @@ const Mixer = (props) => {
             track.current.playbackRate.value = fx.speed.rate;
             track.current.detune.value = fx.speed.detune;
         } else if (playState.state === "stopped") {
-            console.log("2");
+            // console.log("2");
             track.current.start(0, e.target.value);
             startTimer();
             setPlayState({ state: "playing" });
             setPlayPause(true);
         } else if (playState.state === "paused") {
-            console.log("3");
+            // console.log("3");
             track.current.stop();
             createTrackNode(decodedAudio.current);
             track.current.start(0, e.target.value);
@@ -377,7 +378,7 @@ const Mixer = (props) => {
 
     return (
         <>
-            {loading && <h1>Loading Please Wait...</h1>}
+            {loading && <Loading />}
             {!loading && (
                 <div id="mainMixerContainer">
                     <Visualizer analyserNode={analyserNode.current} />
@@ -388,12 +389,19 @@ const Mixer = (props) => {
                         <button onClick={stopTimer}>Stop TIMER</button>
                         <button onClick={handleSaveClick}>Save Mix</button>
                         <button onClick={clearUser}>Clear User</button>
-                        <input type='range' id="volume" min="0" max="1" step=".05" onChange={setMasterVolume} />
+                        <input
+                            type="range"
+                            id="volume"
+                            min="0"
+                            max="1"
+                            step=".05"
+                            onChange={setMasterVolume}
+                        />
                         <div>{`${time.current.toFixed(
                             2
                         )} / ${time.duration.toFixed(2)}`}</div>
                         <input
-                            class="transportSlider"
+                            className="transportSlider"
                             id="seekBar"
                             type="range"
                             min="0"
