@@ -39,7 +39,11 @@ const Mixer = (props) => {
 
     //Refs for time display
     const timer = useRef();
-    const timeStart = useRef();
+    const timerStart = useRef();
+    const timerOffset = useRef();
+    const loadStart = useRef();
+    const seekOffset = useRef(0);
+    const seekTimeStamp = useRef(0);
 
     //Refs for audio node and decoded audio array
     const track = useRef();
@@ -68,6 +72,9 @@ const Mixer = (props) => {
     //Ref for analyser node
     const analyserNode = useRef();
 
+    //Ref for master out
+    const masterOutNode = useRef();
+
     useEffect(() => {
         const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
         if (storedFx) {
@@ -82,6 +89,8 @@ const Mixer = (props) => {
             //Create audio context
             ctx.current = new (window.AudioContext ||
                 window.webkitAudioContext)();
+
+            loadStart.current = Date.now();
 
             //Create Delay Nodes
             delayNode.current = ctx.current.createDelay();
@@ -110,10 +119,11 @@ const Mixer = (props) => {
             // //Create Compressor Node
             compressorNode.current = ctx.current.createDynamicsCompressor();
 
+            // Create Master Out Node
+            masterOutNode.current = ctx.current.createGain();
+
             //Fetch Song from Server and decode audio for playback
-            fetch(
-                "http://www.shawnfaber.com/audio/1987%20-%20Drumming%20-%2004%20-%20part%20IV.mp3"
-            )
+            fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
                 .then((data) => {
                     // console.log(data);
                     return data.arrayBuffer();
@@ -123,7 +133,9 @@ const Mixer = (props) => {
                     return ctx.current.decodeAudioData(arrayBuffer);
                 })
                 .then((decodedAudio) => {
-                    // console.log(decodedAudio);
+                    timerOffset.current =
+                        (Date.now() - loadStart.current) / 1000;
+                    console.log(timerOffset.current);
                     createTrackNode(decodedAudio);
                 })
                 .catch((err) => console.log(err));
@@ -173,7 +185,10 @@ const Mixer = (props) => {
         compressorNode.current.connect(analyserNode.current);
 
         //analyser path
-        analyserNode.current.connect(ctx.current.destination);
+        analyserNode.current.connect(masterOutNode.current);
+
+        //Master Out Node
+        masterOutNode.current.connect(ctx.current.destination);
     };
 
     //SET FX settings
@@ -238,14 +253,24 @@ const Mixer = (props) => {
         });
     };
 
+    const setMasterVolume = (e) => {
+        masterOutNode.current.gain.value = e.target.value; 
+    }
+
     //handles start and stop of timer
     const startTimer = () => {
+        timerStart.current = Date.now();
         timer.current = setInterval(() => {
-            //  console.log(ctx.current.currentTime);
             setTime((prev) => {
                 return {
                     ...prev,
-                    current: ctx.current.currentTime,
+                    current:
+                        seekOffset.current > 0
+                            ? seekOffset.current +
+                              (ctx.current.currentTime - seekTimeStamp.current)
+                            : ctx.current.currentTime -
+                              (timerStart.current - loadStart.current) / 1000 +
+                              seekOffset.current,
                 };
             });
         }, 50);
@@ -271,7 +296,7 @@ const Mixer = (props) => {
     };
 
     const handleStop = () => {
-        track.current.stop(0);
+        track.current.stop();
         setPlayState({ state: "stopped" });
         setPlayPause(false);
         setTime((p) => {
@@ -284,9 +309,31 @@ const Mixer = (props) => {
         createTrackNode(decodedAudio.current);
     };
 
-  const handleSeek = (e) => {
-    console.log(e.target.value);
-    ctx.current.currentTime = e.target.value;
+    const handleSeek = (e) => {
+        seekOffset.current = Number(e.target.value);
+        seekTimeStamp.current = ctx.current.currentTime;
+        console.log(e.target.value);
+        if (playState.state === "playing") {
+            console.log("1");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0.01, e.target.value);
+            //Set play speed
+            track.current.playbackRate.value = fx.speed.rate;
+            track.current.detune.value = fx.speed.detune;
+        } else if (playState.state === "stopped") {
+            console.log("2");
+            track.current.start(0, e.target.value);
+            startTimer();
+            setPlayState({ state: "playing" });
+            setPlayPause(true);
+        } else if (playState.state === "paused") {
+            console.log("3");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0, e.target.value);
+            ctx.current.suspend();
+        }
     };
 
     //Save click handler
@@ -338,14 +385,16 @@ const Mixer = (props) => {
                         <button onClick={handlePlayPause}>
                             {playPause ? "Pause" : "Play"}
                         </button>
-                        <button onClick={handleStop}>Stop</button>
+                        <button onClick={stopTimer}>Stop TIMER</button>
                         <button onClick={handleSaveClick}>Save Mix</button>
                         <button onClick={clearUser}>Clear User</button>
+                        <input type='range' id="volume" min="0" max="1" step=".05" onChange={setMasterVolume} />
                         <div>{`${time.current.toFixed(
                             2
                         )} / ${time.duration.toFixed(2)}`}</div>
                         <input
                             class="transportSlider"
+                            id="seekBar"
                             type="range"
                             min="0"
                             max={time.duration}

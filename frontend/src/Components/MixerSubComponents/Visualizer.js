@@ -14,7 +14,7 @@ const Visualizer = (props) => {
     useEffect(() => {
         const canvas = document.getElementById("visualizer");
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight / 2;
+        canvas.height = window.innerHeight / 3;
         canvasCtx.current = canvas.getContext("2d");
 
         analyserNode.current.fftSize = 4096;
