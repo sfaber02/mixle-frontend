@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "../Styles/scss/MixCard.scss";
+import "../../Styles/scss/MixCard.scss";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";

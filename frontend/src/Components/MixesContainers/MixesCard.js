@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import MixCard from "./MixCard.js";
-import "../Styles/scss/MixesCard.scss"
+import "../../Styles/scss/MixesCard.scss"
 import Container from "./Container";
 
 const API = process.env.REACT_APP_API_URL;
