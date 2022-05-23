@@ -254,8 +254,8 @@ const Mixer = (props) => {
     };
 
     const setMasterVolume = (e) => {
-        masterOutNode.current.gain.value = e.target.value; 
-    }
+        masterOutNode.current.gain.value = e.target.value;
+    };
 
     //handles start and stop of timer
     const startTimer = () => {
@@ -382,26 +382,45 @@ const Mixer = (props) => {
                 <div id="mainMixerContainer">
                     <Visualizer analyserNode={analyserNode.current} />
                     <div id="transportContainer">
-                        <button onClick={handlePlayPause}>
-                            {playPause ? "Pause" : "Play"}
-                        </button>
-                        <button onClick={stopTimer}>Stop TIMER</button>
-                        <button onClick={handleSaveClick}>Save Mix</button>
-                        <button onClick={clearUser}>Clear User</button>
-                        <input type='range' id="volume" min="0" max="1" step=".05" onChange={setMasterVolume} />
-                        <div>{`${time.current.toFixed(
-                            2
-                        )} / ${time.duration.toFixed(2)}`}</div>
-                        <input
-                            class="transportSlider"
-                            id="seekBar"
-                            type="range"
-                            min="0"
-                            max={time.duration}
-                            step="1"
-                            value={time.current}
-                            onChange={handleSeek}
-                        />
+                        <div id="transportPlayContainer">
+                            <button onClick={handlePlayPause}>
+                                {playPause ? (
+                                    <i class="fa-solid fa-pause"></i>
+                                ) : (
+                                    <i class="fa-solid fa-play"></i>
+                                )}
+                            </button>
+                        </div>
+                        <div id="transportVolumeContainer">
+                            <label>Volume</label>
+                            <input
+                                type="range"
+                                id="volume"
+                                min="0"
+                                max="1"
+                                step=".05"
+                                onChange={setMasterVolume}
+                            />
+                        </div>
+                        <div id="transportTimeContainer">
+                            {/* prettier-ignore */}
+                            <p>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</p>
+                        </div>
+                        <div id="transportSeekBarContainer">
+                            <input
+                                class="transportSlider"
+                                id="seekBar"
+                                type="range"
+                                min="0"
+                                max={time.duration}
+                                step="1"
+                                value={time.current}
+                                onChange={handleSeek}
+                            />
+                        </div>
+                        <div id="transportSaveContainer">
+                            <button onClick={handleSaveClick}>Save Mix</button>
+                        </div>
                     </div>
                     <Delay handleSetFx={handleSetFx} fx={fx} />
                     <PlaySpeed handleSetFx={handleSetFx} fx={fx} />

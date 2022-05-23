@@ -17,17 +17,11 @@ const Visualizer = (props) => {
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight / 3;
-        // canvas.height = Number(
-        //     window.getComputedStyle(wrapper).height.split("p")[0]
-        // );
+        
 
         window.onresize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight / 3;
-            // canvas.height = Number(
-            //     window.getComputedStyle(wrapper).height.split("p")[0]
-            // );
-            console.log(canvas.height);
         };
 
         canvasCtx.current = canvas.getContext("2d");
@@ -48,7 +42,7 @@ const Visualizer = (props) => {
 
             analyserNode.current.getByteFrequencyData(dataArray);
 
-            canvasCtx.current.fillStyle = "rgba(0,0,0,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
+            canvasCtx.current.fillStyle = "rgba(72,61,139,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
             canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height); // Fade effect, set opacity to 1 for sharper rendering of bars
 
             let r, g, b;
