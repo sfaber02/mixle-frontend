@@ -7,8 +7,9 @@ require('react-dom');
 window.React2 = require('react');
 console.log(window.React1 === window.React2);
 
-export default function MixCard({ song }) {
-    // const {title, artist, album} = song
+export default function MixCard({ audio }) {
+    // const {title, artist, album} = audio
+    // console.log(audio);
     const [ isHovered, setHovered] = useState(false);
     
     const handleResponse = () => {
@@ -45,9 +46,9 @@ export default function MixCard({ song }) {
                         </div>
                     </div>
                     <React.Fragment>
-                        <Name name={song.artist} className={"artist"} length={song.artist.length} />
-                        <Name name={song.title} className={"title"} length={song.title.length} />
-                        <Name name={song.album} className={"album"} length={song.album.length} />
+                        <Name name={audio.artist} className={"artist"} length={audio.artist.length} />
+                        <Name name={audio.title} className={"title"} length={audio.title.length} />
+                        <Name name={audio.album} className={"album"} length={audio.album.length} />
                     </React.Fragment>
                 </>
         }
