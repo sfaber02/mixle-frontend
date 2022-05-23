@@ -20,7 +20,7 @@ function App() {
             username: JSON.parse(localStorage.getItem("username")),
             user_id: JSON.parse(localStorage.getItem("user_id")),
         });
-    }, [userDetails]);
+    }, []);
 
     return (
         <main>
