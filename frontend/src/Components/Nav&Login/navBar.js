@@ -1,20 +1,22 @@
 import Dropdown from "./Dropdown";
 import "../../Styles/Nav.css";
 
-export default function NavBar({ username }) {
+export default function NavBar({ user }) {
     const handleIconClick = () => {};
     return (
         <nav
             className="navbar navbar-expand-lg navbar-light"
-            style={{ "background-color": "#e3f2fd" }}
+            style={{
+                backgroundImage: "linear-gradient(to right, #211898 , #4C3BAC)",
+            }}
         >
             <button className="iconBtn" onClick={handleIconClick}>
-                <i className="fa-solid fa-circle-info fa-lg"></i>
+                <i className="fa-solid fa-circle-info fa-xl"></i>
             </button>
             <a className="navbar-brand" href="/">
-                MIXLE
+                <h1>MIXLE</h1>
             </a>
-            <Dropdown username={username} />
+            <Dropdown user={user} />
         </nav>
     );
 }

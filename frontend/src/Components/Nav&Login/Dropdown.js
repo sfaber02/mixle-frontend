@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Dropdown({ username }) {
+export default function Dropdown({ user }) {
     const navigate = useNavigate();
     const handleSignOut = () => {
         localStorage.clear();
         return navigate("/");
     };
 
-    if (username) {
+    if (user.username) {
         return (
             <div className="dropdown">
                 <button
@@ -18,7 +18,7 @@ export default function Dropdown({ username }) {
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                    {username + " "}
+                    {user.username + " "}
                 </button>
                 <div
                     className="dropdown-menu"

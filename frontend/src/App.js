@@ -10,24 +10,33 @@ import NavBar from "./Components/Nav&Login/navBar";
 import Mixes from "./Components/mixes";
 
 function App() {
-    const [username, setUsername] = useState(
-        JSON.parse(localStorage.getItem("username"))
-    );
+    const [userDetails, setUserDetails] = useState({
+        username: JSON.parse(localStorage.getItem("username")),
+        user_id: JSON.parse(localStorage.getItem("user_id")),
+    });
 
     useEffect(() => {
-        setUsername(JSON.parse(localStorage.getItem("username")));
-    }, []);
+        setUserDetails({
+            username: JSON.parse(localStorage.getItem("username")),
+            user_id: JSON.parse(localStorage.getItem("user_id")),
+        });
+    }, [userDetails]);
 
     return (
         <main>
-            <NavBar username={username} />
+            <NavBar user={userDetails} />
             <Routes>
                 <Route exact path="/" element={<MixerWrapper />} />
                 <Route path="/audio" element={<Mixes />} />
-                <Route path="register" element={<SignUp />} />
+                <Route path="/register" element={<SignUp />} />
                 <Route
-                    path="login"
-                    element={<Login setUsername={setUsername} />}
+                    path="/login"
+                    element={
+                        <Login
+                            userDetails={userDetails}
+                            setUserDetails={setUserDetails}
+                        />
+                    }
                 />
             </Routes>
         </main>

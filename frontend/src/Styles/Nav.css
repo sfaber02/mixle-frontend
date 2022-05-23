@@ -5,7 +5,12 @@
     align-items: center;
 }
 
+.navbar h1{
+    color: white;
+}
+
 .iconBtn{
     border: none;
-
+    background-color: transparent;
+    color: #6c757d;
 }

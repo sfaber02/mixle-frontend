@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/Login.css";
 
 const API = process.env.REACT_APP_API_URL;
 
-function Login({ setUsername }) {
+function Login({ userDetails, setUserDetails }) {
     let navigate = useNavigate();
     const [user, setUser] = useState({
         email: "",
         password: "",
-        user_id: null,
+        user_id: userDetails.user_id,
     });
+
+    useEffect(() => {
+        if (user.user_id) {
+            navigate("/");
+        }
+    }, [user.user_id]);
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });
@@ -37,7 +43,10 @@ function Login({ setUsername }) {
             if (!data.error) {
                 localStorage.setItem("user_id", JSON.stringify(data.user_id));
                 localStorage.setItem("username", JSON.stringify(data.username));
-                setUsername(data.username);
+                setUserDetails({
+                    username: data.username,
+                    user_id: data.user_id,
+                });
                 return navigate("/");
             } else if (data.error === "password") {
                 setUser({ ...user, password: "" });
