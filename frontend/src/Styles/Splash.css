@@ -1,7 +1,10 @@
-#dancing-cat img{
-    display: block;
-    justify-content: center;
-    margin: 0 auto;
+#splashPageContainer {
+  background-image: url("../Assets/Mixle_Icon-Nobg.png");
+  height: 100%;
+  background-size: inherit;
+  background-position: center;
+  background-repeat: repeat-x;
+  background-color: black;
 }
 
 #splashButton {
@@ -10,8 +13,15 @@
     align-items: center;
     min-height: 10vh;
     margin: 0 auto;
+    position:absolute;
+    bottom:0;
   }
   
+  #splashPageButtonContainer {
+    position:absolute;
+    bottom:0;
+  }
+
   #splashButton, #splashButton::after {
     width: 150px;
     height: 20px;
@@ -98,3 +108,5 @@
       transform: translate(0);
     }
   }
+
+  
