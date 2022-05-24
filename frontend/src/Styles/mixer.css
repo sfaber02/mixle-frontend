@@ -3,13 +3,12 @@ body,
 #root,
 main {
     height: 100%;
-
-    color: white;
 }
 
 /*******************************************************/
 
 #mainMixerContainer {
+    color: white;
     border: 2px solid purple;
     background-color: darkslateblue;
     height: 100%;
