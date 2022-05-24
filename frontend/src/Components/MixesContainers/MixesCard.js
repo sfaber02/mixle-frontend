@@ -62,7 +62,7 @@ export default function MixesCard() {
      * FETCH SONG
      */
     useEffect(() => {
-        fetch(`${API}/effects/allmixes/1`)
+        fetch(`${API}/effects/allusers/1`)
             .then((res) => {
                 return res.json();
             })
