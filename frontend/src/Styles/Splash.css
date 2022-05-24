@@ -1,3 +1,9 @@
+#dancing-cat img{
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+}
+
 #splashButton {
     display: flex;
     justify-content: center;
@@ -37,7 +43,7 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(45deg, transparent 5%, #ddf600 3%, #f600dd 5%, #b3ff01 5%);
-    text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00f619;
+    text-shadow: -3px -3px 0px #F8F005, 5px 5px 0px #00f619;
     clip-path: var(--slice-0);
   }
   
