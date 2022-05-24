@@ -6,15 +6,16 @@ import Container from "./Container";
 const API = process.env.REACT_APP_API_URL;
 
 export default function MixesCard() {
-    const [audios, setAudios] = useState([]);
+    const [effects, setEffects] = useState([]);
     
     useEffect(() => {
-        fetch(`${API}/audio`)
+        fetch(`${API}/effects/allmixes/1`)
         .then((res) => {
-            return res.json()
+          return res.json()
         })
         .then((data) => {
-            setAudios(data);
+          console.log(data);
+            setEffects(data);
         })
         .catch((err) => {
             console.log(err);
@@ -26,9 +27,9 @@ export default function MixesCard() {
     <Container>
       <div className={"music-card-container"}>
         {
-          audios.map(audio => (
-              <MixCard key={audio.id} audio={audio}/>
-          ))
+          // effects.map( => (
+          //     <MixCard key={audio.id} audio={audio}/>
+          // ))
         }
       </div>
     </Container>

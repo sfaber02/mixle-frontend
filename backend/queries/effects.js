@@ -6,7 +6,7 @@ const getAllUserEffects = async (id) => {
     try {
         const effects = await db.any(
             "SELECT e.*, u.username FROM effects e JOIN users u ON e.user_id = u.user_id  WHERE user_id=$1",
-            audio_id
+            id
         );
         return effects;
     } catch (error) {

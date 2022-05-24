@@ -42,11 +42,11 @@ export default function MixCard({ audio }) {
                             <ThumbUpAltIcon />
                         </div>
                     </div>
-                    <React.Fragment>
+                    <div>
                         <Name name={audio.artist} className={"artist"} length={audio.artist.length} />
                         <Name name={audio.title} className={"title"} length={audio.title.length} />
                         <Name name={audio.album} className={"album"} length={audio.album.length} />
-                    </React.Fragment>
+                    </div>
                 </>
         }
     </div>
