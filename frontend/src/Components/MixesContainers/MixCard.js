@@ -5,13 +5,8 @@ import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 
-require('react-dom');
-window.React2 = require('react');
-console.log(window.React1 === window.React2);
-
 export default function MixCard({ audio }) {
-    // const {title, artist, album} = audio
-    // console.log(audio);
+
     const [ isHovered, setHovered] = useState(false);
     
     const handleResponse = () => {
@@ -19,7 +14,7 @@ export default function MixCard({ audio }) {
     }
     
     const handleClick = () =>{
-        
+        console.log("trigger");
     }
     
     const [ loaded, setLoaded] = useState(false);
