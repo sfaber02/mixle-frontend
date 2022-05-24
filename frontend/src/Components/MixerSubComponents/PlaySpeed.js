@@ -6,29 +6,36 @@ const PlaySpeed = (props) => {
 
     return (
         <div id="playSpeedContainer">
-            <label>Speed</label>
-            <input
-                id="speed.rate"
-                class="playSpeedSliders"
-                type="range"
-                min=".1"
-                max="4"
-                step=".1"
-                value={fx.speed.rate}
-                onChange={handleSetFx}
-            />
-            <br />
-            <label>Detune</label>
-            <input
-                id="speed.detune"
-                class="playSpeedSliders"
-                type="range"
-                min="-2400"
-                max="2400"
-                step="100"
-                value={fx.speed.detune}
-                onChange={handleSetFx}
-            />
+            <div className="playSpeedSliderContainer">
+                <label className="playSpeedLabel">Play Speed</label>
+                <input
+                    id="speed.rate"
+                    class="playSpeedSliders"
+                    type="range"
+                    min=".1"
+                    max="4"
+                    step=".1"
+                    value={fx.speed.rate}
+                    onChange={handleSetFx}
+                />
+                <label className="playSpeedLabel2">{fx.speed.rate}</label>
+            </div>
+            <div className="playSpeedSliderContainer">
+                <label className="playSpeedLabel">Detune</label>
+                <input
+                    id="speed.detune"
+                    class="playSpeedSliders"
+                    type="range"
+                    min="-2400"
+                    max="2400"
+                    step="100"
+                    value={fx.speed.detune}
+                    onChange={handleSetFx}
+                />
+                <label id="playSpeedDetuneLabel">
+                    {fx.speed.detune} cents
+                </label>
+            </div>
         </div>
     );
 };

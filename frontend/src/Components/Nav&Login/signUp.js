@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Styles/SignUp.css";
 
 const API = process.env.REACT_APP_API_URL;
 
-function SignUp() {
+function SignUp({ userDetails }) {
     let navigate = useNavigate();
     const [user, setUser] = useState({
         username: "",
         email: "",
         password: "",
     });
+
+    useEffect(() => {
+        if (userDetails.user_id) {
+            navigate("/");
+        }
+    }, [userDetails.user_id, navigate]);
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });

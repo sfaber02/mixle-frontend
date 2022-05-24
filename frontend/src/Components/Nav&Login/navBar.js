@@ -1,8 +1,10 @@
 import Dropdown from "./Dropdown";
 import "../../Styles/Nav.css";
 
-export default function NavBar({ user }) {
-    const handleIconClick = () => {};
+export default function NavBar({ user, trigger, setTrigger }) {
+    const handleIconClick = () => {
+        setTrigger(!trigger);
+    };
     return (
         <nav
             className="navbar navbar-expand-lg navbar-light"

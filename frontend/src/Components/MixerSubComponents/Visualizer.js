@@ -13,33 +13,43 @@ const Visualizer = (props) => {
 
     useEffect(() => {
         const canvas = document.getElementById("visualizer");
+        const wrapper = canvas.parentNode;
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight / 3;
+        
+
+        window.onresize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight / 3;
+        };
+
         canvasCtx.current = canvas.getContext("2d");
 
         analyserNode.current.fftSize = 4096;
         let bufferLength = analyserNode.current.frequencyBinCount;
         let dataArray = new Uint8Array(bufferLength);
-        const barWidth = (canvas.width / bufferLength) * 13;
         let barHeight;
         let x = 0;
 
         //Render visualizer
         const renderFrame = () => {
+            const barWidth = (canvas.width / bufferLength) * 13;
+            // console.log (canvas.width, canvas.height);
             requestAnimationFrame(renderFrame);
             x = 0;
             // console.log (analyserNode.current);
 
             analyserNode.current.getByteFrequencyData(dataArray);
 
-            canvasCtx.current.fillStyle = "rgba(0,0,0,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
+            canvasCtx.current.fillStyle = "rgba(72,61,139,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
             canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height); // Fade effect, set opacity to 1 for sharper rendering of bars
 
             let r, g, b;
             let bars = 100;
 
             for (let i = 0; i < bars; i++) {
-                barHeight = dataArray[i] * 1.5;
+                barHeight = dataArray[i];
                 // console.log (dataArray[i]);
                 if (dataArray[i] > 210) {
                     // pink

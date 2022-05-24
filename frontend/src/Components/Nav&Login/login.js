@@ -16,7 +16,7 @@ function Login({ userDetails, setUserDetails }) {
         if (user.user_id) {
             navigate("/");
         }
-    }, [user.user_id]);
+    }, [user.user_id, navigate]);
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });
