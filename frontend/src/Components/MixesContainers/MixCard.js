@@ -5,8 +5,8 @@ import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 
-export default function MixCard({ effect }) {
-    // console.log(effect);
+export default function MixCard({ effect, handleUserChange }) {
+    // console.log(effect.user_id);
     const [ isHovered, setHovered] = useState(false);
     
     const handleResponse = () => {
@@ -23,6 +23,9 @@ export default function MixCard({ effect }) {
         setLoaded(true)
     }, [])
 
+    const handleMouseEnter = (e) => {
+        handleUserChange(e.target.parentNode.id);
+    }
   return (
     <div className={"music-card"}>
         {
@@ -36,7 +39,7 @@ export default function MixCard({ effect }) {
             </div>
                 :
                 <>
-                    <div onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse}>
+                    <div id={effect.user_id} onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse} onMouseEnter={handleMouseEnter}>
                         <img src={"https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ"} alt={""}/>
                         <div className='thumbs-up'>
                             <ThumbUpAltIcon />
