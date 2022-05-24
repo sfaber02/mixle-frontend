@@ -1,6 +1,6 @@
 \c mixle;
 
-INSERT INTO users (username, email, password) VALUES (
+INSERT INTO users (username, email, password) VALUES 
     ('capstone3', 'capstone@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'),
     ('shawn', 'shawn@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'),
     ('hector', 'hector@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'),
@@ -12,7 +12,6 @@ INSERT INTO users (username, email, password) VALUES (
     ('test4', 'test4@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'),
     ('test5', 'test5@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'),
     ('test6', 'test6@gmail.com', '$2b$10$jSK3gK28fB7bTi5/S89AUuOwiJloAmxz2eiNNBA8AOHNRIOtGtB96'); 
-);
 
 INSERT INTO audio (title, artist, album, audio_key) VALUES
     ('Money', 'Pink Floyd', 'The Darkside of the Moon', '(6)%20Pink%20Floyd%20-%20Money.flac'),
@@ -27,12 +26,12 @@ INSERT INTO audio (title, artist, album, audio_key) VALUES
  
 INSERT INTO effects (effects_data, audio, user_id) VALUES
 ('{"speed":{"rate":0.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":1,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":2,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":1.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":2.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":3,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":3.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":4,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":0.8,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1),
-('{"speed":{"rate":0.2,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,1);
+('{"speed":{"rate":1,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,2),
+('{"speed":{"rate":2,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,3),
+('{"speed":{"rate":1.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,4),
+('{"speed":{"rate":2.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,5),
+('{"speed":{"rate":3,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,6),
+('{"speed":{"rate":3.5,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,7),
+('{"speed":{"rate":4,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,8),
+('{"speed":{"rate":0.8,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,9),
+('{"speed":{"rate":0.2,"detune":0},"delay":{"time":0,"feedback":0,"dry":1,"wet":0},"compressor":{"threshold":-60,"ratio":1,"attack":0,"release":0},"eq":{"band1":{"frequency":100,"gain":0},"band2":{"frequency":500,"gain":0},"band3":{"frequency":1000,"gain":0},"band4":{"frequency":2500,"gain":0},"band5":{"frequency":8000,"gain":0}}}',1,10);

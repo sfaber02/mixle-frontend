@@ -5,7 +5,7 @@ const db = require("../db/dbConfig");
 const getAllUserEffects = async (id) => {
     try {
         const effects = await db.any(
-            "SELECT e.*, u.username FROM effects e JOIN users u ON e.user_id = u.user_id  WHERE user_id=$1",
+            "SELECT * FROM effects JOIN users ON effects.user_id = users.user_id WHERE audio=$1",
             id
         );
         return effects;

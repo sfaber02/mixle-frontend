@@ -5,8 +5,8 @@ import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 
-export default function MixCard({ audio }) {
-
+export default function MixCard({ effect }) {
+    // console.log(effect);
     const [ isHovered, setHovered] = useState(false);
     
     const handleResponse = () => {
@@ -43,9 +43,7 @@ export default function MixCard({ audio }) {
                         </div>
                     </div>
                     <div>
-                        <Name name={audio.artist} className={"artist"} length={audio.artist.length} />
-                        <Name name={audio.title} className={"title"} length={audio.title.length} />
-                        <Name name={audio.album} className={"album"} length={audio.album.length} />
+                        <Name name={effect.username} className={"username"} />
                     </div>
                 </>
         }

@@ -27,9 +27,9 @@ export default function MixesCard() {
     <Container>
       <div className={"music-card-container"}>
         {
-          // effects.map( => (
-          //     <MixCard key={audio.id} audio={audio}/>
-          // ))
+          effects.map(effect => (
+              <MixCard key={effect.id} effect={effect}/>
+          ))
         }
       </div>
     </Container>
