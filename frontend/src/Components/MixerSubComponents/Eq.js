@@ -21,14 +21,14 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band1.frequency"
-                        type="number"
+                        type="range"
                         min="20"
                         max="500"
                         step="10"
                         value={fx.eq.band1.frequency}
                         onChange={handleSetFx}
                     />
-                    <label>hz</label>
+                    <label>{fx.eq.band1.frequency}hz</label>
                 </div>
             </div>
             <div id="eqBand2" className="eqBand">
@@ -46,14 +46,14 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band2.frequency"
-                        type="number"
+                        type="range"
                         min="100"
                         max="700"
                         step="10"
                         value={fx.eq.band2.frequency}
                         onChange={handleSetFx}
                     />
-                    <label>hz</label>
+                    <label>{fx.eq.band2.frequency}hz</label>
                 </div>
             </div>
             <div id="eqBand3" className="eqBand">
@@ -71,15 +71,14 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band3.frequency"
-                    
-                        type="number"
+                        type="range"
                         min="600"
                         max="1500"
                         step="10"
                         value={fx.eq.band3.frequency}
                         onChange={handleSetFx}
                     />
-                    <label>hz</label>
+                    <label>{fx.eq.band3.frequency}hz</label>
                 </div>
             </div>
             <div id="eqBand4" className="eqBand">
@@ -97,15 +96,14 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band4.frequency"
-                       
-                        type="number"
+                        type="range"
                         min="1500"
                         max="5000"
                         step="10"
                         value={fx.eq.band4.frequency}
                         onChange={handleSetFx}
                     />
-                    <label>hz</label>
+                    <label>{fx.eq.band4.frequency}hz</label>
                 </div>
             </div>
             <div id="eqBand5" className="eqBand">
@@ -123,15 +121,14 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band5.frequency"
-                       
-                        type="number"
+                        type="range"
                         min="4000"
                         max="10000"
                         step="10"
                         value={fx.eq.band5.frequency}
                         onChange={handleSetFx}
                     />
-                    <label>hz</label>
+                    <label>{fx.eq.band5.frequency}hz</label>
                 </div>
             </div>
         </div>

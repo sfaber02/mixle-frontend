@@ -386,9 +386,9 @@ const Mixer = (props) => {
                         <div id="transportPlayContainer">
                             <button onClick={handlePlayPause}>
                                 {playPause ? (
-                                    <i class="fa-solid fa-pause"></i>
+                                    <i className="fa-solid fa-pause"></i>
                                 ) : (
-                                    <i class="fa-solid fa-play"></i>
+                                    <i className="fa-solid fa-play"></i>
                                 )}
                             </button>
                         </div>
@@ -409,7 +409,7 @@ const Mixer = (props) => {
                         </div>
                         <div id="transportSeekBarContainer">
                             <input
-                                class="transportSlider"
+                                className="transportSlider"
                                 id="seekBar"
                                 type="range"
                                 min="0"
@@ -420,7 +420,7 @@ const Mixer = (props) => {
                             />
                         </div>
                         <div id="transportSaveContainer">
-                            <button onClick={handleSaveClick}>Save Mix</button>
+                            <button onClick={handleSaveClick}>Save</button>
                         </div>
                     </div>
                     <Delay handleSetFx={handleSetFx} fx={fx} />

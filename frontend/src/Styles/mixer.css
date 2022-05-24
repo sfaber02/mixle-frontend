@@ -355,7 +355,7 @@ main {
 /* SPACING */
 
 #eqContainer {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: space-around;
     /* position: relative;
@@ -364,10 +364,13 @@ main {
 
 .eqBand {
     border: 1px solid yellow;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+
 .eqGain {
     transform: rotate(0.75turn);
 }
@@ -377,11 +380,13 @@ main {
     text-align: center;
 }
 
+
 /* RANGE SLIDERS */
 
 .eqGain {
     -webkit-appearance: none;
-    width: 200px;
+    /* appearance: slider-vertical; */
+    width: 100%;
     height: 20px;
     background: #000;
     outline: none;
