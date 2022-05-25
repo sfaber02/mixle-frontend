@@ -17,7 +17,10 @@ export default function MixesCard() {
     const [loading, setLoading] = useState(true);
     const [fx, setFx] = useState(() => defaultfx);
     const [effects, setEffects] = useState([]);
-    const [availableVotes, setAvailableVotes] = useState();
+
+    //states for vote tracking and updating
+    const [availableVotes, setAvailableVotes] = useState(0);
+    const [user, setUser] = useState();
 
 
     //Refs for time display
@@ -89,7 +92,10 @@ export default function MixesCard() {
 
             fetch(`${API}/user/${user}`, requestOptions)
                 .then((response) => response.json())
-                .then((result) => setAvailableVotes(result.avaliablevotes))
+                .then((result) => {
+                    setAvailableVotes(result.avaliablevotes)
+                    setUser(result);
+                })
                 .catch((error) => console.log("error", error));
         }
 
@@ -264,6 +270,7 @@ export default function MixesCard() {
             });
         }, 50);
     };
+
     const handleSeek = (e) => {
         seekOffset.current = Number(e.target.value);
         seekTimeStamp.current = ctx.current.currentTime;
@@ -302,9 +309,13 @@ export default function MixesCard() {
         }
     };
 
+    const subtractVote = () => {
+        console.log('subtract');
+    }
+
     return (
         <div id="mixesContainer">
-            <div id="availableVotes">{availableVotes}</div>
+            <div id="availableVotes">Votes Left: {availableVotes}</div>
             <div id="transportControlsContainer">
                 <div id="timer">
                     {time.current.toFixed(2)}/{time.duration.toFixed(2)}
@@ -339,6 +350,8 @@ export default function MixesCard() {
                         key={effect.id}
                         effect={effect}
                         handleUserChange={handleUserChange}
+                        availableVotes={availableVotes}
+                        subtractVote={subtractVote}
                     />
                 ))}
             </div>
