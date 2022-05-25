@@ -40,6 +40,20 @@ user.post("/register", async (req, res) => {
     }
 });
 
+//GET USER INFO
+user.get('/:id', async(req, res) => {
+    const id = req.params;
+    console.log (id.id);
+    try {
+        const user = await getUserById(id.id);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).json({
+            error: err
+        })
+    }
+})
+
 // LOGIN CREATE REQUEST
 user.post("/login", async (req, res) => {
     const { email, password } = req.body;

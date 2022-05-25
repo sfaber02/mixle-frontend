@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../../Styles/scss/MixCard.scss";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Name from './Name';
@@ -6,23 +7,34 @@ import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import artDB from "../../Actions/art";
 
+
+
+const API = process.env.REACT_APP_API_URL;
+
 export default function MixCard({ effect, handleUserChange }) {
     const [ isHovered, setHovered] = useState(false);
-    
+    const [userVotes, setUserVotes] = useState();
     const [imageSource, setImageSource] = useState(artDB[Math.floor(Math.random() * artDB.length)]); 
+
+    const navigate = useNavigate();
 
     const handleResponse = () => {
         setHovered(!isHovered);
     }
     
     const handleClick = () =>{
-        console.log("trigger");
+        let user = JSON.parse(localStorage.getItem("user_id"));
+        if (user) {
+            console.log (user);
+        } else {
+          navigate("/register");  
+        }
     }
     
     const [ loaded, setLoaded] = useState(false);
     
     useEffect(() => {
-        setLoaded(true)
+        setLoaded(true);
     }, [])
     
     const handleMouseEnter = (e) => {

@@ -17,6 +17,8 @@ export default function MixesCard() {
     const [loading, setLoading] = useState(true);
     const [fx, setFx] = useState(() => defaultfx);
     const [effects, setEffects] = useState([]);
+    const [availableVotes, setAvailableVotes] = useState();
+
 
     //Refs for time display
     const timer = useRef();
@@ -60,8 +62,11 @@ export default function MixesCard() {
      * LOAD ALL MIXES
      * CREATE AUDIO NODES
      * FETCH SONG
+     * FETCH USERS VOTES
      */
     useEffect(() => {
+
+        //FETCH ALL MIXES FOR SONG ID
         fetch(`${API}/effects/allusers/1`)
             .then((res) => {
                 return res.json();
@@ -73,6 +78,21 @@ export default function MixesCard() {
             .catch((err) => {
                 console.log(err);
             });
+
+        //IF USER IS LOGGED IN FETCH USER INFO AND SET AVAILABLE VOTES
+        let user = JSON.parse(localStorage.getItem("user_id"));
+        if (user) {
+            var requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+
+            fetch(`${API}/user/${user}`, requestOptions)
+                .then((response) => response.json())
+                .then((result) => setAvailableVotes(result.avaliablevotes))
+                .catch((error) => console.log("error", error));
+        }
+
 
         //Create audio context
         ctx.current = new (window.AudioContext || window.webkitAudioContext)();
@@ -244,8 +264,31 @@ export default function MixesCard() {
             });
         }, 50);
     };
-    const stopTimer = () => {
-        clearInterval(timer.current);
+    const handleSeek = (e) => {
+        seekOffset.current = Number(e.target.value);
+        seekTimeStamp.current = ctx.current.currentTime;
+        // console.log(e.target.value);
+        if (playState.state === "playing") {
+            // console.log("1");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0.01, e.target.value);
+            //Set play speed
+            track.current.playbackRate.value = fx.speed.rate;
+            track.current.detune.value = fx.speed.detune;
+        } else if (playState.state === "stopped") {
+            // console.log("2");
+            track.current.start(0, e.target.value);
+            startTimer();
+            setPlayState({ state: "playing" });
+            setPlayPause(true);
+        } else if (playState.state === "paused") {
+            // console.log("3");
+            track.current.stop();
+            createTrackNode(decodedAudio.current);
+            track.current.start(0, e.target.value);
+            ctx.current.suspend();
+        }
     };
 
     const handleUserChange = (user) => {
@@ -261,8 +304,12 @@ export default function MixesCard() {
 
     return (
         <div id="mixesContainer">
+            <div id="availableVotes">{availableVotes}</div>
             <div id="transportControlsContainer">
-                {!loading && (
+                <div id="timer">
+                    {time.current.toFixed(2)}/{time.duration.toFixed(2)}
+                </div>
+                <div id="playPause">
                     <button onClick={handlePlayPause}>
                         {playPause ? (
                             <i className="fa-solid fa-pause"></i>
@@ -270,7 +317,21 @@ export default function MixesCard() {
                             <i className="fa-solid fa-play"></i>
                         )}
                     </button>
-                )}
+                </div>
+                <div id="seekbar">
+                    <div id="transportSeekBarContainer">
+                        <input
+                            className="transportSlider"
+                            id="seekBar"
+                            type="range"
+                            min="0"
+                            max={time.duration}
+                            step="1"
+                            value={time.current}
+                            onChange={handleSeek}
+                        />
+                    </div>
+                </div>
             </div>
             <div className={"music-card-container"}>
                 {effects.map((effect) => (
