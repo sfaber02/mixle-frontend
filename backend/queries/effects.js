@@ -5,7 +5,7 @@ const db = require("../db/dbConfig");
 const getAllUserEffects = async (id) => {
     try {
         const effects = await db.any(
-            "SELECT * FROM effects JOIN users ON effects.user_id = users.user_id WHERE audio=$1",
+            "SELECT e.*, u.user_id FROM effects e JOIN users u ON e.user_id = u.user_id WHERE e.user_id=$1",
             id
         );
         return effects;
@@ -67,13 +67,26 @@ const deleteEffect = async (id) => {
 };
 
 // UPDATE
-const updateEffect = async (effects, id) => {
+const updateEffect = async (effects, audio_id, user_id) => {
     try {
         const updatedEffects = await db.one(
-            "UPDATE effects SET effects_data=$1 WHERE effects_id=$2 RETURNING *",
-            [effects.data, id]
+            "UPDATE effects SET effects_data=$1 WHERE audio=$2 AND user_id=$3 RETURNING *",
+            [effects, audio_id, user_id]
         );
         return updatedEffects;
+    } catch (error) {
+        return error;
+    }
+};
+
+// CHECK IF USER HAS AUDIO EFFECTS ALREADY
+const hasEffects = async (audio_id, user_id) => {
+    try {
+        const valid = await db.query(
+            "SELECT EXISTS (SELECT 1 FROM effects WHERE audio=$1 AND user_id=$2)",
+            [audio_id, user_id]
+        );
+        return valid[0].exists;
     } catch (error) {
         return error;
     }
@@ -87,4 +100,5 @@ module.exports = {
     createEffect,
     deleteEffect,
     updateEffect,
+    hasEffects,
 };

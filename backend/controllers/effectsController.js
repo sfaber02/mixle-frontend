@@ -8,6 +8,7 @@ const {
     createEffect,
     deleteEffect,
     updateEffect,
+    hasEffects,
 } = require("../queries/effects");
 
 // GET ONE EFFECT BY USER AND SPECIFIC AUDIO
@@ -44,10 +45,10 @@ effects.get("/allusers/:id", async (req, res) => {
 });
 
 // UPDATE AN EFFECT
-effects.put("/:id", async (req, res) => {
-    const { id } = req.params;
+effects.put("/", async (req, res) => {
+    const { effects, audio_id, user_id } = req.body;
     try {
-        const updatedEffect = await updateEffect(effects, id);
+        const updatedEffect = await updateEffect(effects, audio_id, user_id);
         res.status(200).json(updatedEffect);
     } catch (error) {
         res.status(404).json({ error: error });
@@ -57,7 +58,7 @@ effects.put("/:id", async (req, res) => {
 // CREATE AN EFFECT
 effects.post("/", async (req, res) => {
     try {
-        const { effects, audio_id, user_id } = req.body
+        const { effects, audio_id, user_id } = req.body;
         const newEffect = await createEffect(effects, audio_id, user_id);
         res.status(200).json(newEffect);
     } catch (error) {
@@ -71,6 +72,17 @@ effects.delete("/:id", async (req, res) => {
     try {
         const deletedEffect = await deleteEffect(effects, audio_id, user_id);
         res.status(200).json(deletedEffect);
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+});
+
+// CHECK AUDIO AND USER
+effects.get("/exist/:audio_id/:user_id", async (req, res) => {
+    const { audio_id, user_id } = req.params;
+    try {
+        const doesExist = await hasEffects(audio_id, user_id);
+        res.status(200).json(doesExist);
     } catch (error) {
         res.status(404).json({ error: error });
     }

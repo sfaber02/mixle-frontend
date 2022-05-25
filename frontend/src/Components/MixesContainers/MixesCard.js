@@ -67,7 +67,7 @@ export default function MixesCard() {
                 return res.json();
             })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setEffects(data);
             })
             .catch((err) => {
@@ -249,31 +249,36 @@ export default function MixesCard() {
     };
 
     const handleUserChange = (user) => {
-      console.log(user);
-      for (let mix of effects) {
-        console.log (mix.user_id);
-        if (mix.user_id == user) {
-
-          console.log(mix.effects_data);
-          setFx(mix.effects_data);
+        //   console.log(user);
+        for (let mix of effects) {
+            // console.log (mix.user_id);
+            if (mix.user_id == user) {
+                //   console.log(mix.effects_data);
+                setFx(mix.effects_data);
+            }
         }
-      }
     };
 
     return (
         <div id="mixesContainer">
             <div id="transportControlsContainer">
-                {!loading && <button onClick={handlePlayPause}>
-                    {playPause ? (
-                        <i className="fa-solid fa-pause"></i>
-                    ) : (
-                        <i className="fa-solid fa-play"></i>
-                    )}
-                </button>}
+                {!loading && (
+                    <button onClick={handlePlayPause}>
+                        {playPause ? (
+                            <i className="fa-solid fa-pause"></i>
+                        ) : (
+                            <i className="fa-solid fa-play"></i>
+                        )}
+                    </button>
+                )}
             </div>
             <div className={"music-card-container"}>
                 {effects.map((effect) => (
-                    <MixCard key={effect.id} effect={effect} handleUserChange={handleUserChange} />
+                    <MixCard
+                        key={effect.id}
+                        effect={effect}
+                        handleUserChange={handleUserChange}
+                    />
                 ))}
             </div>
         </div>

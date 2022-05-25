@@ -17,7 +17,6 @@ CREATE TABLE audio (
     artist VARCHAR,
     album VARCHAR,
     audio_key TEXT,
-    totalVotes INTEGER DEFAULT 0,
     used BOOLEAN DEFAULT false
 );
 
@@ -25,5 +24,6 @@ CREATE TABLE effects (
     effects_id SERIAL PRIMARY KEY,
     effects_data JSON,
     audio INTEGER REFERENCES audio (audio_id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users (user_id) ON DELETE CASCADE
+    user_id INTEGER REFERENCES users (user_id) ON DELETE CASCADE,
+    totalVotes INTEGER DEFAULT 0 CHECK (totalVotes >= 0 )
 );
