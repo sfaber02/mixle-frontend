@@ -124,7 +124,7 @@ const Mixer = (props) => {
             masterOutNode.current = ctx.current.createGain();
 
             //Fetch Song from Server and decode audio for playback
-            fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
+            fetch(process.env.REACT_APP_SONG_URL)
                 .then((data) => {
                     // console.log(data);
                     return data.arrayBuffer();
@@ -347,8 +347,26 @@ const Mixer = (props) => {
                     user_id: user,
                     audio_id: 1,
                 };
+
+                let method;
+
+                const existResponse = await fetch(
+                    `${API}/effects/exist/1/${user}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                const existContent = await existResponse.json();
+
+                existContent ? (method = "PUT") : (method = "POST");
+
                 const response = await fetch(`${API}/effects`, {
-                    method: "POST",
+                    method: method,
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -356,13 +374,14 @@ const Mixer = (props) => {
                     body: JSON.stringify(data),
                 });
                 const content = await response.json();
+
                 localStorage.setItem(
                     "user_id",
-                    JSON.stringify(content.userInfo.user_id)
+                    JSON.stringify(content.user_id)
                 );
                 return navigate("/");
             } catch (error) {
-                return error;
+                console.log(error);
             }
         } else {
             localStorage.setItem("temp_fx", JSON.stringify(fx));

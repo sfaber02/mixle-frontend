@@ -4,7 +4,8 @@ const db = require("../db/dbConfig.js");
 const doesUserExist = async (email) => {
     try {
         const exists = await db.query(
-            `SELECT EXISTS (SELECT 1 FROM users WHERE email='${email}');`
+            `SELECT EXISTS (SELECT 1 FROM users WHERE email=$1');`,
+            [email]
         );
         return exists[0].exists;
     } catch (err) {

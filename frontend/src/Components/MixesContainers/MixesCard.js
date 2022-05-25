@@ -110,7 +110,7 @@ export default function MixesCard() {
         masterOutNode.current = ctx.current.createGain();
 
         //Fetch Song from Server and decode audio for playback
-        fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
+        fetch(process.env.REACT_APP_SONG_URL)
             .then((data) => {
                 // console.log(data);
                 return data.arrayBuffer();
@@ -249,31 +249,36 @@ export default function MixesCard() {
     };
 
     const handleUserChange = (user) => {
-    //   console.log(user);
-      for (let mix of effects) {
-        // console.log (mix.user_id);
-        if (mix.user_id == user) {
-
-        //   console.log(mix.effects_data);
-          setFx(mix.effects_data);
+        //   console.log(user);
+        for (let mix of effects) {
+            // console.log (mix.user_id);
+            if (mix.user_id == user) {
+                //   console.log(mix.effects_data);
+                setFx(mix.effects_data);
+            }
         }
-      }
     };
 
     return (
         <div id="mixesContainer">
             <div id="transportControlsContainer">
-                {!loading && <button onClick={handlePlayPause}>
-                    {playPause ? (
-                        <i className="fa-solid fa-pause"></i>
-                    ) : (
-                        <i className="fa-solid fa-play"></i>
-                    )}
-                </button>}
+                {!loading && (
+                    <button onClick={handlePlayPause}>
+                        {playPause ? (
+                            <i className="fa-solid fa-pause"></i>
+                        ) : (
+                            <i className="fa-solid fa-play"></i>
+                        )}
+                    </button>
+                )}
             </div>
             <div className={"music-card-container"}>
                 {effects.map((effect) => (
-                    <MixCard key={effect.id} effect={effect} handleUserChange={handleUserChange} />
+                    <MixCard
+                        key={effect.id}
+                        effect={effect}
+                        handleUserChange={handleUserChange}
+                    />
                 ))}
             </div>
         </div>

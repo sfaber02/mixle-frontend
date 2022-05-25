@@ -1,4 +1,5 @@
 import "../Styles/Splash.css";
+import "../Assets/Mixle_Icon-Nobg.png";
 
 function SplashPage(props) {
   return (
@@ -8,19 +9,12 @@ function SplashPage(props) {
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
         rel="stylesheet"
       />
-
-      {/* <h1>Splash Page</h1> */}
-      <div id="dancing-cat">
-        <iframe
-          src="https://giphy.com/embed/15wC7XdIXN5q8o6fr9"
-          width="480"
-          height="480"
-          frameBorder="0"
-        />
+    
+      <div id="splashButtonContainer">
+        <button id="splashButton" onClick={props.handleStartClick}>
+          Start Mixing
+        </button>
       </div>
-      <button id="splashButton" onClick={props.handleStartClick}>
-        Start Mixing
-      </button>
     </div>
   );
 }
