@@ -8,8 +8,9 @@ import artDB from "../../Actions/art";
 
 export default function MixCard({ effect, handleUserChange }) {
     const [ isHovered, setHovered] = useState(false);
-    // const imageItem = require("../../Assets/albumArt/" + artCover).default;
     
+    const [imageSource, setImageSource] = useState(artDB[Math.floor(Math.random() * artDB.length)]); 
+
     const handleResponse = () => {
         setHovered(!isHovered);
     }
@@ -28,9 +29,6 @@ export default function MixCard({ effect, handleUserChange }) {
         handleUserChange(e.target.parentNode.id);
     }
     
-    // const artCover = artDB.map(({id, img, name}) => <img key={id} src={img} alt={name} />);
-    // console.log(artCover);
-    console.log("hello")
   return (
     <div className={"music-card"}>
         {
@@ -45,8 +43,7 @@ export default function MixCard({ effect, handleUserChange }) {
                 :
                 <>
                     <div id={effect.user_id} onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse} onMouseEnter={handleMouseEnter}>
-                        {/* {artCover} */}
-                        <img src={""} alt={""}/>
+                        <img src={imageSource} alt={"mixelArt"}/>
                         <div className='thumbs-up'>
                             <ThumbUpAltIcon />
                         </div>
