@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 export default function MixCard({ effect, handleUserChange }) {
     // console.log(effect.user_id);
     const [ isHovered, setHovered] = useState(false);
+    const imageItem = require("../../Assets/albumArt/" + img).default;
     
     const handleResponse = () => {
         setHovered(!isHovered);
@@ -40,7 +41,7 @@ export default function MixCard({ effect, handleUserChange }) {
                 :
                 <>
                     <div id={effect.user_id} onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse} onMouseEnter={handleMouseEnter}>
-                        <img src={"https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ"} alt={""}/>
+                        <img src={imageItem} alt={""}/>
                         <div className='thumbs-up'>
                             <ThumbUpAltIcon />
                         </div>
