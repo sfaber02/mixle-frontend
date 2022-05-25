@@ -110,7 +110,7 @@ export default function MixesCard() {
         masterOutNode.current = ctx.current.createGain();
 
         //Fetch Song from Server and decode audio for playback
-        fetch("http://www.shawnfaber.com/audio/1-08%20-%20The%20Chain.flac")
+        fetch(process.env.REACT_APP_SONG_URL)
             .then((data) => {
                 // console.log(data);
                 return data.arrayBuffer();

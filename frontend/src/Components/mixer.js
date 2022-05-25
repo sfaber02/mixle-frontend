@@ -124,7 +124,7 @@ const Mixer = (props) => {
             masterOutNode.current = ctx.current.createGain();
 
             //Fetch Song from Server and decode audio for playback
-            fetch("http://www.shawnfaber.com/audio/Tems%20-%20Free%20Mind.mp3")
+            fetch(process.env.REACT_APP_SONG_URL)
                 .then((data) => {
                     // console.log(data);
                     return data.arrayBuffer();
