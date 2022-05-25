@@ -67,7 +67,7 @@ export default function MixesCard() {
                 return res.json();
             })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setEffects(data);
             })
             .catch((err) => {
@@ -249,12 +249,12 @@ export default function MixesCard() {
     };
 
     const handleUserChange = (user) => {
-      console.log(user);
+    //   console.log(user);
       for (let mix of effects) {
-        console.log (mix.user_id);
+        // console.log (mix.user_id);
         if (mix.user_id == user) {
 
-          console.log(mix.effects_data);
+        //   console.log(mix.effects_data);
           setFx(mix.effects_data);
         }
       }

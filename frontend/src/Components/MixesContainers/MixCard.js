@@ -4,11 +4,11 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Name from './Name';
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
+import artDB from "../../Actions/art";
 
 export default function MixCard({ effect, handleUserChange }) {
-    // console.log(effect.user_id);
     const [ isHovered, setHovered] = useState(false);
-    const imageItem = require("../../Assets/albumArt/" + img).default;
+    // const imageItem = require("../../Assets/albumArt/" + artCover).default;
     
     const handleResponse = () => {
         setHovered(!isHovered);
@@ -23,10 +23,14 @@ export default function MixCard({ effect, handleUserChange }) {
     useEffect(() => {
         setLoaded(true)
     }, [])
-
+    
     const handleMouseEnter = (e) => {
         handleUserChange(e.target.parentNode.id);
     }
+    
+    // const artCover = artDB.map(({id, img, name}) => <img key={id} src={img} alt={name} />);
+    // console.log(artCover);
+    console.log("hello")
   return (
     <div className={"music-card"}>
         {
@@ -41,7 +45,8 @@ export default function MixCard({ effect, handleUserChange }) {
                 :
                 <>
                     <div id={effect.user_id} onClick={handleClick} className={"music-card-cover"} onMouseOver={handleResponse} onMouseEnter={handleMouseEnter}>
-                        <img src={imageItem} alt={""}/>
+                        {/* {artCover} */}
+                        <img src={""} alt={""}/>
                         <div className='thumbs-up'>
                             <ThumbUpAltIcon />
                         </div>

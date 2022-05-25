@@ -34,7 +34,7 @@ effects.get("/allmixes/:id", async (req, res) => {
 // GET ALL EFFECTS FOR ALL USERS SPECIFIC AUDIO
 effects.get("/allusers/:id", async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     try {
         const allEffects = await getAllAudioEffects(id);
         res.status(200).json(allEffects);
