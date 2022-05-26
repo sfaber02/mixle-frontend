@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../Styles/SignUp.css";
 
 const API = process.env.REACT_APP_API_URL;
-console.log (API);
 
 function SignUp({ userDetails }) {
     let navigate = useNavigate();

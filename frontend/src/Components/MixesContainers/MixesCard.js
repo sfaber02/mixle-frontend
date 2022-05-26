@@ -376,7 +376,7 @@ export default function MixesCard() {
             <div className={"music-card-container"}>
                 {effects.map((effect, index) => (
                     <MixCard
-                        key={effect.id}
+                        key={effect.effects_id}
                         effect={effect}
                         handleUserChange={handleUserChange}
                         avaliableVotes={user.avaliablevotes}

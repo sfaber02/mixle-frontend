@@ -11,7 +11,7 @@ export default function AboutPopUp(props) {
                 <div className="popHeader">
                     <h3>About</h3>
                     <button className="closeBtn" onClick={handleClick}>
-                        <i class="fa-regular fa-circle-xmark fa-xl"></i>{" "}
+                        <i className="fa-regular fa-circle-xmark fa-xl"></i>{" "}
                     </button>
                 </div>
                 <div className="popBody">
@@ -42,25 +42,25 @@ export default function AboutPopUp(props) {
 
                     <ul>
                         <li>
-                            <i class="fa-brands fa-github-alt"></i>
+                            <i className="fa-brands fa-github-alt"></i>
                             <a href="https://github.com/HectorIlarraza">
                                 Hector Ilarraza
                             </a>
                         </li>
                         <li>
-                            <i class="fa-brands fa-github-alt"></i>
+                            <i className="fa-brands fa-github-alt"></i>
                             <a href="https://github.com/jrussell1017">
                                 James Russell
                             </a>
                         </li>
                         <li>
-                            <i class="fa-brands fa-github-alt"></i>
+                            <i className="fa-brands fa-github-alt"></i>
                             <a href="https://github.com/joshmarte">
                                 Josh Marte
                             </a>
                         </li>
                         <li>
-                            <i class="fa-brands fa-github-alt"></i>
+                            <i className="fa-brands fa-github-alt"></i>
                             <a href="https://github.com/sfaber02">
                                 Shawn Faber
                             </a>

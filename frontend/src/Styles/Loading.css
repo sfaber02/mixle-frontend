@@ -6,7 +6,7 @@
     padding: 2px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
+    background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
   }
   
   .loading h1 {

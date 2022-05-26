@@ -11,7 +11,7 @@ const Compressor = (props) => {
                 <label className="compressorLabel">Threshold</label>
                 <input
                     id="compressor.threshold"
-                    class="compressorSliders"
+                    className="compressorSliders"
                     type="range"
                     min="-60"
                     max="0"
@@ -27,7 +27,7 @@ const Compressor = (props) => {
                 <label>Ratio</label>
                 <input
                     id="compressor.ratio"
-                    class="compressorSliders"
+                    className="compressorSliders"
                     type="range"
                     min="1"
                     max="20"
@@ -43,7 +43,7 @@ const Compressor = (props) => {
                 <label>Attack</label>
                 <input
                     id="compressor.attack"
-                    class="compressorSliders"
+                    className="compressorSliders"
                     type="range"
                     min="0"
                     max="1"
@@ -52,14 +52,14 @@ const Compressor = (props) => {
                     onChange={handleSetFx}
                 />
                 <label className="compressorLabel2">
-                    {fx.compressor.attack *1000}ms
+                    {fx.compressor.attack * 1000}ms
                 </label>
             </div>
             <div className="compressorSliderContainer">
                 <label>Release</label>
                 <input
                     id="compressor.release"
-                    class="compressorSliders"
+                    className="compressorSliders"
                     type="range"
                     min="0"
                     max="1"

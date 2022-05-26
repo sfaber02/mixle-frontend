@@ -14,6 +14,7 @@ export default function MixCard({
     handleUserChange,
     avaliableVotes,
     subtractVote,
+    random,
 }) {
     const [isHovered, setHovered] = useState(false);
     const [votes, setVotes] = useState(effect.totalvotes);
@@ -51,12 +52,8 @@ export default function MixCard({
             redirect: "follow",
         };
 
-        fetch(
-            `http://localhost:3333/effects/${effect.effects_id}/${votes}`,
-            requestOptions
-        )
+        fetch(`${API}/effects/${effect.effects_id}/${votes}`, requestOptions)
             .then((response) => response.text())
-            .then((result) => console.log(result))
             .catch((error) => console.log("error", error));
     }, [votes]);
 

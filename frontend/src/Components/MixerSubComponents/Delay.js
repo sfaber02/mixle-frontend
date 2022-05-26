@@ -11,7 +11,7 @@ const Delay = (props) => {
                 <label className="delayLabel">Time</label>
                 <input
                     id="delay.time"
-                    class="delaySliders"
+                    className="delaySliders"
                     type="range"
                     min="0"
                     max="1"
@@ -25,7 +25,7 @@ const Delay = (props) => {
                 <label>Feedback</label>
                 <input
                     id="delay.feedback"
-                    class="delaySliders"
+                    className="delaySliders"
                     type="range"
                     min="0"
                     max="1"
@@ -40,7 +40,7 @@ const Delay = (props) => {
                 <input
                     id="delay.dry"
                     type="range"
-                    class="delaySliders"
+                    className="delaySliders"
                     min="0"
                     max="1"
                     step=".05"
@@ -53,7 +53,7 @@ const Delay = (props) => {
                 <label>Wet</label>
                 <input
                     id="delay.wet"
-                    class="delaySliders"
+                    className="delaySliders"
                     type="range"
                     min="0"
                     max="1"
