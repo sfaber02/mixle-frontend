@@ -2,8 +2,19 @@ import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
 import "../../Styles/scss/MixesCard.scss";
 import { defaultfx } from "../../settings/defaultfx.js";
+import artDB from "../../Actions/art";
 
 const API = process.env.REACT_APP_API_URL;
+
+let randomArray = [];
+while (randomArray.length < artDB.length) {
+    let newRandom = Math.floor(Math.random() * artDB.length);
+    if (randomArray.includes(newRandom)) {
+        continue;
+    } else {
+        randomArray.push(newRandom);
+    }
+}
 
 export default function MixesCard() {
     /**
@@ -20,8 +31,8 @@ export default function MixesCard() {
 
     //states for vote tracking and updating
     // const [availableVotes, setAvailableVotes] = useState(0);
-    const [user, setUser] = useState({avaliablevotes: 0});
-    
+    const [user, setUser] = useState({ avaliablevotes: 0 });
+
     //Refs for time display
     const timer = useRef();
     const timerStart = useRef();
@@ -67,7 +78,6 @@ export default function MixesCard() {
      * FETCH USERS VOTES
      */
     useEffect(() => {
-
         //FETCH ALL MIXES FOR SONG ID
         fetch(`${API}/effects/allusers/1`)
             .then((res) => {
@@ -96,7 +106,6 @@ export default function MixesCard() {
                 })
                 .catch((error) => console.log("error", error));
         }
-
 
         //Create audio context
         ctx.current = new (window.AudioContext || window.webkitAudioContext)();
@@ -313,20 +322,25 @@ export default function MixesCard() {
                 method: "PUT",
                 redirect: "follow",
             };
-    
-            fetch(`http://localhost:3333/user/votes/${user.user_id}/${user.avaliablevotes - 1}`, requestOptions)
+
+            fetch(
+                `http://localhost:3333/user/votes/${user.user_id}/${
+                    user.avaliablevotes - 1
+                }`,
+                requestOptions
+            )
                 .then((response) => response.json())
                 .then((result) => {
-                    setUser(prev => {
-                        return ({
+                    setUser((prev) => {
+                        return {
                             ...prev,
                             avaliablevotes: result.avaliablevotes,
-                        })
-                    })
+                        };
+                    });
                 })
                 .catch((error) => console.log("error", error));
         }
-    }
+    };
 
     return (
         <div id="mixesContainer">
@@ -360,13 +374,14 @@ export default function MixesCard() {
                 </div>
             </div>
             <div className={"music-card-container"}>
-                {effects.map((effect) => (
+                {effects.map((effect, index) => (
                     <MixCard
                         key={effect.id}
                         effect={effect}
                         handleUserChange={handleUserChange}
                         avaliableVotes={user.avaliablevotes}
                         subtractVote={subtractVote}
+                        random={randomArray[index]}
                     />
                 ))}
             </div>

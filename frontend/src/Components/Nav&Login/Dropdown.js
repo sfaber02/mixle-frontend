@@ -24,7 +24,7 @@ export default function Dropdown({ user }) {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                 >
-                    <a className="dropdown-item" href="/">
+                    <a className="dropdown-item" href="/audio">
                         View Today's Mixes
                     </a>
                     <a className="dropdown-item" href="/">
