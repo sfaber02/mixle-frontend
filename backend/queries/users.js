@@ -26,6 +26,7 @@ const getUser = async (email) => {
     }
 };
 
+// GET USER ROW BY USER ID
 const getUserById = async (id) => {
     try {
         const newUserId = await db.one(

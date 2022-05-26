@@ -4,19 +4,24 @@ import "../../Styles/SignUp.css";
 
 const API = process.env.REACT_APP_API_URL;
 
+
 function SignUp({ userDetails }) {
     let navigate = useNavigate();
+
+    //State to store current inputs
     const [user, setUser] = useState({
         username: "",
         email: "",
         password: "",
     });
 
+    //If user is already logged in redirect to '/'
     useEffect(() => {
         if (userDetails.user_id) {
             navigate("/");
         }
     }, [userDetails.user_id, navigate]);
+
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });

@@ -1,6 +1,7 @@
 import Dropdown from "./Dropdown";
 import "../../Styles/Nav.css";
 
+
 export default function NavBar({ user, trigger, setTrigger }) {
     const handleIconClick = () => {
         setTrigger(!trigger);

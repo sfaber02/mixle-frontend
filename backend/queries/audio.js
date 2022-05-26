@@ -24,6 +24,7 @@ const getAAudio = async (id) => {
     }
 };
 
+// UPDATE A SONG
 const updateAudio = async (track, id) => {
     console.log(track.totalVotes, track.used, id);
     try {

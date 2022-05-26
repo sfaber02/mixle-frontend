@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import "../Styles/Loading.css";
 
+/**
+ * Animates loading dots using interval function
+ * @param {*} element JOSH
+ * @param {*} className HELP
+ */
 function animate(element, className) {
     element.classList.add(className);
     setTimeout(() => {
@@ -11,7 +16,10 @@ function animate(element, className) {
     }, 2500);
 }
 
+
 export default function Loading() {
+    
+    // Component did mount wrapper to grab div for loading animation
     useEffect(() => {
         let dots = document.querySelector(".dots");
         animate(dots, "dots--animate");
