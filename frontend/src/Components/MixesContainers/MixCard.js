@@ -12,9 +12,8 @@ import artDB from "../../Actions/art";
 const API = process.env.REACT_APP_API_URL;
 
 export default function MixCard({ effect, handleUserChange, avaliableVotes, subtractVote }) {
-    console.log (avaliableVotes);
     const [ isHovered, setHovered] = useState(false);
-    const [votes, setVotes] = useState(0);
+    const [votes, setVotes] = useState(effect.totalvotes);
     const [imageSource, setImageSource] = useState(artDB[Math.floor(Math.random() * artDB.length)]); 
 
     const navigate = useNavigate();
@@ -41,10 +40,20 @@ export default function MixCard({ effect, handleUserChange, avaliableVotes, subt
     
     useEffect(() => {
         setLoaded(true);
+
+
     }, []);
 
     useEffect(() => {
-        
+        var requestOptions = {
+            method: "PUT",
+            redirect: "follow",
+        };
+
+        fetch(`http://localhost:3333/effects/${effect.effects_id}/${votes}`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
     }, [votes])
     
     const handleMouseEnter = (e) => {
