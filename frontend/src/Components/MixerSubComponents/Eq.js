@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * EQ component of mixer
+ * @param {object} props 
+ * @param {object} fx from mixer component
+ * @param {function} OnChange handler to set FX from mixer component  
+ * 
+ * @returns JSX for EQ section of mixer
+ */
 const Eq = (props) => {
     const fx = props.fx;
     const handleSetFx = props.handleSetFx;

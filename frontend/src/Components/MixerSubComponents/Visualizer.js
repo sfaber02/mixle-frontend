@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from "react";
 
 /**
- * Renders music visualizer baseed on audio date form analyser node
+ * Renders music visualizer based on audio data from analyser node
  * needs analyser node passed as a prop
  * @param {object} props
+ * @param {audio node}
  * @returns visualizer component
  */
 const Visualizer = (props) => {
@@ -11,28 +12,35 @@ const Visualizer = (props) => {
     const canvasCtx = useRef();
     const analyserNode = useRef(props.analyserNode);
 
+    /**
+     * Component Did Mount wrapper to ensure <canvas> element exists before this code runs
+     */
     useEffect(() => {
+        //DOM elements for <canvas> element and the div it is contained in
         const canvas = document.getElementById("visualizer");
         const wrapper = canvas.parentNode;
 
+        //Canvas window size settings
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight / 3;
-        
 
+        // On resize event listener to dyanmcally resize canvas when window is resized
         window.onresize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight / 3;
         };
 
+        //Create 2D canvas context for drawing the visualizer
         canvasCtx.current = canvas.getContext("2d");
 
+        //Various parameters required for visualizer
         analyserNode.current.fftSize = 4096;
         let bufferLength = analyserNode.current.frequencyBinCount;
         let dataArray = new Uint8Array(bufferLength);
         let barHeight;
         let x = 0;
 
-        //Render visualizer
+        //Render a frame of the visualizer
         const renderFrame = () => {
             const barWidth = (canvas.width / bufferLength) * 13;
             // console.log (canvas.width, canvas.height);
@@ -40,11 +48,16 @@ const Visualizer = (props) => {
             x = 0;
             // console.log (analyserNode.current);
 
+            //Grabs current frequency and amplitude of audio
             analyserNode.current.getByteFrequencyData(dataArray);
 
-            canvasCtx.current.fillStyle = "rgba(72,61,139,.2)"; // Clears canvas before rendering bars (black with opacity 0.2)
-            canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height); // Fade effect, set opacity to 1 for sharper rendering of bars
+            // Clears canvas before rendering bars (black with opacity 0.2)
+            canvasCtx.current.fillStyle = "rgba(72,61,139,.2)";
 
+            // Fade effect, set opacity to 1 for sharper rendering of bars
+            canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height);
+
+            // variables for colors of visualizer bars and # of bars
             let r, g, b;
             let bars = 100;
 
@@ -78,7 +91,16 @@ const Visualizer = (props) => {
                     b = 255;
                 }
 
+                //sets bar color based on amplitude
                 canvasCtx.current.fillStyle = `rgb(${r},${g},${b})`;
+
+                /**
+                 * draws rectangle based on preset bar width and dyanmic frequency and amplitude
+                 * param 1 = current x coord of bar's start point
+                 * param 2 = current y coord of bar's start point
+                 * param 3 = width of bar based on pre configured settings
+                 * param 4 = height of bar based on amplitude of current frequency data 
+                 */
                 canvasCtx.current.fillRect(
                     x,
                     canvas.height - barHeight,
@@ -86,6 +108,7 @@ const Visualizer = (props) => {
                     barHeight
                 );
 
+                //advances X coord to draw next bar
                 x += barWidth + 5;
             }
         };

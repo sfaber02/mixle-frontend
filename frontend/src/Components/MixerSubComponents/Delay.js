@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * Delay component of mixer
+ * @param {object} props 
+ * @param {object} fx from mixer component
+ * @param {function} OnChange handler to set FX from mixer component  
+ * 
+ * @returns JSX for Delay section of mixer
+ */
 const Delay = (props) => {
     const fx = props.fx;
     const handleSetFx = props.handleSetFx;

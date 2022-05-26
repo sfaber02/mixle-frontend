@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * Play Speed component of mixer
+ * @param {object} props 
+ * @param {object} fx from mixer component
+ * @param {function} OnChange handler to set FX from mixer component  
+ * 
+ * @returns JSX for Play Speed section of mixer
+ */
 const PlaySpeed = (props) => {
     const fx = props.fx;
     const handleSetFx = props.handleSetFx;
