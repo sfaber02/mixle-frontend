@@ -14,14 +14,6 @@ import Loading from "./Loading";
 
 const API = process.env.REACT_APP_API_URL;
 
-/**
- * TO DO:
- * Seek bar
- * Make current track time display
- *
- *
- * @param {object} props
- */
 const Mixer = (props) => {
     const navigate = useNavigate();
 
@@ -29,13 +21,13 @@ const Mixer = (props) => {
      * play/pause - boolean state for play/pause toggling
      * playstate - object state for tracking the current play state (e.g. 'playing', 'paused')
      * time - object state for current time of track / total duration of track
+     * loading - boolean state for tracking if track is loaded
+     * fx - object state of all FX parameters
      */
     const [playPause, setPlayPause] = useState(false);
     const [playState, setPlayState] = useState({ state: "stopped" });
     const [time, setTime] = useState({ current: 0, duration: 0 });
-
     const [loading, setLoading] = useState(true);
-    const [firstLoad, setFirstLoad] = useState(true);
     const [fx, setFx] = useState(defaultfx);
 
     //Refs for time display
@@ -76,6 +68,10 @@ const Mixer = (props) => {
     //Ref for master out
     const masterOutNode = useRef();
 
+    /**
+     * On page load checks if there are FX settings stored in local storage.
+     * This is used in the case that a user has created mix without an account or being logged in.
+     */
     useEffect(() => {
         const storedFx = JSON.parse(localStorage.getItem("temp_fx"));
         if (storedFx) {
@@ -162,6 +158,17 @@ const Mixer = (props) => {
         connectNodes();
     };
 
+    /**
+     * Connects audio nodes together to create FX chain
+     *
+     * FX CHAIN:
+     * Track buffer source -> (split to dry node & delay node)
+     * ------dry node -> delay Out node
+     * ------delay node -> delay feedback -> delay -> wet node -> delay out node
+     * delay out node -> band 1 -> band 2 -> band 3 -> band 4 -> band 5
+     * band 5 -> compressor node -> analyser node -> master out node -> ctx.destination(this is the audio out)
+     *
+     */
     const connectNodes = () => {
         // delay path dry signal
         track.current.connect(dryNode.current);
@@ -176,6 +183,8 @@ const Mixer = (props) => {
 
         //delay output
         delayOutNode.current.connect(band1.current);
+
+        //eq path
         band1.current.connect(band2.current);
         band2.current.connect(band3.current);
         band3.current.connect(band4.current);
@@ -192,7 +201,10 @@ const Mixer = (props) => {
         masterOutNode.current.connect(ctx.current.destination);
     };
 
-    //SET FX settings
+    /**
+     * Updates settings of audio nodes when FX state changes
+     * FX state will change from user inputs OR if there are fx in local storage from a save mix/no user scenario
+     */
     useEffect(() => {
         if (!loading) {
             //Set play speed
@@ -223,12 +235,16 @@ const Mixer = (props) => {
             compressorNode.current.ratio.value = fx.compressor.ratio;
             compressorNode.current.attack.value = fx.compressor.attack;
             compressorNode.current.release.value = fx.compressor.release;
-
-            setFirstLoad(false);
         }
     }, [loading, fx]);
 
-    // CHANGE FX SETTINGS HANDLERS
+    /**
+     * handles onChange event from all inputs in the mixer
+     * dyanmically determines key based on <input> tags id property
+     * ID needs to be in the format key.key OR for EQ settings key.key.key
+     * (eg. id="delay.time" or id="eq.band1.gain")
+     * @param {object} e
+     */
     const handleSetFx = (e) => {
         setFx((prev) => {
             if (e.target.id.split(".").length === 3) {
@@ -254,11 +270,18 @@ const Mixer = (props) => {
         });
     };
 
+    /**
+     * handles onChange event from master volume slider in transport controls
+     * changes volumes of masterOutNode which is the last node in the FX chain
+     * @param {object} e 
+     */
     const setMasterVolume = (e) => {
         masterOutNode.current.gain.value = e.target.value;
     };
 
-    //handles start and stop of timer
+    /**
+     * Creates an interval function to update the timer if song is playing
+     */
     const startTimer = () => {
         timerStart.current = Date.now();
         timer.current = setInterval(() => {
@@ -276,11 +299,19 @@ const Mixer = (props) => {
             });
         }, 50);
     };
+
+    /**
+     * Stops timer by clearing interval
+     */
     const stopTimer = () => {
         clearInterval(timer.current);
     };
 
-    //Transport control click handlers
+    /**
+     * handles onClick event from Play/Pause button
+     * refers to playState state to determine what actions needs to happen
+     * also updates PlayPause state to flip play button icon between play/pause
+     */
     const handlePlayPause = () => {
         if (playState.state === "stopped") {
             track.current.start(ctx.current.currentTime);
@@ -296,20 +327,11 @@ const Mixer = (props) => {
         setPlayPause((prev) => !prev);
     };
 
-    const handleStop = () => {
-        track.current.stop();
-        setPlayState({ state: "stopped" });
-        setPlayPause(false);
-        setTime((p) => {
-            return {
-                ...p,
-                current: 0,
-            };
-        });
-        stopTimer();
-        createTrackNode(decodedAudio.current);
-    };
-
+   /**
+    * handles onChange event from Seekbar <input> element
+    * Refers to play state to decided what actions need to happen for accurate seeking
+    * @param {object} e 
+    */
     const handleSeek = (e) => {
         seekOffset.current = Number(e.target.value);
         seekTimeStamp.current = ctx.current.currentTime;
@@ -337,7 +359,14 @@ const Mixer = (props) => {
         }
     };
 
-    //Save click handler
+    /**
+     * handle onClick event from "Save Mix" button
+     * Checks local storage to determine if a user is logged in
+     * If logged in Check if logged in user has already created a mix for specific track
+     * -----If mix already exists update that mix
+     * -----If mix does not exist POST a new mix
+     * If not logged in save user's mix to local storage and navigate to the REGISTER page
+     */
     const handleSaveClick = async () => {
         let user = JSON.parse(localStorage.getItem("user_id"));
         if (user) {
@@ -389,11 +418,6 @@ const Mixer = (props) => {
         }
     };
 
-    //TEMP BUTTON FOR DEV PURPOSES
-    const clearUser = () => {
-        localStorage.setItem("user_id", null);
-        localStorage.setItem("temp_fx", null);
-    };
 
     return (
         <>
