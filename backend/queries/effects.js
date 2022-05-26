@@ -79,6 +79,19 @@ const updateEffect = async (effects, audio_id, user_id) => {
     }
 };
 
+// UPDATE VOTES
+const updateEffectVotes = async (effects_id, votes) => {
+    try {
+        const updatedVotes = await db.one(
+            "UPDATE effects SET totalVotes=$1 WHERE effects_id=$2 RETURNING totalVotes",
+            [votes, effects_id]
+        );
+        return updatedVotes;
+    } catch (error) {
+        return error;
+    }
+};
+
 // CHECK IF USER HAS AUDIO EFFECTS ALREADY
 const hasEffects = async (audio_id, user_id) => {
     try {
@@ -101,4 +114,5 @@ module.exports = {
     deleteEffect,
     updateEffect,
     hasEffects,
+    updateEffectVotes,
 };

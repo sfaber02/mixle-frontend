@@ -11,7 +11,8 @@ import artDB from "../../Actions/art";
 
 const API = process.env.REACT_APP_API_URL;
 
-export default function MixCard({ effect, handleUserChange, availableVotes, subtractVote }) {
+export default function MixCard({ effect, handleUserChange, avaliableVotes, subtractVote }) {
+    console.log (avaliableVotes);
     const [ isHovered, setHovered] = useState(false);
     const [votes, setVotes] = useState(0);
     const [imageSource, setImageSource] = useState(artDB[Math.floor(Math.random() * artDB.length)]); 
@@ -25,9 +26,11 @@ export default function MixCard({ effect, handleUserChange, availableVotes, subt
     const handleClick = () =>{
         let user = JSON.parse(localStorage.getItem("user_id"));
         if (user) {
-            if (availableVotes > 0) {
+            if (avaliableVotes > 0) {
                 setVotes(p => p += 1);
                 subtractVote();
+            } else {
+                window.alert('Sorry! You have no votes left for today!')
             }
         } else {
           navigate("/register");  
@@ -38,7 +41,11 @@ export default function MixCard({ effect, handleUserChange, availableVotes, subt
     
     useEffect(() => {
         setLoaded(true);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        
+    }, [votes])
     
     const handleMouseEnter = (e) => {
         handleUserChange(e.target.parentNode.id);

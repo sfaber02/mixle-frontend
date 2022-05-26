@@ -19,10 +19,9 @@ export default function MixesCard() {
     const [effects, setEffects] = useState([]);
 
     //states for vote tracking and updating
-    const [availableVotes, setAvailableVotes] = useState(0);
-    const [user, setUser] = useState();
-
-
+    // const [availableVotes, setAvailableVotes] = useState(0);
+    const [user, setUser] = useState({avaliablevotes: 0});
+    
     //Refs for time display
     const timer = useRef();
     const timerStart = useRef();
@@ -93,7 +92,6 @@ export default function MixesCard() {
             fetch(`${API}/user/${user}`, requestOptions)
                 .then((response) => response.json())
                 .then((result) => {
-                    setAvailableVotes(result.avaliablevotes)
                     setUser(result);
                 })
                 .catch((error) => console.log("error", error));
@@ -310,12 +308,29 @@ export default function MixesCard() {
     };
 
     const subtractVote = () => {
-        console.log('subtract');
+        if (user.avaliablevotes > 0) {
+            var requestOptions = {
+                method: "PUT",
+                redirect: "follow",
+            };
+    
+            fetch(`http://localhost:3333/user/votes/${user.user_id}/${user.avaliablevotes - 1}`, requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    setUser(prev => {
+                        return ({
+                            ...prev,
+                            avaliablevotes: result.avaliablevotes,
+                        })
+                    })
+                })
+                .catch((error) => console.log("error", error));
+        }
     }
 
     return (
         <div id="mixesContainer">
-            <div id="availableVotes">Votes Left: {availableVotes}</div>
+            <div id="availableVotes">Votes Left: {user.avaliablevotes}</div>
             <div id="transportControlsContainer">
                 <div id="timer">
                     {time.current.toFixed(2)}/{time.duration.toFixed(2)}
@@ -350,7 +365,7 @@ export default function MixesCard() {
                         key={effect.id}
                         effect={effect}
                         handleUserChange={handleUserChange}
-                        availableVotes={availableVotes}
+                        avaliableVotes={user.avaliablevotes}
                         subtractVote={subtractVote}
                     />
                 ))}

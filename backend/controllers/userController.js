@@ -11,6 +11,7 @@ const {
     getUser,
     updateUser,
     getUserById,
+    updateUserVotes,
 } = require("../queries/users.js");
 
 // CONFIGURATION
@@ -100,6 +101,19 @@ user.put("/:id", async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10);
         const updatedUser = await updateUser(user, hashPassword);
 
+        res.status(202).json(updatedUser);
+    } catch (err) {
+        res.status(500).json({ error: "Update was unsuccessful." });
+    }
+});
+
+// UPDATE USER'S VOTES
+user.put("/votes/:id/:votes", async (req, res) => {
+    const { id, votes } = req.params;
+    console.log ('111');
+    try {
+        const updatedUser = await updateUserVotes(votes, id);
+        
         res.status(202).json(updatedUser);
     } catch (err) {
         res.status(500).json({ error: "Update was unsuccessful." });

@@ -9,6 +9,7 @@ const {
     deleteEffect,
     updateEffect,
     hasEffects,
+    updateEffectVotes,
 } = require("../queries/effects");
 
 // GET ONE EFFECT BY USER AND SPECIFIC AUDIO
@@ -43,6 +44,17 @@ effects.get("/allusers/:id", async (req, res) => {
     }
 });
 
+// UPDATE AN EFFECT'S VOTES
+effects.put("/:id/:votes", async (req, res) => {
+    const { id, votes } = req.params;
+    try {
+        const updatedVotes = await updateEffectVotes(id, votes);
+        res.status(200).json(updatedVotes);
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+});
+
 // UPDATE AN EFFECT
 effects.put("/", async (req, res) => {
     const { effects, audio_id, user_id } = req.body;
@@ -53,6 +65,7 @@ effects.put("/", async (req, res) => {
         res.status(404).json({ error: error });
     }
 });
+
 
 // CREATE AN EFFECT
 effects.post("/", async (req, res) => {
