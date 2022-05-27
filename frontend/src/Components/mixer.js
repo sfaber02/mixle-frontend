@@ -167,7 +167,7 @@ const Mixer = (props) => {
      * ------delay node -> delay feedback -> delay -> wet node -> delay out node
      * delay out node -> band 1 -> band 2 -> band 3 -> band 4 -> band 5
      * band 5 -> compressor node -> analyser node -> master out node -> ctx.destination(this is the audio out)
-     *
+     * 
      */
     const connectNodes = () => {
         // delay path dry signal
@@ -436,15 +436,17 @@ const Mixer = (props) => {
                             </button>
                         </div>
                         <div id="transportVolumeContainer">
-                            <label>Volume</label>
-                            <input
-                                type="range"
-                                id="volume"
-                                min="0"
-                                max="1"
-                                step=".05"
-                                onChange={setMasterVolume}
-                            />
+                            <label>
+                                Volume
+                                <input
+                                    type="range"
+                                    id="volume"
+                                    min="0"
+                                    max="1"
+                                    step=".05"
+                                    onChange={setMasterVolume}
+                                />
+                            </label>
                         </div>
                         <div id="transportTimeContainer">
                             {/* prettier-ignore */}

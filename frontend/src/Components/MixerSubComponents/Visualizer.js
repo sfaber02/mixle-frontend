@@ -11,6 +11,7 @@ const Visualizer = (props) => {
     // Refs for canvas context element and analyser node
     const canvasCtx = useRef();
     const analyserNode = useRef(props.analyserNode);
+    // const canvas = useRef();
 
     /**
      * Component Did Mount wrapper to ensure <canvas> element exists before this code runs

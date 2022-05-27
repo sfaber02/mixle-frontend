@@ -44,7 +44,6 @@ user.post("/register", async (req, res) => {
 //GET USER INFO
 user.get('/:id', async(req, res) => {
     const id = req.params;
-    console.log (id.id);
     try {
         const user = await getUserById(id.id);
         res.status(200).json(user);
@@ -110,7 +109,6 @@ user.put("/:id", async (req, res) => {
 // UPDATE USER'S VOTES
 user.put("/votes/:id/:votes", async (req, res) => {
     const { id, votes } = req.params;
-    console.log ('111');
     try {
         const updatedUser = await updateUserVotes(votes, id);
         

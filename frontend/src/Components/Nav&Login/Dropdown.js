@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+
 export default function Dropdown({ user }) {
     const navigate = useNavigate();
     const handleSignOut = () => {
