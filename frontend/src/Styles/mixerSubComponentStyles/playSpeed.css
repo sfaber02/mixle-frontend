@@ -1,5 +1,35 @@
 /* SPEED */
 
+#playSpeedContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #000;
+    border-radius: 5px;
+}
+
+#playSpeedP {
+    text-align: center;
+    margin: 0;
+}
+
+#playSpeedContainer label {
+    text-align: center;
+}
+
+.playSpeedSliderContainer {
+    display: grid;
+    grid-template-columns: 20% 65% 15%;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+
+#playSpeedDetuneLabel {
+    font-size: 12px;
+}
+
+
+/* SPEED SLIDERS */
+
 .playSpeedSliders {
     -webkit-appearance: none;
     width: 100%;
@@ -30,31 +60,4 @@
     cursor: pointer;
     border: 5px solid lawngreen;
     border-radius: 4px;
-}
-
-/* SPEED */
-#playSpeedContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-}
-
-#playSpeedP {
-    text-align: center;
-    margin: 0;
-}
-
-#playSpeedContainer label {
-    text-align: center;
-}
-
-.playSpeedSliderContainer {
-    display: grid;
-    grid-template-columns: 20% 65% 15%;
-    grid-template-rows: 25% 25% 25% 25%;
-}
-
-#playSpeedDetuneLabel {
-    font-size: 12px;
 }

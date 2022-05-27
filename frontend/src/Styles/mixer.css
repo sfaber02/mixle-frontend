@@ -10,7 +10,8 @@ main {
 #mainMixerContainer {
     color: white;
     border: 2px solid purple;
-    background-color: darkslateblue;
+    /* background-color: black; */
+    background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
     height: 100%;
     /* border: 5px solid purple; */
     display: grid;
@@ -32,28 +33,45 @@ main {
 }
 
 #transportContainer {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     grid-area: transport;
+    margin: 8px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 #playSpeedContainer {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     grid-area: speed;
+    margin: 8px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 #delayContainer {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
+    background-color: black;
     grid-area: delay;
+    margin: 8px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
+    
 }
 
 #compressorContainer {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     grid-area: compressor;
+    margin: 8px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 #eqContainer {
     border: 1px solid yellow;
     grid-area: eq;
+    margin: 8px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 

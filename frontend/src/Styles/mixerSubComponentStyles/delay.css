@@ -1,5 +1,30 @@
-/* DELAY */
+/********** DELAY **************/
 
+#delayContainer {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 5px;
+}
+
+#delayP {
+    text-align: center;
+    margin: 0;
+}
+
+#delayContainer label {
+    text-align: center;
+}
+
+.delaySliderContainer {
+    display: grid;
+    grid-template-columns: 20% 65% 15%;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+
+
+/* SLIDER STYLING */
 .delaySliders {
     -webkit-appearance: none;
     width: 100%;
@@ -30,27 +55,4 @@
     cursor: pointer;
     border: 5px solid lawngreen;
     border-radius: 4px;
-}
-/* DELAY */
-
-#delayContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-}
-
-#delayP {
-    text-align: center;
-    margin: 0;
-}
-
-#delayContainer label {
-    text-align: center;
-}
-
-.delaySliderContainer {
-    display: grid;
-    grid-template-columns: 20% 65% 15%;
-    grid-template-rows: 25% 25% 25% 25%;
 }

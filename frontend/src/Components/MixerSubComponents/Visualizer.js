@@ -53,7 +53,7 @@ const Visualizer = (props) => {
             analyserNode.current.getByteFrequencyData(dataArray);
 
             // Clears canvas before rendering bars (black with opacity 0.2)
-            canvasCtx.current.fillStyle = "rgba(72,61,139,.2)";
+            canvasCtx.current.fillStyle = "rgba(0,0,0,.2)";
 
             // Fade effect, set opacity to 1 for sharper rendering of bars
             canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height);
