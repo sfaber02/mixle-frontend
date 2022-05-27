@@ -1,4 +1,5 @@
 import React from "react";
+import "../../Styles/mixerSubComponentStyles/playSpeed.css";
 
 /**
  * Play Speed component of mixer

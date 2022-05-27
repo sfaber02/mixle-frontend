@@ -1,0 +1,104 @@
+/* TRANSPORT */
+.transportSlider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 8px;
+}
+
+/* for chrome/safari */
+.transportSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 10px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(21, 252, 0);
+    border-radius: 4px;
+}
+
+.transportSlider::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+}
+
+/* TRANSPORT */
+#transportContainer {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-columns: 20% 60% 20%;
+}
+
+#transportPlayContainer {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+#transportPlayContainer button {
+    border-radius: 50%;
+    width: 50%;
+    border: none;
+    background-color: rgb(252, 113, 0);
+}
+
+#transportPlayContainer button:hover {
+    transition-duration: 0.5s;
+    background-color: aqua;
+}
+
+#transportVolumeContainer {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid red;
+}
+
+#transportVolumeContainer input {
+    width: 100%;
+}
+
+#transportTimeContainer {
+    text-align: center;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border: 1px solid red;
+}
+
+#transportSeekBarContainer {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    border: 1px solid red;
+}
+
+#transportSaveContainer {
+    display: flex;
+    justify-content: space-around;
+    grid-column: 3 / 4;
+    grid-row: 2 / 4;
+    border: 1px solid red;
+}
+
+#transportSaveContainer button {
+    border-radius: 50%;
+    width: 50%;
+    border: none;
+    background-color: rgb(252, 113, 0);
+}
+
+#transportSaveContainer button:hover {
+    transition-duration: 0.5s;
+    background-color: aqua;
+}

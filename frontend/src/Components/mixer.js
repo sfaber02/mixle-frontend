@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { defaultfx } from "../settings/defaultfx";
 
 import "../Styles/mixer.css";
+import "../Styles/mixerSubComponentStyles/transport.css";
 
 //MIXER SUB COMPONENTS
 import { Visualizer } from "./MixerSubComponents/Visualizer";
