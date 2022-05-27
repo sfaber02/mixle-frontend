@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
 import "../../Styles/scss/MixesCard.scss";
 import { defaultfx } from "../../settings/defaultfx.js";
-import artDB from "../../Actions/art";
+import artDB from "../../Actions/art.js";
 
 const API = process.env.REACT_APP_API_URL;
 
