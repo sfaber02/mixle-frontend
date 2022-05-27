@@ -436,17 +436,16 @@ const Mixer = (props) => {
                             </button>
                         </div>
                         <div id="transportVolumeContainer">
-                            <label>
-                                Volume
-                                <input
-                                    type="range"
-                                    id="volume"
-                                    min="0"
-                                    max="1"
-                                    step=".05"
-                                    onChange={setMasterVolume}
-                                />
-                            </label>
+                            <label htmlFor="volume">Volume</label>
+                            <input
+                                type="range"
+                                id="volume"
+                                name="volume"
+                                min="0"
+                                max="1"
+                                step=".05"
+                                onChange={setMasterVolume}
+                            />
                         </div>
                         <div id="transportTimeContainer">
                             {/* prettier-ignore */}
