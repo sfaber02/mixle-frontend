@@ -16,9 +16,10 @@ const Delay = (props) => {
         <div id="delayContainer">
             <p id="delayP">Delay</p>
             <div className="delaySliderContainer">
-                <label className="delayLabel">Time</label>
+                <label className="delayLabel" htmlFor="delay.time">Time</label>
                 <input
                     id="delay.time"
+                    name="delay.time"
                     className="delaySliders"
                     type="range"
                     min="0"
@@ -27,12 +28,13 @@ const Delay = (props) => {
                     value={fx.delay.time}
                     onChange={handleSetFx}
                 />
-                <label className="delayLabel2">{fx.delay.time * 1000}ms</label>
+                <p className="delayLabel2">{fx.delay.time * 1000}ms</p>
             </div>
             <div className="delaySliderContainer">
-                <label>Feedback</label>
+                <label htmlFor="delay.feedback">Feedback</label>
                 <input
                     id="delay.feedback"
+                    name="delay.feedback"
                     className="delaySliders"
                     type="range"
                     min="0"
@@ -41,12 +43,13 @@ const Delay = (props) => {
                     value={fx.delay.feedback}
                     onChange={handleSetFx}
                 />
-                <label>{(fx.delay.feedback * 100).toFixed(0)}%</label>
+                <p>{(fx.delay.feedback * 100).toFixed(0)}%</p>
             </div>
             <div className="delaySliderContainer">
-                <label>Dry</label>
+                <label htmlFor="delay.dry">Dry</label>
                 <input
                     id="delay.dry"
+                    name="delay.dry"
                     type="range"
                     className="delaySliders"
                     min="0"
@@ -55,12 +58,13 @@ const Delay = (props) => {
                     value={fx.delay.dry}
                     onChange={handleSetFx}
                 />
-                <label>{fx.delay.dry * 100}%</label>
+                <p>{fx.delay.dry * 100}%</p>
             </div>
             <div className="delaySliderContainer">
-                <label>Wet</label>
+                <label htmlFor="delay.wet">Wet</label>
                 <input
-                    id="delay.wet"
+                    id="delay.wet" 
+                    name="delay.wet" 
                     className="delaySliders"
                     type="range"
                     min="0"
@@ -69,7 +73,7 @@ const Delay = (props) => {
                     value={fx.delay.wet}
                     onChange={handleSetFx}
                 />
-                <label>{fx.delay.wet * 100}%</label>
+                <p>{fx.delay.wet * 100}%</p>
             </div>
         </div>
     );

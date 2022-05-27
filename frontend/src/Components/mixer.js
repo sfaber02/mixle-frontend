@@ -167,7 +167,7 @@ const Mixer = (props) => {
      * ------delay node -> delay feedback -> delay -> wet node -> delay out node
      * delay out node -> band 1 -> band 2 -> band 3 -> band 4 -> band 5
      * band 5 -> compressor node -> analyser node -> master out node -> ctx.destination(this is the audio out)
-     * 
+     *
      */
     const connectNodes = () => {
         // delay path dry signal
@@ -273,7 +273,7 @@ const Mixer = (props) => {
     /**
      * handles onChange event from master volume slider in transport controls
      * changes volumes of masterOutNode which is the last node in the FX chain
-     * @param {object} e 
+     * @param {object} e
      */
     const setMasterVolume = (e) => {
         masterOutNode.current.gain.value = e.target.value;
@@ -327,11 +327,11 @@ const Mixer = (props) => {
         setPlayPause((prev) => !prev);
     };
 
-   /**
-    * handles onChange event from Seekbar <input> element
-    * Refers to play state to decided what actions need to happen for accurate seeking
-    * @param {object} e 
-    */
+    /**
+     * handles onChange event from Seekbar <input> element
+     * Refers to play state to decided what actions need to happen for accurate seeking
+     * @param {object} e
+     */
     const handleSeek = (e) => {
         seekOffset.current = Number(e.target.value);
         seekTimeStamp.current = ctx.current.currentTime;
@@ -418,11 +418,11 @@ const Mixer = (props) => {
         }
     };
 
-
     return (
         <>
-            {loading && <Loading />}
-            {!loading && (
+            {loading ? (
+                <Loading />
+            ) : (
                 <div id="mainMixerContainer">
                     <Visualizer analyserNode={analyserNode.current} />
                     <div id="transportContainer">
@@ -448,6 +448,7 @@ const Mixer = (props) => {
                             />
                         </div>
                         <div id="transportTimeContainer">
+                            {/*PRETTIER keeps multilining the first .toFixed()! */}
                             {/* prettier-ignore */}
                             <p>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</p>
                         </div>
