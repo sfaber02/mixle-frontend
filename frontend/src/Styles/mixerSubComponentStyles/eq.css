@@ -6,6 +6,7 @@
     display: grid;
     grid-template-columns: 15% 70% 15%;
     grid-template-rows: 100%;
+    
 }
 
 #eqContainer {
@@ -23,11 +24,12 @@
     background-color: black;
     margin: 2px;
     border-radius: 5px;
-    /* border: 1px solid yellow; */
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.2), 0 6px 20px 0 rgba(255,255,255,0.19);
+    /* border: 1px solid yellow; */
 }
 
 .eqBand label {
@@ -110,7 +112,7 @@
     font-size: 100px;
     padding: 0;
     background-color: rgb(252, 113, 0);
-    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.2), 0 6px 20px 0 rgba(255,255,255,0.19)
+    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.2), 0 6px 20px 0 rgba(255,255,255,0.19);
 }
 
 #playButton:hover {

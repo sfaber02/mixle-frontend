@@ -59,7 +59,7 @@ const Delay = (props) => {
                     value={fx.delay.dry}
                     onChange={handleSetFx}
                 />
-                <p>{fx.delay.dry * 100}%</p>
+                <p>{(fx.delay.dry * 100).toFixed(0)}%</p>
             </div>
             <div className="delaySliderContainer">
                 <label htmlFor="delay.wet">Wet</label>
@@ -74,7 +74,7 @@ const Delay = (props) => {
                     value={fx.delay.wet}
                     onChange={handleSetFx}
                 />
-                <p>{fx.delay.wet * 100}%</p>
+                <p>{(fx.delay.wet * 100).toFixed(0)}%</p>
             </div>
         </div>
     );

@@ -30,7 +30,8 @@ main {
     /* border: 1px solid blue; */
     grid-area: visualizer;
     height: 100%;
-    width: 100%;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 #transportContainer {

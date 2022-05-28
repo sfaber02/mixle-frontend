@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import "../../Styles/mixerSubComponentStyles/visualizer.css"
 
 /**
  * Renders music visualizer based on audio data from analyser node
@@ -11,6 +12,8 @@ const Visualizer = (props) => {
     // Refs for canvas context element and analyser node
     const canvasCtx = useRef();
     const analyserNode = useRef(props.analyserNode);
+    const canvas = useRef()
+
     // const canvas = useRef();
 
     /**
@@ -18,21 +21,22 @@ const Visualizer = (props) => {
      */
     useEffect(() => {
         //DOM elements for <canvas> element and the div it is contained in
-        const canvas = document.getElementById("visualizer");
-        const wrapper = canvas.parentNode;
-
+        canvas.current = document.getElementById("visualizer");
+        const wrapper = canvas.current.parentNode;
+        console.log (wrapper.offsetWidth);
+        console.log(wrapper.offsetHeight);
         //Canvas window size settings
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight / 3;
-
-        // On resize event listener to dyanmcally resize canvas when window is resized
+        canvas.current.width = wrapper.offsetWidth;
+        canvas.current.height = wrapper.offsetHeight - 16;
+        console.log(canvas.current)
+        // On resize event listener to dyanmcally resize canvas.current when window is resized
         window.onresize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight / 3;
+            canvas.current.width = wrapper.offsetWidth;
+            canvas.current.height = wrapper.offsetHeight - 16;
         };
 
         //Create 2D canvas context for drawing the visualizer
-        canvasCtx.current = canvas.getContext("2d");
+        canvasCtx.current = canvas.current.getContext("2d");
 
         //Various parameters required for visualizer
         analyserNode.current.fftSize = 4096;
@@ -43,8 +47,8 @@ const Visualizer = (props) => {
 
         //Render a frame of the visualizer
         const renderFrame = () => {
-            const barWidth = (canvas.width / bufferLength) * 13;
-            // console.log (canvas.width, canvas.height);
+            const barWidth = (canvas.current.width / bufferLength) * 13.5;
+            // console.log (canvas.current.width, canvas.current.height);
             requestAnimationFrame(renderFrame);
             x = 0;
             // console.log (analyserNode.current);
@@ -52,11 +56,11 @@ const Visualizer = (props) => {
             //Grabs current frequency and amplitude of audio
             analyserNode.current.getByteFrequencyData(dataArray);
 
-            // Clears canvas before rendering bars (black with opacity 0.2)
+            // Clears canvas.current before rendering bars (black with opacity 0.2)
             canvasCtx.current.fillStyle = "rgba(0,0,0,.2)";
 
             // Fade effect, set opacity to 1 for sharper rendering of bars
-            canvasCtx.current.fillRect(0, 0, canvas.width, canvas.height);
+            canvasCtx.current.fillRect(0, 0, canvas.current.width, canvas.current.height);
 
             // variables for colors of visualizer bars and # of bars
             let r, g, b;
@@ -104,7 +108,7 @@ const Visualizer = (props) => {
                  */
                 canvasCtx.current.fillRect(
                     x,
-                    canvas.height - barHeight,
+                    canvas.current.height - barHeight,
                     barWidth,
                     barHeight
                 );
