@@ -17,9 +17,13 @@
     bottom:0;
   }
   
-  #splashPageButtonContainer {
-    position:absolute;
-    bottom:0;
+  #splashButtonContainer {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 
   #splashButton, #splashButton::after {
