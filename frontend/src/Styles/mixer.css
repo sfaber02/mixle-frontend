@@ -9,7 +9,7 @@ main {
 
 #mainMixerContainer {
     color: white;
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
     /* background-color: black; */
     background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
     height: 100%;
@@ -27,7 +27,7 @@ main {
 }
 
 #visualizerContainer {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     grid-area: visualizer;
     height: 100%;
     width: 100%;
@@ -68,7 +68,7 @@ main {
 }
 
 #eqPlaySaveContainer {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     grid-area: eq;
     margin: 8px;
     width: -moz-calc(100% - 16px);
