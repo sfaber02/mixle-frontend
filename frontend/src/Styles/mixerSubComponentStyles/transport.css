@@ -18,38 +18,43 @@
 
 
 #transportVolumeContainer {
+    /* border: 1px solid red; */
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     display: flex;
     justify-content: space-around;
-    /* border: 1px solid red; */
 }
 
 #transportVolumeContainer input {
     width: 100%;
 }
 
+#transportVolumeContainer label {
+    /* border: 1px solid purple; */
+    margin-right: 5px;
+    padding: 0px;
+}
+
 #transportTimeContainer {
+    /* border: 1px solid red; */
     text-align: center;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    /* border: 1px solid red; */
 }
 
 #transportSeekBarContainer {
+    /* border: 1px solid red; */
     grid-column: 1 / 4;
     grid-row: 1 / 2;
-    /* margin-top: 5px; */
-    /* padding: 5px; */
-    border: 1px solid red;
+    text-align: center;
 }
 
 #transportSaveContainer {
+    /* border: 1px solid red; */
     display: flex;
     justify-content: space-around;
     grid-column: 3 / 4;
     grid-row: 2 / 4;
-    /* border: 1px solid red; */
 }
 
 
@@ -58,7 +63,9 @@
 /* TRANSPORT SLIDERS*/
 .transportSlider {
     -webkit-appearance: none;
-    width: 100%;
+    width: 95%;
+    margin: auto;
+    margin-top: 8px;
     height: 15px;
     background: #000;
     background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
@@ -80,6 +87,40 @@
 }
 
 .transportSlider::-moz-range-thumb {
+    width: 20px;
+    height: 60px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid lawngreen;
+    border-radius: 4px;
+}
+
+#volume {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 10px;
+    height: 15px;
+    background: #000;
+    background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
+    outline: none;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 8px;
+}
+
+/* for chrome/safari */
+#volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 10px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(21, 252, 0);
+    border-radius: 4px;
+}
+
+#volume::-moz-range-thumb {
     width: 20px;
     height: 60px;
     background: #000;
