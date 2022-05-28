@@ -32,6 +32,7 @@ const Eq = (props) => {
                     <input
                         id="eq.band1.frequency"
                         name="eq.band1.frequency"
+                        className="eqFrequencySlider"
                         type="range"
                         min="20"
                         max="500"
@@ -60,6 +61,7 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band2.frequency"
+                        className="eqFrequencySlider"
                         name="eq.band2.frequency"
                         type="range"
                         min="100"
@@ -68,7 +70,9 @@ const Eq = (props) => {
                         value={fx.eq.band2.frequency}
                         onChange={handleSetFx}
                     />
-                    <label htmlFor="eq.band2.frequency">{fx.eq.band2.frequency}hz</label>
+                    <label htmlFor="eq.band2.frequency">
+                        {fx.eq.band2.frequency}hz
+                    </label>
                 </div>
             </div>
             <div id="eqBand3" className="eqBand">
@@ -87,6 +91,7 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band3.frequency"
+                        className="eqFrequencySlider"
                         name="eq.band3.frequency"
                         type="range"
                         min="600"
@@ -95,7 +100,9 @@ const Eq = (props) => {
                         value={fx.eq.band3.frequency}
                         onChange={handleSetFx}
                     />
-                    <label htmlFor="eq.band3.frequency">{fx.eq.band3.frequency}hz</label>
+                    <label htmlFor="eq.band3.frequency">
+                        {fx.eq.band3.frequency}hz
+                    </label>
                 </div>
             </div>
             <div id="eqBand4" className="eqBand">
@@ -114,6 +121,7 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band4.frequency"
+                        className="eqFrequencySlider"
                         name="eq.band4.frequency"
                         type="range"
                         min="1500"
@@ -122,7 +130,9 @@ const Eq = (props) => {
                         value={fx.eq.band4.frequency}
                         onChange={handleSetFx}
                     />
-                    <label htmlFor="eq.band4.frequency">{fx.eq.band4.frequency}hz</label>
+                    <label htmlFor="eq.band4.frequency">
+                        {fx.eq.band4.frequency}hz
+                    </label>
                 </div>
             </div>
             <div id="eqBand5" className="eqBand">
@@ -141,6 +151,7 @@ const Eq = (props) => {
                 <div className="eqFrequency">
                     <input
                         id="eq.band5.frequency"
+                        className="eqFrequencySlider"
                         name="eq.band5.frequency"
                         type="range"
                         min="4000"
@@ -149,7 +160,9 @@ const Eq = (props) => {
                         value={fx.eq.band5.frequency}
                         onChange={handleSetFx}
                     />
-                    <label htmlFor="eq.band5.frequency">{fx.eq.band5.frequency}hz</label>
+                    <label htmlFor="eq.band5.frequency">
+                        {fx.eq.band5.frequency}hz
+                    </label>
                 </div>
             </div>
         </div>

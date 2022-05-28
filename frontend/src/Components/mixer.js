@@ -427,15 +427,6 @@ const Mixer = (props) => {
                 <div id="mainMixerContainer">
                     <Visualizer analyserNode={analyserNode.current} />
                     <div id="transportContainer">
-                        <div id="transportPlayContainer">
-                            <button onClick={handlePlayPause}>
-                                {playPause ? (
-                                    <i className="fa-solid fa-pause"></i>
-                                ) : (
-                                    <i className="fa-solid fa-play"></i>
-                                )}
-                            </button>
-                        </div>
                         <div id="transportVolumeContainer">
                             <label htmlFor="volume">Volume</label>
                             <input
@@ -465,14 +456,23 @@ const Mixer = (props) => {
                                 onChange={handleSeek}
                             />
                         </div>
-                        <div id="transportSaveContainer">
-                            <button onClick={handleSaveClick}>Save</button>
-                        </div>
                     </div>
                     <Delay handleSetFx={handleSetFx} fx={fx} />
                     <PlaySpeed handleSetFx={handleSetFx} fx={fx} />
                     <Compressor handleSetFx={handleSetFx} fx={fx} />
-                    <Eq handleSetFx={handleSetFx} fx={fx} />
+                    <div id="eqPlaySaveContainer">
+                        <button id="playButton" onClick={handlePlayPause}>
+                            {playPause ? (
+                                <i className="fa-solid fa-pause"></i>
+                            ) : (
+                                <i className="fa-solid fa-play"></i>
+                            )}
+                        </button>
+                        <Eq handleSetFx={handleSetFx} fx={fx} />
+                        <button id="saveButton" onClick={handleSaveClick}>
+                            Save
+                        </button>
+                    </div>
                 </div>
             )}
         </>

@@ -2,22 +2,30 @@
 
 /* SPACING */
 
+#eqPlaySaveContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #eqContainer {
-    width: 80%;
+    /* width: 80%; */
+    height: 100%;
     display: flex;
     justify-content: space-around;
-    /* position: relative;
-    top: 75px; */
+    background-color: black;
+    margin: 0px 16px;
+    border-radius: 5px;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
 }
 
 .eqBand {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 .eqGain {
     transform: rotate(0.75turn);
@@ -26,10 +34,9 @@
 .eqFrequency {
     display: flex;
     justify-content: space-around;
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     text-align: center;
 }
-
 
 /* RANGE SLIDERS */
 
@@ -63,4 +70,43 @@
     cursor: pointer;
     border: 5px solid lawngreen;
     border-radius: 4px;
+}
+
+.eqFrequencySlider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(252, 113, 0);
+    border-radius: 8px;
+}
+
+/* BUTTONS */
+
+#playButton {
+    /* border-radius: 50%; */
+    width: 100px;
+    border: none;
+    font-size: 50px;
+    background-color: rgb(252, 113, 0);
+}
+
+#playButton:hover {
+    transition-duration: 0.5s;
+    background-color: aqua;
+}
+
+#saveButton {
+    /* border-radius: 20%; */
+    width: 100px;
+    /* height: 40%; */
+    font-size: 30px;
+    border: none;
+    background-color: rgb(252, 113, 0);
+}
+
+#saveButton:hover {
+    transition-duration: 0.5s;
+    background-color: aqua;
 }
