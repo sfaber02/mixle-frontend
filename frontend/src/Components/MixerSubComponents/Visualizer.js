@@ -13,8 +13,7 @@ const Visualizer = (props) => {
     const canvasCtx = useRef();
     const analyserNode = useRef(props.analyserNode);
     const canvas = useRef()
-
-    // const canvas = useRef();
+    const wrapper = useRef();
 
     /**
      * Component Did Mount wrapper to ensure <canvas> element exists before this code runs
@@ -22,17 +21,16 @@ const Visualizer = (props) => {
     useEffect(() => {
         //DOM elements for <canvas> element and the div it is contained in
         canvas.current = document.getElementById("visualizer");
-        const wrapper = canvas.current.parentNode;
-        console.log (wrapper.offsetWidth);
-        console.log(wrapper.offsetHeight);
+        wrapper.current = canvas.current.parentNode;
+
         //Canvas window size settings
-        canvas.current.width = wrapper.offsetWidth;
-        canvas.current.height = wrapper.offsetHeight - 16;
-        console.log(canvas.current)
+        canvas.current.width = wrapper.current.offsetWidth;
+        canvas.current.height = wrapper.current.offsetHeight - 16;
+        
         // On resize event listener to dyanmcally resize canvas.current when window is resized
         window.onresize = () => {
-            canvas.current.width = wrapper.offsetWidth;
-            canvas.current.height = wrapper.offsetHeight - 16;
+            canvas.current.width = wrapper.current.offsetWidth;
+            canvas.current.height = wrapper.current.offsetHeight - 16;
         };
 
         //Create 2D canvas context for drawing the visualizer
@@ -44,9 +42,11 @@ const Visualizer = (props) => {
         let dataArray = new Uint8Array(bufferLength);
         let barHeight;
         let x = 0;
+        console.log(bufferLength);
 
         //Render a frame of the visualizer
         const renderFrame = () => {
+            // console.log (canvas.current.width);
             const barWidth = (canvas.current.width / bufferLength) * 13.5;
             // console.log (canvas.current.width, canvas.current.height);
             requestAnimationFrame(renderFrame);
@@ -57,7 +57,7 @@ const Visualizer = (props) => {
             analyserNode.current.getByteFrequencyData(dataArray);
 
             // Clears canvas.current before rendering bars (black with opacity 0.2)
-            canvasCtx.current.fillStyle = "rgba(0,0,0,.2)";
+            canvasCtx.current.fillStyle = "rgba(0,0,0,1)";
 
             // Fade effect, set opacity to 1 for sharper rendering of bars
             canvasCtx.current.fillRect(0, 0, canvas.current.width, canvas.current.height);
@@ -114,7 +114,7 @@ const Visualizer = (props) => {
                 );
 
                 //advances X coord to draw next bar
-                x += barWidth + 5;
+                x += barWidth + 6;
             }
         };
         renderFrame();
