@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
 import "../../Styles/scss/MixesCard.scss";
+import "../../Styles/mixes.css"
 import { defaultfx } from "../../settings/defaultfx.js";
 import artDB from "../../Actions/art.js";
 
@@ -344,7 +345,6 @@ export default function MixesCard() {
 
     return (
         <div id="mixesContainer">
-            <div id="availableVotes">Votes Left: {user.avaliablevotes}</div>
             <div id="transportControlsContainer">
                 <div id="timer">
                     {time.current.toFixed(2)}/{time.duration.toFixed(2)}
@@ -372,6 +372,7 @@ export default function MixesCard() {
                         />
                     </div>
                 </div>
+                <div id="availableVotes">Votes Left: {user.avaliablevotes}</div>
             </div>
             <div className={"music-card-container"}>
                 {effects.map((effect, index) => (

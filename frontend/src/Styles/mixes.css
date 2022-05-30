@@ -1,0 +1,34 @@
+#mixesContainer {
+    /* border: 5px solid purple; */
+    /* height: 100%; */
+    height: -moz-calc(100% - 82px);
+    height: -webkit-calc(100% - 82px);
+    
+
+    background: linear-gradient(
+            to right,
+            rgb(33, 24, 152),
+            rgb(76, 59, 172)
+        );
+}
+
+#transportControlsContainer {
+    background-color: black;
+    color: white;
+    position: fixed;
+    z-index: 1;
+    width: -moz-calc(100% - 16px);
+    width: -webkit-calc(100% - 16px);
+    height: 125px;
+    bottom: 0px;
+    margin: 8px;
+    border-radius: 5px;
+}
+
+.music-card-container {
+    /* border: 2px solid green; */
+    overflow: scroll;
+    height: -moz-calc(100% - 125px);
+    height: -webkit-calc(100% - 125px);
+    /* height: 500px; */
+}
