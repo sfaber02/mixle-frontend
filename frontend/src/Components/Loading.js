@@ -3,8 +3,8 @@ import "../Styles/Loading.css";
 
 /**
  * Animates loading dots using interval function
- * @param {*} element JOSH
- * @param {*} className HELP
+ * @param {Object} element - html element (div) which constains dot elements
+ * @param {string} className - className of html element to add to container
  */
 function animate(element, className) {
     element.classList.add(className);
@@ -16,9 +16,7 @@ function animate(element, className) {
     }, 2500);
 }
 
-
 export default function Loading() {
-    
     // Component did mount wrapper to grab div for loading animation
     useEffect(() => {
         let dots = document.querySelector(".dots");
