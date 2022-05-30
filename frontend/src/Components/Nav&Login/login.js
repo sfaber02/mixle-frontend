@@ -4,6 +4,12 @@ import "../../Styles/Login.css";
 
 const API = process.env.REACT_APP_API_URL;
 
+/**
+ *
+ * @param {object} userDetails - useState passed from app.js containing user information if logged in
+ * @param {function} setUserDetails - useState passed down from parent component to set username and userid from api call
+ * @returns JSX for login page
+ */
 function Login({ userDetails, setUserDetails }) {
     let navigate = useNavigate();
     const [user, setUser] = useState({
@@ -12,12 +18,14 @@ function Login({ userDetails, setUserDetails }) {
         user_id: userDetails.user_id,
     });
 
+    // redirect user from login if they are already logged in
     useEffect(() => {
         if (user.user_id) {
             navigate("/");
         }
     }, [user.user_id, navigate]);
 
+    // handleChange for input elements
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });
     };
@@ -25,6 +33,7 @@ function Login({ userDetails, setUserDetails }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // async function to get user data
             async function postFetch() {
                 const response = await fetch(`${API}/user/login`, {
                     method: "POST",
@@ -38,8 +47,9 @@ function Login({ userDetails, setUserDetails }) {
                 const data = await response.json();
                 return data;
             }
-
             const data = await postFetch();
+
+            // conditionls check fetch data if incorrect password or email
             if (!data.error) {
                 localStorage.setItem("user_id", JSON.stringify(data.user_id));
                 localStorage.setItem("username", JSON.stringify(data.username));

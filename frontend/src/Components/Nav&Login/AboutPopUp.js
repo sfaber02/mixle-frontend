@@ -1,6 +1,12 @@
 import "../../Styles/PopUp.css";
 
+/**
+ *
+ * @param {Object} props - props object containing trigger(boolean) and setTrigger(function) to control information icon on navBar
+ * @returns JSX for popup functionality in navBar icon
+ */
 export default function AboutPopUp(props) {
+    // updating state in parent component
     const handleClick = () => {
         props.setTrigger(!props.trigger);
     };
@@ -28,6 +34,7 @@ export default function AboutPopUp(props) {
                         nulla eu facilisis. Maecenas hendrerit sollicitudin
                         purus at placerat.
                     </p>
+                    <br />
                     <p>
                         Morbi volutpat, ante vel fringilla convallis, risus diam
                         commodo tortor, a cursus turpis elit vitae tellus. Cras
@@ -36,6 +43,7 @@ export default function AboutPopUp(props) {
                         metus nulla, a vehicula nunc pellentesque ut. Vivamus
                         rutrum odio mauris, a convallis ligula laoreet vitae.{" "}
                     </p>
+                    <br />
                     <div>
                         <p className="ghFollow">Follow Us on Github: </p>
                     </div>

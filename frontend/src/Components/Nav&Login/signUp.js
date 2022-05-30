@@ -4,8 +4,7 @@ import "../../Styles/SignUp.css";
 
 const API = process.env.REACT_APP_API_URL;
 
-
-function SignUp({ userDetails }) {
+function SignUp({ userDetails, setUserDetails }) {
     let navigate = useNavigate();
 
     //State to store current inputs
@@ -21,7 +20,6 @@ function SignUp({ userDetails }) {
             navigate("/");
         }
     }, [userDetails.user_id, navigate]);
-
 
     const handleChange = (event) => {
         setUser({ ...user, [event.target.id]: event.target.value });
@@ -43,6 +41,14 @@ function SignUp({ userDetails }) {
                 "user_id",
                 JSON.stringify(content.userInfo.user_id)
             );
+            localStorage.setItem(
+                "username",
+                JSON.stringify(content.userInfo.username)
+            );
+            setUserDetails({
+                username: content.userInfo.username,
+                user_id: content.userInfo.user_id,
+            });
             return navigate("/");
         } catch (error) {
             return error;

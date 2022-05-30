@@ -37,7 +37,12 @@ function App() {
                 <Route path="/audio" element={<MixesCard />} />
                 <Route
                     path="/register"
-                    element={<SignUp userDetails={userDetails} />}
+                    element={
+                        <SignUp
+                            userDetails={userDetails}
+                            setUserDetails={setUserDetails}
+                        />
+                    }
                 />
                 <Route
                     path="/login"

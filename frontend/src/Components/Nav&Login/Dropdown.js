@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-
+/**
+ *
+ * @param {Object} user -  user object used to manipulate dropdown element
+ * @returns JSX for dropdown element
+ */
 export default function Dropdown({ user }) {
     const navigate = useNavigate();
     const handleSignOut = () => {
