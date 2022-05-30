@@ -409,12 +409,13 @@ const Mixer = (props) => {
                     "user_id",
                     JSON.stringify(content.user_id)
                 );
-                return navigate("/");
+                return navigate("/audio");
             } catch (error) {
                 console.log(error);
             }
         } else {
             localStorage.setItem("temp_fx", JSON.stringify(fx));
+            if (playState.state === "playing") track.current.stop();
             navigate("/register");
         }
     };
