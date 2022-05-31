@@ -9,32 +9,28 @@
 
 #splashButton {
     display: flex;
+    font: Oswald;
     justify-content: center;
     align-items: center;
     min-height: 10vh;
     margin: 0 auto;
-    position:absolute;
-    bottom:0;
+    position: absolute;
+    left: 41.5%;
+    margin-top: 70px;
   }
-  
-  #splashPageButtonContainer {
-    position:absolute;
-    bottom:0;
-  }
+
 
   #splashButton, #splashButton::after {
     width: 150px;
     height: 20px;
     font-size: 14px;
-    font-family: 'Bebas Neue', cursive;
-    background: linear-gradient(45deg, transparent 5%, #4d01ff 5%);
+    background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
     border: 0;
     color: #fff;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     line-height: 88px;
-    box-shadow: 6px 0px 3px #c500f6;
+    box-shadow: 6px 0px 3px rgba(252,34,112,255);
     outline: transparent;
-    position: relative;
   }
   
   #splashButton::after {
@@ -52,7 +48,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 10%, #ddf600 3%, #f600dd 5%, #b3ff01 5%);
+    background: linear-gradient(45deg, transparent 10%, #ddf600 3%, rgba(252,34,112,255) 5%, #b3ff01 5%);
     text-shadow: -3px -3px 0px #F8F005, 5px 5px 0px #00f619;
     clip-path: var(--slice-0);
   }
