@@ -1,3 +1,52 @@
+#transportControlsContainer {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 33% 25% 33%;
+
+}
+
+#transportVolumeContainer {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+#transportVolumeContainer label {
+    position: relative;
+    top: 7px;
+}
+
+#timer {
+    grid-column: 2 / 3;
+    text-align: center;
+    font-size: 28px;
+}
+
+#playPause {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+    text-align: center;
+}
+
+#seekbar {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+}
+
+#availableVotes {
+    grid-column: 3 / 4;
+    grid-row: 2 / 4;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
 #mixesContainer {
     /* border: 5px solid purple; */
     /* height: 100%; */
@@ -22,7 +71,30 @@
     height: 125px;
     bottom: 0px;
     margin: 8px;
+    /* padding: 10px; */
     border-radius: 5px;
+}
+
+#transportSeekBarContainer {
+    margin-top: 5px;
+}
+
+#playPause button {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    border: 5px solid white;
+    border-radius: 50%;
+    font-size: 35px;
+    padding: 0px;
+    background-color: rgb(252, 113, 0);
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
+        0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
+
+#playPause button:hover {
+    transition-duration: 0.5s;
+    background-color: aqua;
 }
 
 .music-card-container {

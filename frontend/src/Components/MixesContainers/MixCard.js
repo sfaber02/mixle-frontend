@@ -73,7 +73,7 @@ export default function MixCard({
                     </Box>
                 </div>
             ) : (
-                <div  className="mixCard">
+                <div className="mixCard">
                     <div
                         id={effect.user_id}
                         onClick={handleClick}
@@ -88,9 +88,11 @@ export default function MixCard({
                     </div>
                     <div className="mixCardInfo">
                         <Name name={effect.username} className={"username"} />
-                        <p>{votes}</p>
+                        <p>
+                            {votes}{"    "}<i class="fa-solid fa-thumbs-up"></i>
+                        </p>
                     </div>
-                </ div>
+                </div>
             )}
         </div>
     );
