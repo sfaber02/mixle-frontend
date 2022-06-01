@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
 import "../../Styles/scss/MixesCard.scss";
+import "../../Styles/mixes.css"
 import { defaultfx } from "../../settings/defaultfx.js";
 import artDB from "../../Actions/art.js";
 
@@ -28,6 +29,7 @@ export default function MixesCard() {
     const [loading, setLoading] = useState(true);
     const [fx, setFx] = useState(() => defaultfx);
     const [effects, setEffects] = useState([]);
+    const [volume, setVolume] = useState(0.5);
 
     //states for vote tracking and updating
     // const [availableVotes, setAvailableVotes] = useState(0);
@@ -316,6 +318,21 @@ export default function MixesCard() {
         }
     };
 
+    /**
+     * handles onChange event from master volume slider in transport controls
+     * changes volumes of masterOutNode which is the last node in the FX chain
+     * @param {object} e
+     */
+    const setMasterVolume = (e) => {
+        console.log(e.target.value);
+        setVolume(e.target.value);
+    };
+
+    useEffect(() => {
+        console.log(volume);
+        masterOutNode.current.gain.value = Number(volume);
+    }, [volume]);
+
     const subtractVote = () => {
         if (user.avaliablevotes > 0) {
             var requestOptions = {
@@ -344,8 +361,20 @@ export default function MixesCard() {
 
     return (
         <div id="mixesContainer">
-            <div id="availableVotes">Votes Left: {user.avaliablevotes}</div>
             <div id="transportControlsContainer">
+                <div id="transportVolumeContainer">
+                    <label htmlFor="volume">Volume</label>
+                    <input
+                        type="range"
+                        id="volume"
+                        name="volume"
+                        min="0"
+                        max="1"
+                        step=".05"
+                        value={volume}
+                        onChange={setMasterVolume}
+                    />
+                </div>
                 <div id="timer">
                     {time.current.toFixed(2)}/{time.duration.toFixed(2)}
                 </div>
@@ -372,6 +401,7 @@ export default function MixesCard() {
                         />
                     </div>
                 </div>
+                <div id="availableVotes">Votes Left: {user.avaliablevotes}</div>
             </div>
             <div className={"music-card-container"}>
                 {effects.map((effect, index) => (
