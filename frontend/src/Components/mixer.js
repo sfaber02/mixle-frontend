@@ -278,12 +278,10 @@ const Mixer = (props) => {
      * @param {object} e
      */
     const setMasterVolume = (e) => {
-        console.log (e.target.value);
         setVolume(e.target.value);
     };
 
     useEffect(() => {
-        console.log(volume);
         masterOutNode.current.gain.value = Number(volume);
     }, [volume])
 
@@ -292,8 +290,10 @@ const Mixer = (props) => {
      */
     const startTimer = () => {
         timerStart.current = Date.now();
+        console.log (fx.speed.rate);
         timer.current = setInterval(() => {
             setTime((prev) => {
+                // console.log (fx.speed.rate);
                 return {
                     ...prev,
                     current:

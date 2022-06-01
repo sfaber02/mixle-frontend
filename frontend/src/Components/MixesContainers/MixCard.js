@@ -69,50 +69,63 @@ export default function MixCard({
     };
 
     return (
-      <div className={"music-card"}>
-        <>
-            {/* keyword allows user to hit esc key to close modal */}
-          <Modal show={show} onHide={handleClose} keyboard={false}></Modal>
+        <div className={"music-card"}>
+            <>
+                {/* keyword allows user to hit esc key to close modal */}
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                ></Modal>
 
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Sorry! You have no votes left for today!</Modal.Title>
-            </Modal.Header>
-            <Modal.Footer>
-              <Button variant="danger" size="lg" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-        {!loaded ? (
-          <div className={"Skeleton-top"}>
-            <Skeleton variant="rect" width={210} height={210} />
-            <Box pt={0.5}>
-              <Skeleton />
-              <Skeleton width="60%" />
-            </Box>
-          </div>
-        ) : (
-          <>
-            <div
-              id={effect.user_id}
-              onClick={handleClick}
-              className={"music-card-cover"}
-              onMouseOver={handleResponse}
-              onMouseEnter={handleMouseEnter}
-            >
-              <img src={imageSource} alt={"mixelArt"} />
-              <div className="thumbs-up">
-                <ThumbUpAltIcon />
-              </div>
-            </div>
-            <div>
-              <Name name={effect.username} className={"username"} />
-              <p>{votes}</p>
-            </div>
-          </>
-        )}
-      </div>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Sorry! You have no votes left for today!
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Footer>
+                        <Button
+                            variant="danger"
+                            size="lg"
+                            onClick={handleClose}
+                        >
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+            {!loaded ? (
+                <div className={"Skeleton-top"}>
+                    <Skeleton variant="rect" width={210} height={210} />
+                    <Box pt={0.5}>
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                    </Box>
+                </div>
+            ) : (
+                <>
+                    <div
+                        id={effect.user_id}
+                        onClick={handleClick}
+                        className={"music-card-cover"}
+                        onMouseOver={handleResponse}
+                        onMouseEnter={handleMouseEnter}
+                    >
+                        <img src={imageSource} alt={"mixelArt"} />
+                        <div className="thumbs-up">
+                            <ThumbUpAltIcon />
+                        </div>
+                    </div>
+                    <div className="mixCardInfo">
+                        <Name name={effect.username} className={"username"} />
+                        <p>
+                            {votes}{"   "}
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </p>
+                    </div>
+                </>
+            )}
+        </div>
     );
 }
