@@ -30,6 +30,7 @@ const Mixer = (props) => {
     const [time, setTime] = useState({ current: 0, duration: 0 });
     const [loading, setLoading] = useState(true);
     const [fx, setFx] = useState(defaultfx);
+    const [volume, setVolume] = useState(0.5);
 
     //Refs for time display
     const timer = useRef();
@@ -277,8 +278,14 @@ const Mixer = (props) => {
      * @param {object} e
      */
     const setMasterVolume = (e) => {
-        masterOutNode.current.gain.value = e.target.value;
+        console.log (e.target.value);
+        setVolume(e.target.value);
     };
+
+    useEffect(() => {
+        console.log(volume);
+        masterOutNode.current.gain.value = Number(volume);
+    }, [volume])
 
     /**
      * Creates an interval function to update the timer if song is playing
@@ -437,6 +444,7 @@ const Mixer = (props) => {
                                 min="0"
                                 max="1"
                                 step=".05"
+                                value={volume}
                                 onChange={setMasterVolume}
                             />
                         </div>
