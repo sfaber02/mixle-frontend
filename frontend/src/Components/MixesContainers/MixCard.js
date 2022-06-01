@@ -39,7 +39,6 @@ export default function MixCard({
                 setVotes((p) => (p += 1));
                 subtractVote();
             } else {
-                // window.alert("Sorry! You have no votes left for today!");
                 handleShow();
             }
         } else {
