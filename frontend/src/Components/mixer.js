@@ -290,10 +290,8 @@ const Mixer = (props) => {
      */
     const startTimer = () => {
         timerStart.current = Date.now();
-        console.log (fx.speed.rate);
         timer.current = setInterval(() => {
             setTime((prev) => {
-                // console.log (fx.speed.rate);
                 return {
                     ...prev,
                     current:
