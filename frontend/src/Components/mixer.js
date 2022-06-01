@@ -416,6 +416,7 @@ const Mixer = (props) => {
                     "user_id",
                     JSON.stringify(content.user_id)
                 );
+                if (playState.state === "playing") track.current.stop();
                 return navigate("/audio");
             } catch (error) {
                 console.log(error);
