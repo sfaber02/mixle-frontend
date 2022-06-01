@@ -6,6 +6,8 @@ import Name from "./Name";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import artDB from "../../Actions/art";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -19,8 +21,12 @@ export default function MixCard({
     const [isHovered, setHovered] = useState(false);
     const [votes, setVotes] = useState(effect.totalvotes);
     const [imageSource, setImageSource] = useState(artDB[random]);
-
+    const [show, setShow] = useState(false);
+    
     const navigate = useNavigate();
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleResponse = () => {
         setHovered(!isHovered);
@@ -33,7 +39,8 @@ export default function MixCard({
                 setVotes((p) => (p += 1));
                 subtractVote();
             } else {
-                window.alert("Sorry! You have no votes left for today!");
+                // window.alert("Sorry! You have no votes left for today!");
+                handleShow();
             }
         } else {
             navigate("/register");
@@ -62,35 +69,50 @@ export default function MixCard({
     };
 
     return (
-        <div className={"music-card"}>
-            {!loaded ? (
-                <div className={"Skeleton-top"}>
-                    <Skeleton variant="rect" width={210} height={210} />
-                    <Box pt={0.5}>
-                        <Skeleton />
-                        <Skeleton width="60%" />
-                    </Box>
-                </div>
-            ) : (
-                <>
-                    <div
-                        id={effect.user_id}
-                        onClick={handleClick}
-                        className={"music-card-cover"}
-                        onMouseOver={handleResponse}
-                        onMouseEnter={handleMouseEnter}
-                    >
-                        <img src={imageSource} alt={"mixelArt"} />
-                        <div className="thumbs-up">
-                            <ThumbUpAltIcon />
-                        </div>
-                    </div>
-                    <div>
-                        <Name name={effect.username} className={"username"} />
-                        <p>{votes}</p>
-                    </div>
-                </>
-            )}
-        </div>
+      <div className={"music-card"}>
+        <>
+            {/* keyword allows user to hit esc key to close modal */}
+          <Modal show={show} onHide={handleClose} keyboard={false}></Modal>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Sorry! You have no votes left for today!</Modal.Title>
+            </Modal.Header>
+            <Modal.Footer>
+              <Button variant="danger" size="lg" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+        {!loaded ? (
+          <div className={"Skeleton-top"}>
+            <Skeleton variant="rect" width={210} height={210} />
+            <Box pt={0.5}>
+              <Skeleton />
+              <Skeleton width="60%" />
+            </Box>
+          </div>
+        ) : (
+          <>
+            <div
+              id={effect.user_id}
+              onClick={handleClick}
+              className={"music-card-cover"}
+              onMouseOver={handleResponse}
+              onMouseEnter={handleMouseEnter}
+            >
+              <img src={imageSource} alt={"mixelArt"} />
+              <div className="thumbs-up">
+                <ThumbUpAltIcon />
+              </div>
+            </div>
+            <div>
+              <Name name={effect.username} className={"username"} />
+              <p>{votes}</p>
+            </div>
+          </>
+        )}
+      </div>
     );
 }
