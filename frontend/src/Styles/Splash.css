@@ -1,116 +1,185 @@
-#splashPageContainer {
+*{
+  margin: 0;
+  padding: 0;
+}
+
+section{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+section .top_row{
+  display: grid;
+  justify-content: center;
+  align-items: flex-end;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section .mid_row{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  white-space: nowrap;
+  font-size: 200px;
+}
+
+span{
+  margin: 10%;
+}
+
+.mid_row i{
+  color: rgb(233, 63, 113);
+  transition: 1s;
+  padding: 0 5px;
+  user-select: none;
+  cursor: default;
+  animation: rotation 10s infinite linear;
+}
+
+.mid_row i:hover{
+  transition: 0s;
+  color: #4d01ff;
+  text-shadow: 0 0 120px slateblue;
+}
+
+.logo{
+  height: 60%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+h2{
+  color: rgb(233, 63, 113);
+}
+
+#splashButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  margin: 0 auto;
+  position:absolute;
+  bottom:0;
+}
+
+#splashButtonContainer {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#splashButton, #splashButton::after {
+  width: 150px;
+  height: 20px;
+  font-size: 14px;
+  font-family: 'Bebas Neue', cursive;
+  background: linear-gradient(45deg, transparent 5%, #4d01ff 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 88px;
+  box-shadow: 6px 0px 3px #c500f6;
+  outline: transparent;
+  position: relative;
+}
+
+#splashButton::after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'START MIXING';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 10%, #ddf600 3%, #f600dd 5%, #b3ff01 5%);
+  text-shadow: -3px -3px 0px #F8F005, 5px 5px 0px #00f619;
+  clip-path: var(--slice-0);
+}
+
+#splashButton:hover::after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+/* #splashPageContainer {
   background-image: url("../Assets/Mixle_Icon-Nobg.png");
   height: 100%;
+  width: 100%;
   background-size: inherit;
   background-position: center;
   background-repeat: repeat-x;
   background-color: black;
 }
-
-#splashButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
-    margin: 0 auto;
-    position:absolute;
-    bottom:0;
-  }
-  
-  #splashButtonContainer {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-
-  #splashButton, #splashButton::after {
-    width: 150px;
-    height: 20px;
-    font-size: 14px;
-    font-family: 'Bebas Neue', cursive;
-    background: linear-gradient(45deg, transparent 5%, #4d01ff 5%);
-    border: 0;
-    color: #fff;
-    letter-spacing: 3px;
-    line-height: 88px;
-    box-shadow: 6px 0px 3px #c500f6;
-    outline: transparent;
-    position: relative;
-  }
-  
-  #splashButton::after {
-    --slice-0: inset(50% 50% 50% 50%);
-    --slice-1: inset(80% -6px 0 0);
-    --slice-2: inset(50% -6px 30% 0);
-    --slice-3: inset(10% -6px 85% 0);
-    --slice-4: inset(40% -6px 43% 0);
-    --slice-5: inset(80% -6px 5% 0);
-    
-    content: 'START MIXING';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 10%, #ddf600 3%, #f600dd 5%, #b3ff01 5%);
-    text-shadow: -3px -3px 0px #F8F005, 5px 5px 0px #00f619;
-    clip-path: var(--slice-0);
-  }
-  
-  #splashButton:hover::after {
-    animation: 1s glitch;
-    animation-timing-function: steps(2, end);
-  }
-  
-  @keyframes glitch {
-    0% {
-      clip-path: var(--slice-1);
-      transform: translate(-20px, -10px);
-    }
-    10% {
-      clip-path: var(--slice-3);
-      transform: translate(10px, 10px);
-    }
-    20% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 10px);
-    }
-    30% {
-      clip-path: var(--slice-3);
-      transform: translate(0px, 5px);
-    }
-    40% {
-      clip-path: var(--slice-2);
-      transform: translate(-5px, 0px);
-    }
-    50% {
-      clip-path: var(--slice-3);
-      transform: translate(5px, 0px);
-    }
-    60% {
-      clip-path: var(--slice-4);
-      transform: translate(5px, 10px);
-    }
-    70% {
-      clip-path: var(--slice-2);
-      transform: translate(-10px, 10px);
-    }
-    80% {
-      clip-path: var(--slice-5);
-      transform: translate(20px, -10px);
-    }
-    90% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 0px);
-    }
-    100% {
-      clip-path: var(--slice-1);
-      transform: translate(0);
-    }
-  }
-
-  
+   */
