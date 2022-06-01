@@ -41,7 +41,7 @@ span{
   padding: 0 5px;
   user-select: none;
   cursor: default;
-  animation: rotation 10s infinite linear;
+  animation: rotation 1.8s infinite linear;
 }
 
 .mid_row i:hover{
@@ -65,6 +65,7 @@ span{
 
 h2{
   color: rgb(233, 63, 113);
+  padding-left: 10px;
 }
 
 #splashButton {
