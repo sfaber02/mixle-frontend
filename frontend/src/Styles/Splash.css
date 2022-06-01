@@ -63,10 +63,6 @@ span{
   }
 }
 
-h2{
-  color: rgb(233, 63, 113);
-  padding-left: 10px;
-}
 
 #splashButton {
   display: flex;
@@ -91,7 +87,7 @@ h2{
   width: 150px;
   height: 20px;
   font-size: 14px;
-  font-family: 'Bebas Neue', cursive;
+  /* font-family: 'Bebas Neue', cursive; */
   background: linear-gradient(45deg, transparent 5%, #4d01ff 5%);
   border: 0;
   color: #fff;
@@ -125,6 +121,14 @@ h2{
 #splashButton:hover::after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
+}
+
+.low_row {
+  /* border: 1px solid white; */
+  color: rgb(233, 63, 113);
+  padding-left: 10px;
+  position: absolute;
+  bottom: 10px;
 }
 
 @keyframes glitch {
