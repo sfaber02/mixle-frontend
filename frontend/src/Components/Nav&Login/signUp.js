@@ -37,19 +37,25 @@ function SignUp({ userDetails, setUserDetails }) {
                 body: JSON.stringify(user),
             });
             const content = await response.json();
-            localStorage.setItem(
-                "user_id",
-                JSON.stringify(content.userInfo.user_id)
-            );
-            localStorage.setItem(
-                "username",
-                JSON.stringify(content.userInfo.username)
-            );
-            setUserDetails({
-                username: content.userInfo.username,
-                user_id: content.userInfo.user_id,
-            });
-            return navigate("/");
+
+            if (content.error) {
+                window.alert(content.error);
+                setUser({ ...user, email: "" });
+            } else {
+                localStorage.setItem(
+                    "user_id",
+                    JSON.stringify(content.userInfo.user_id)
+                );
+                localStorage.setItem(
+                    "username",
+                    JSON.stringify(content.userInfo.username)
+                );
+                setUserDetails({
+                    username: content.userInfo.username,
+                    user_id: content.userInfo.user_id,
+                });
+                return navigate("/");
+            }
         } catch (error) {
             return error;
         }

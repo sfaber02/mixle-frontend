@@ -1,9 +1,7 @@
-*{
+
+#splashPageContainer{
   margin: 0;
   padding: 0;
-}
-
-section{
   position: relative;
   width: 100%;
   height: 100vh;
@@ -36,7 +34,7 @@ span{
 }
 
 .mid_row i{
-  color: rgb(233, 63, 113);
+  color: rgba(252,34,112,255);
   transition: 1s;
   padding: 0 5px;
   user-select: none;
@@ -46,8 +44,8 @@ span{
 
 .mid_row i:hover{
   transition: 0s;
-  color: #4d01ff;
-  text-shadow: 0 0 120px slateblue;
+  color: rgb(33, 24, 152);
+  text-shadow: 0 0 120px   rgb(76, 59, 172);
 }
 
 .logo{
@@ -87,13 +85,16 @@ span{
   width: 150px;
   height: 20px;
   font-size: 14px;
-  /* font-family: 'Bebas Neue', cursive; */
-  background: linear-gradient(45deg, transparent 5%, #4d01ff 5%);
+  background: linear-gradient(
+            to right,
+            rgb(33, 24, 152),
+            rgb(76, 59, 172)
+        );
   border: 0;
   color: #fff;
   letter-spacing: 3px;
   line-height: 88px;
-  box-shadow: 6px 0px 3px #c500f6;
+  box-shadow: 6px 0px 3px rgba(252,34,112,255);
   outline: transparent;
   position: relative;
 }
@@ -113,7 +114,7 @@ span{
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 10%, #ddf600 3%, #f600dd 5%, #b3ff01 5%);
+  background: linear-gradient(45deg, transparent 10%, #ddf600 3%, rgba(252,34,112,255) 5%, #b3ff01 5%);
   text-shadow: -3px -3px 0px #F8F005, 5px 5px 0px #00f619;
   clip-path: var(--slice-0);
 }
@@ -125,7 +126,7 @@ span{
 
 .low_row {
   /* border: 1px solid white; */
-  color: rgb(233, 63, 113);
+  color: rgba(252,34,112,255);
   padding-left: 10px;
   position: absolute;
   bottom: 82px;

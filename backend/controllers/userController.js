@@ -22,7 +22,9 @@ user.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
     try {
         if (await doesUserExist(email)) {
-            res.status(400).send("User with that email already exists");
+            res.status(400).json({
+                error: "User with that email already exists",
+            });
             return;
         }
         const hashPassword = await bcrypt.hash(password, 10);
@@ -42,17 +44,17 @@ user.post("/register", async (req, res) => {
 });
 
 //GET USER INFO
-user.get('/:id', async(req, res) => {
+user.get("/:id", async (req, res) => {
     const id = req.params;
     try {
         const user = await getUserById(id.id);
         res.status(200).json(user);
     } catch (err) {
         res.status(400).json({
-            error: err
-        })
+            error: err,
+        });
     }
-})
+});
 
 // LOGIN CREATE REQUEST
 user.post("/login", async (req, res) => {
@@ -111,7 +113,7 @@ user.put("/votes/:id/:votes", async (req, res) => {
     const { id, votes } = req.params;
     try {
         const updatedUser = await updateUserVotes(votes, id);
-        
+
         res.status(202).json(updatedUser);
     } catch (err) {
         res.status(500).json({ error: "Update was unsuccessful." });

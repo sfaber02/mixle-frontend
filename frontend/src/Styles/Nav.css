@@ -9,6 +9,20 @@
     color: white;
 }
 
+
+.navbar a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-right: 0px;
+}
+
+.navbar a h1 {
+    margin-bottom: 0px;
+    padding-left: 61px;
+}
+
+
+
 .iconBtn{
     border: none;
     background-color: transparent;
