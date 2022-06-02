@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
 import "../../Styles/scss/MixesCard.scss";
-import "../../Styles/mixes.css"
+import "../../Styles/mixes.css";
 import { defaultfx } from "../../settings/defaultfx.js";
 import artDB from "../../Actions/art.js";
 
@@ -341,9 +341,7 @@ export default function MixesCard() {
             };
 
             fetch(
-                `http://localhost:3333/user/votes/${user.user_id}/${
-                    user.avaliablevotes - 1
-                }`,
+                `${API}/user/votes/${user.user_id}/${user.avaliablevotes - 1}`,
                 requestOptions
             )
                 .then((response) => response.json())
