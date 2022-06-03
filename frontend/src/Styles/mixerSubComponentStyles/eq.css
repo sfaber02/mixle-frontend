@@ -142,8 +142,8 @@
 /* BUTTONS */
 
 #playButton {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     border: 5px solid white;
     border-radius: 50%;
@@ -152,6 +152,12 @@
     background-color: rgb(252, 113, 0);
     box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
         0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
+
+#playButton i {
+    position: relative;
+    bottom: 5px;
+    left: 9px;
 }
 
 #playButton:hover {
@@ -170,8 +176,8 @@
 }
 
 #saveButton {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     border: 5px solid white;
     border-radius: 50%;
