@@ -154,7 +154,10 @@ const Mixer = (props) => {
         track.current.buffer = decodedAudio.current;
 
         //intialize time state, set loading state
-        setTime({ current: 0, duration: track.current.buffer.duration });
+        setTime({
+            current: 0,
+            duration: track.current.buffer.duration,
+        });
         setLoading(false);
 
         connectNodes();
@@ -283,7 +286,7 @@ const Mixer = (props) => {
 
     useEffect(() => {
         masterOutNode.current.gain.value = Number(volume);
-    }, [volume])
+    }, [volume]);
 
     /**
      * Creates an interval function to update the timer if song is playing
@@ -450,7 +453,14 @@ const Mixer = (props) => {
                         <div id="transportTimeContainer">
                             {/*PRETTIER keeps multilining the first .toFixed()! */}
                             {/* prettier-ignore */}
-                            <p>{`${time.current.toFixed(2)} / ${time.duration.toFixed(2)}`}</p>
+                            <p>{`${Math.floor(time.current / 60)}:${(time.current % 60).toFixed(0) < 10 ? 
+                                `0${(time.current % 60).toFixed(0)}`: 
+                                (time.current % 60).toFixed(0)}`} / 
+                            {`${Math.floor(time.duration / 60)}:
+                            ${(time.duration % 60).toFixed(0) < 10 ? 
+                                `0${(time.duration % 60).toFixed(0)}`: 
+                                (time.duration % 60).toFixed(0)}`}
+                            </p>
                         </div>
                         <div id="transportSeekBarContainer">
                             <input
@@ -490,3 +500,14 @@ const Mixer = (props) => {
 };
 
 export { Mixer };
+
+/*
+
+
+                Math.floor(time.duration / 60),
+                (time.duration % 60).toFixed(2) < 10
+                    ? `0${(time.duration % 60).toFixed(2)}`
+                    : (time.duration % 60).toFixed(2)
+            
+
+            */
