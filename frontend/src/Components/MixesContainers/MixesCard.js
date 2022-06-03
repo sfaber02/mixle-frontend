@@ -265,16 +265,19 @@ export default function MixesCard() {
     const startTimer = () => {
         timerStart.current = Date.now();
         timer.current = setInterval(() => {
+            let cTime =
+                seekOffset.current > 0
+                    ? seekOffset.current +
+                      (ctx.current.currentTime - seekTimeStamp.current)
+                    : ctx.current.currentTime -
+                      (timerStart.current - loadStart.current) / 1000 +
+                      seekOffset.current;
+            if (cTime <= 0) cTime = 0;
+
             setTime((prev) => {
                 return {
                     ...prev,
-                    current:
-                        seekOffset.current > 0
-                            ? seekOffset.current +
-                              (ctx.current.currentTime - seekTimeStamp.current)
-                            : ctx.current.currentTime -
-                              (timerStart.current - loadStart.current) / 1000 +
-                              seekOffset.current,
+                    current: cTime,
                 };
             });
         }, 50);
@@ -374,7 +377,18 @@ export default function MixesCard() {
                     />
                 </div>
                 <div id="timer">
-                    {time.current.toFixed(2)}/{time.duration.toFixed(2)}
+                    {`${Math.floor(time.current / 60)}:${
+                        (time.current % 60).toFixed(0) < 10
+                            ? `0${(time.current % 60).toFixed(0)}`
+                            : (time.current % 60).toFixed(0)
+                    }`}{" "}
+                    /
+                    {`${Math.floor(time.duration / 60)}:
+                            ${
+                                (time.duration % 60).toFixed(0) < 10
+                                    ? `0${(time.duration % 60).toFixed(0)}`
+                                    : (time.duration % 60).toFixed(0)
+                            }`}
                 </div>
                 <div id="playPause">
                     <button onClick={handlePlayPause}>

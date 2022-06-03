@@ -146,7 +146,7 @@
     height: 150px;
     margin: auto;
     border: 5px solid white;
-    border-radius: 50%;
+    border-radius: 35%;
     font-size: 100px;
     padding: 0;
     background-color: rgb(252, 113, 0);
@@ -154,11 +154,6 @@
         0 6px 20px 0 rgba(255, 255, 255, 0.19);
 }
 
-#playButton i {
-    position: relative;
-    bottom: 5px;
-    left: 9px;
-}
 
 #playButton:hover {
     transition-duration: 0.5s;
@@ -180,7 +175,7 @@
     height: 150px;
     margin: auto;
     border: 5px solid white;
-    border-radius: 50%;
+    border-radius: 35%;
     font-size: 50px;
     padding: 0;
     background-color: rgb(252, 113, 0);
