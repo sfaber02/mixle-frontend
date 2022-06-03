@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 33% 25% 33%;
-
 }
 
 #transportVolumeContainer {
@@ -39,19 +38,11 @@
     font-size: 25px;
 }
 
-
-
-
-
-
-
-
-
 #mixesContainer {
     /* border: 5px solid purple; */
     /* height: 100%; */
-    height: -moz-calc(100% - 82px);
-    height: -webkit-calc(100% - 82px);
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
     
 
     background: linear-gradient(
