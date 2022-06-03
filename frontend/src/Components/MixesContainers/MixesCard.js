@@ -363,11 +363,11 @@ export default function MixesCard() {
     return (
         <div id="mixesContainer">
             <div id="transportControlsContainer">
-                <div id="transportVolumeContainer">
-                    <label htmlFor="volume">Volume</label>
+                <div id="transportVolumeContainerMixes">
+                    <label htmlFor="volumeMixes">Volume</label>
                     <input
                         type="range"
-                        id="volume"
+                        id="volumeMixes"
                         name="volume"
                         min="0"
                         max="1"
@@ -382,7 +382,7 @@ export default function MixesCard() {
                             ? `0${(time.current % 60).toFixed(0)}`
                             : (time.current % 60).toFixed(0)
                     }`}{" "}
-                    /
+                    / {"  "}
                     {`${Math.floor(time.duration / 60)}:
                             ${
                                 (time.duration % 60).toFixed(0) < 10

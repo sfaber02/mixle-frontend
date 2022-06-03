@@ -19,7 +19,6 @@
 
 
 #transportVolumeContainer {
-    /* border: 1px solid red; */
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     display: flex;
@@ -31,9 +30,7 @@
 }
 
 #transportVolumeContainer label {
-    /* border: 1px solid purple; */
     margin-right: 5px;
-    padding: 0px;
 }
 
 #transportTimeContainer {
