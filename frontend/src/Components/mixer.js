@@ -383,13 +383,13 @@ const Mixer = (props) => {
                 const data = {
                     effects: JSON.stringify(fx),
                     user_id: user,
-                    audio_id: 1,
+                    audio_id: 2,
                 };
 
                 let method;
 
                 const existResponse = await fetch(
-                    `${API}/effects/exist/1/${user}`,
+                    `${API}/effects/exist/2/${user}`,
                     {
                         method: "GET",
                         headers: {

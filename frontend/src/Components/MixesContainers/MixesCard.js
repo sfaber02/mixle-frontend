@@ -81,7 +81,7 @@ export default function MixesCard() {
      */
     useEffect(() => {
         //FETCH ALL MIXES FOR SONG ID
-        fetch(`${API}/effects/allusers/1`)
+        fetch(`${API}/effects/allusers/2`)
             .then((res) => {
                 return res.json();
             })
