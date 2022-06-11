@@ -81,7 +81,7 @@ export default function MixesCard() {
      */
     useEffect(() => {
         //FETCH ALL MIXES FOR SONG ID
-        fetch(`${API}/effects/allusers/3`)
+        fetch(`${API}/effects/allusers/4`)
             .then((res) => {
                 return res.json();
             })
@@ -145,7 +145,9 @@ export default function MixesCard() {
         masterOutNode.current = ctx.current.createGain();
 
         //Fetch Song from Server and decode audio for playback
-        fetch(process.env.REACT_APP_SONG_URL)
+        fetch(
+            "https://www.shawnfaber.com/audio/04.%20Kendrick%20Lamar%20-%20Die%20Hard.flac"
+        )
             .then((data) => {
                 // console.log(data);
                 return data.arrayBuffer();

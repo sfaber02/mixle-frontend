@@ -122,7 +122,9 @@ const Mixer = (props) => {
             masterOutNode.current = ctx.current.createGain();
 
             //Fetch Song from Server and decode audio for playback
-            fetch(process.env.REACT_APP_SONG_URL)
+            fetch(
+                "https://www.shawnfaber.com/audio/04.%20Kendrick%20Lamar%20-%20Die%20Hard.flac"
+            )
                 .then((data) => {
                     // console.log(data);
                     return data.arrayBuffer();
@@ -383,13 +385,13 @@ const Mixer = (props) => {
                 const data = {
                     effects: JSON.stringify(fx),
                     user_id: user,
-                    audio_id: 3,
+                    audio_id: 4,
                 };
 
                 let method;
 
                 const existResponse = await fetch(
-                    `${API}/effects/exist/3/${user}`,
+                    `${API}/effects/exist/4/${user}`,
                     {
                         method: "GET",
                         headers: {
