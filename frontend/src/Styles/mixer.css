@@ -101,9 +101,9 @@ main {
             "visualizer"
             "transport"
             "speed"
-            "compressor"
+            "eq"
             "delay"
-            "eq";
+            "compressor";
         justify-items: center;
         grid-template-columns: 100%;
     }

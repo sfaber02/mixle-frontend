@@ -282,9 +282,8 @@ const Mixer = (props) => {
      * changes volumes of masterOutNode which is the last node in the FX chain
      * @param {object} e
      */
-    const setMasterVolume = (e) => {
-        setVolume(e.target.value);
-    };
+    const setMasterVolume = e => setVolume(e.target.value);
+
 
     useEffect(() => {
         masterOutNode.current.gain.value = Number(volume);
@@ -335,7 +334,7 @@ const Mixer = (props) => {
             ctx.current.resume();
             setPlayState({ state: "playing" });
         }
-        setPlayPause((prev) => !prev);
+        setPlayPause(prev => !prev);
     };
 
     /**

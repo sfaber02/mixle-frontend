@@ -24,7 +24,7 @@ const PlaySpeed = (props) => {
                     type="range"
                     min=".1"
                     max="4"
-                    step=".1"
+                    step=".03"
                     value={fx.speed.rate}
                     onChange={handleSetFx}
                 />

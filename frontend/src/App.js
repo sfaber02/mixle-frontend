@@ -7,7 +7,7 @@ import SignUp from "./Components/Nav&Login/signUp";
 import { MixerWrapper } from "./Components/mixersplashwrapper.js";
 import Login from "./Components/Nav&Login/login";
 import NavBar from "./Components/Nav&Login/navBar";
-import MixesCard from "./Components/MixesContainers/MixesCard";
+import MixesCard from "./Components/MixesContainers/Mixes";
 import AboutPopUp from "./Components/Nav&Login/AboutPopUp";
 
 function App() {

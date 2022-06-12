@@ -1,7 +1,5 @@
 /* ----------------- EQUALIZER CSS ------------- */
 
-/* SPACING */
-
 /* FOR DESKTOP */
 @media only screen and (min-device-width: 601px) {
     #eqPlaySaveContainer {
@@ -29,21 +27,21 @@
         /* border: 1px solid purple; */
         display: grid;
         grid-template-columns: 50% 50%;
-        grid-template-rows: 400px 100px;
+        grid-template-rows: 100px 400px;
     }
 
     #eqContainer {
-        grid-row: 1 / 2;
+        grid-row: 2 / 3;
         grid-column: 1 / 3;
     }
 
     #playButton {
-        grid-row: 2 / 3;
+        grid-row: 1 / 2;
         grid-column: 1 / 2;
     }
 
     #saveButton {
-        grid-row: 2 / 3;
+        grid-row: 1 / 2;
         grid-column: 2 / 3;
     }
 }
@@ -196,9 +194,9 @@
     height: 100%;
     margin: auto;
     border: none;
-    border-radius: 50%;
+    border-radius: 35%;
     font-size: 50px;
-    padding: 0;
+    padding: 0px;
     background-color: rgb(252, 113, 0);
     box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
         0 6px 20px 0 rgba(255, 255, 255, 0.19);
@@ -224,7 +222,7 @@
         height: 100%;
         margin: auto;
         border: none;
-        border-radius: 50%;
+        border-radius: 35%;
         font-size: 25px;
         padding: 0;
         background-color: rgb(252, 113, 0);

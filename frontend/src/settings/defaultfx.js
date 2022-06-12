@@ -11,7 +11,7 @@ const defaultfx =
       wet: 0,
     },
     compressor: {
-      threshold: -60,
+      threshold: 0,
       ratio: 1,
       attack: 0.001,
       release: 0.001,
