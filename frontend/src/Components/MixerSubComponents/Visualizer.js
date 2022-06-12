@@ -42,7 +42,6 @@ const Visualizer = (props) => {
         let dataArray = new Uint8Array(bufferLength);
         let barHeight;
         let x = 0;
-        console.log(bufferLength);
 
         //Render a frame of the visualizer
         const renderFrame = () => {

@@ -68,6 +68,10 @@ export default function MixCard({
         handleUserChange(e.target.parentNode.id);
     };
 
+    const handlePlayClick = (e) => {
+        handleUserChange(e.target.className);
+    }
+
     return (
         <div className={"music-card"}>
             <>
@@ -117,12 +121,13 @@ export default function MixCard({
                             <ThumbUpAltIcon />
                         </div>
                     </div>
-                    <div className="mixCardInfo">
+                    <div className="mixCardInfo" >
                         <Name name={effect.username} className={"username"} />
                         <p>
                             {votes}{"   "}
                             <i class="fa-solid fa-thumbs-up"></i>
                         </p>
+                        <button id="MixCardButton" className={effect.user_id} onClick={handlePlayClick}>Play</button>
                     </div>
                 </>
             )}

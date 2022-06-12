@@ -379,7 +379,9 @@ const Mixer = (props) => {
      */
     const handleSaveClick = async () => {
         let user = JSON.parse(localStorage.getItem("user_id"));
+        console.log (user);
         if (user) {
+            console.log ('1');
             try {
                 const data = {
                     effects: JSON.stringify(fx),
