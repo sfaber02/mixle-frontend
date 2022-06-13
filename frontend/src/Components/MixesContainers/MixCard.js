@@ -37,7 +37,7 @@ export default function MixCard({
         let user = JSON.parse(localStorage.getItem("user_id"));
         if (user) {
             if (avaliableVotes > 0) {
-                setVotes((p) => (p += 1));
+                setVotes(p => p += 1);
                 subtractVote();
             } else {
                 handleShow();

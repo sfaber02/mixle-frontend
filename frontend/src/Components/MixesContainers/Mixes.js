@@ -81,7 +81,7 @@ export default function MixesCard() {
      */
     useEffect(() => {
         //FETCH ALL MIXES FOR SONG ID
-        fetch(`${API}/effects/allusers/4`)
+        fetch(`${API}/effects/allusers/5`)
             .then((res) => {
                 return res.json();
             })
@@ -146,7 +146,7 @@ export default function MixesCard() {
 
         //Fetch Song from Server and decode audio for playback
         fetch(
-            "https://www.shawnfaber.com/audio/04.%20Kendrick%20Lamar%20-%20Die%20Hard.flac"
+            "https://www.shawnfaber.com/audio/Rezz,%20deadmau5%20-%20Hypnocurrency.flac"
         )
             .then((data) => {
                 // console.log(data);
