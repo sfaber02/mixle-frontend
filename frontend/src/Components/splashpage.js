@@ -13,17 +13,10 @@ function SplashPage(props) {
         <img src={Image} alt="logo" className="logo" />
       </div>
       <div className="mid_row">
-        <div className="records">
-          <i className="fa-solid fa-compact-disc"></i>
-        </div>
-        <span></span>
         <div id="splashButtonContainer">
           <button id="splashButton" onClick={props.handleStartClick}>
             Start Mixing
           </button>
-        </div>
-        <div className="records">
-          <i className="fa-solid fa-compact-disc"></i>
         </div>
       </div>
       <div className="low_row">

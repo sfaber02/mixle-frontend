@@ -12,46 +12,19 @@
 }
 
 section .top_row{
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: flex-end;
   margin-left: auto;
   margin-right: auto;
 }
 
-section .mid_row{
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  white-space: nowrap;
-  font-size: 200px;
-}
-
-#splashPageContainer span{
-  margin: 10%;
-}
-
-.mid_row i{
-  color: rgba(252,34,112,255);
-  transition: 1s;
-  padding: 0 5px;
-  user-select: none;
-  cursor: default;
-  animation: rotation 1.8s infinite linear;
-}
-
-.mid_row i:hover{
-  transition: 0s;
-  color: rgb(33, 24, 152);
-  text-shadow: 0 0 120px   rgb(76, 59, 172);
-}
-
 .logo{
   height: 60%;
 }
-
+.top_row img {
+  animation: rotation 1.8s infinite linear;
+}
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -60,7 +33,6 @@ section .mid_row{
     transform: rotate(359deg);
   }
 }
-
 
 #splashButton {
   display: flex;
