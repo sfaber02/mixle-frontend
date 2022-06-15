@@ -150,7 +150,7 @@ main {
     }
 
     #eqPlaySaveContainer {
-        border: 1px solid yellow;
+        /* border: 1px solid yellow; */
         grid-area: eq;
         margin: 8px;
         width: -moz-calc(100% - 16px);
