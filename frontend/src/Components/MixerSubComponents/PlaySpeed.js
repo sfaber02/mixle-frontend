@@ -16,7 +16,7 @@ const PlaySpeed = (props) => {
     return (
         <div id="playSpeedContainer">
             <div className="playSpeedSliderContainer">
-                <label className="playSpeedLabel" htmlFor="speed.rate">Play Speed</label>
+                <label className="playSpeedLabel" htmlFor="speed.rate">Speed</label>
                 <input
                     id="speed.rate"
                     name="speed.rate"

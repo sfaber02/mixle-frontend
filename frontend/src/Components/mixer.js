@@ -481,19 +481,23 @@ const Mixer = (props) => {
                     <PlaySpeed handleSetFx={handleSetFx} fx={fx} />
                     <Compressor handleSetFx={handleSetFx} fx={fx} />
                     <div id="eqPlaySaveContainer">
-                        <button id="playButton" onClick={handlePlayPause}>
-                            <span>
-                                {playPause ? (
-                                    <i className="fa-solid fa-pause"></i>
-                                ) : (
-                                    <i className="fa-solid fa-play"></i>
-                                )}
-                            </span>
-                        </button>
+                        <div id="playButtonContainer">
+                            <button id="playButton" onClick={handlePlayPause}>
+                                <span>
+                                    {playPause ? (
+                                        <i className="fa-solid fa-pause"></i>
+                                    ) : (
+                                        <i className="fa-solid fa-play"></i>
+                                    )}
+                                </span>
+                            </button>
+                        </div>
                         <Eq handleSetFx={handleSetFx} fx={fx} />
-                        <button id="saveButton" onClick={handleSaveClick}>
-                            Save
-                        </button>
+                        <div id="saveButtonContainer">
+                            <button id="saveButton" onClick={handleSaveClick}>
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
