@@ -1,3 +1,17 @@
+#mixesContainer {
+    /* border: 5px solid purple; */
+    /* height: 100%; */
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
+    
+
+    background: linear-gradient(
+            to right,
+            rgb(33, 24, 152),
+            rgb(76, 59, 172)
+        );
+}
+
 #transportControlsContainer {
     display: grid;
     grid-template-columns: 20% 60% 20%;
@@ -40,19 +54,6 @@
     font-size: 25px;
 }
 
-#mixesContainer {
-    /* border: 5px solid purple; */
-    /* height: 100%; */
-    height: -moz-calc(100% - 64px);
-    height: -webkit-calc(100% - 64px);
-    
-
-    background: linear-gradient(
-            to right,
-            rgb(33, 24, 152),
-            rgb(76, 59, 172)
-        );
-}
 
 #transportControlsContainer {
     background-color: black;

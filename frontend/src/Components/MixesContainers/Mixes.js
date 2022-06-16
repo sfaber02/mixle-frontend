@@ -334,7 +334,6 @@ export default function MixesCard() {
     };
 
     useEffect(() => {
-        console.log(volume);
         masterOutNode.current.gain.value = Number(volume);
     }, [volume]);
 
