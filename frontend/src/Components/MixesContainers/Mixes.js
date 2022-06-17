@@ -384,12 +384,11 @@ export default function MixesCard() {
                             : (time.current % 60).toFixed(0)
                     }`}{" "}
                     / {"  "}
-                    {`${Math.floor(time.duration / 60)}:
-                            ${
-                                (time.duration % 60).toFixed(0) < 10
-                                    ? `0${(time.duration % 60).toFixed(0)}`
-                                    : (time.duration % 60).toFixed(0)
-                            }`}
+                    {`${Math.floor(time.duration / 60)}:${
+                        (time.duration % 60).toFixed(0) < 10
+                            ? `0${(time.duration % 60).toFixed(0)}`
+                            : (time.duration % 60).toFixed(0)
+                    }`}
                 </div>
                 <div id="playPause">
                     <button onClick={handlePlayPause}>
