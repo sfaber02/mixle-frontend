@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import MixCard from "./MixCard.js";
-import "../../Styles/scss/MixesCard.scss";
 import "../../Styles/mixes.css";
 import { defaultfx } from "../../settings/defaultfx.js";
 import artDB from "../../Actions/art.js";
@@ -149,16 +148,13 @@ export default function MixesCard() {
             "https://www.shawnfaber.com/audio/Rezz,%20deadmau5%20-%20Hypnocurrency.flac"
         )
             .then((data) => {
-                // console.log(data);
                 return data.arrayBuffer();
             })
             .then((arrayBuffer) => {
-                // console.log(arrayBuffer);
                 return ctx.current.decodeAudioData(arrayBuffer);
             })
             .then((decodedAudio) => {
                 timerOffset.current = (Date.now() - loadStart.current) / 1000;
-                // console.log(timerOffset.current);
                 createTrackNode(decodedAudio);
             })
             .catch((err) => console.log(err));
@@ -391,13 +387,13 @@ export default function MixesCard() {
                     }`}
                 </div>
                 <div id="playPause">
-                    <button onClick={handlePlayPause}>
+                    {!loading && <button onClick={handlePlayPause}>
                         {playPause ? (
                             <i className="fa-solid fa-pause"></i>
                         ) : (
                             <i className="fa-solid fa-play"></i>
                         )}
-                    </button>
+                    </button>}
                 </div>
                 <div id="seekbar">
                     <div id="transportSeekBarContainer">

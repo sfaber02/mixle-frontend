@@ -68,7 +68,7 @@ export default function MixCard({
     };
 
     const handlePlayClick = (e) => {
-        handleUserChange(e.target.className);
+        handleUserChange(e.target.className.split(' ')[0]);
     }
 
     return (
@@ -128,11 +128,10 @@ export default function MixCard({
                             <i class="fa-solid fa-thumbs-up"></i>
                         </p>
                         <button
-                            id="MixCardButton"
-                            className={effect.user_id}
+                            className={`${effect.user_id} mixCardButton`}
                             onClick={handlePlayClick}
                         >
-                            <i className="fa-solid fa-play"></i>
+                            <i className={`${effect.user_id} fa-solid fa-play`}></i>
                         </button>
                     </div>
                 </>

@@ -1,9 +1,6 @@
 #mixesContainer {
-    /* border: 1px solid purple; */
-    /* height: 100%; */
     height: -moz-calc(100% - 64px);
     height: -webkit-calc(100% - 64px);
-
     background: linear-gradient(to right, rgb(33, 24, 152), rgb(76, 59, 172));
 }
 
@@ -129,6 +126,14 @@
         border: 5px solid lawngreen;
         border-radius: 4px;
     }
+
+    .music-card-container {
+        /* border: 2px solid green; */
+        overflow: scroll;
+        height: -moz-calc(100% - 125px);
+        height: -webkit-calc(100% - 125px);
+        /* height: 500px; */
+    }
 }
 
 /**************MOBILE LAYOUT *****************/
@@ -145,7 +150,7 @@
         margin: 8px;
         /* padding: 10px; */
         border-radius: 5px;
-        border: 1px solid purple;
+        /* border: 1px solid purple; */
     }
 
     #transportControlsContainer {
@@ -184,7 +189,7 @@
         grid-row: 3 / 4;
         text-align: center;
         margin: auto;
-        border: 1px solid yellow;
+        /* border: 1px solid yellow; */
     }
 
     #seekbar {
@@ -258,14 +263,18 @@
         border: 5px solid lawngreen;
         border-radius: 4px;
     }
+
+    .music-card-container {
+        /* border: 2px solid green; */
+        overflow: scroll;
+        height: -moz-calc(100% - 250px);
+        height: -webkit-calc(100% - 250px);
+        /* height: 500px; */
+    }
 }
 
 .music-card-container {
-    /* border: 2px solid green; */
-    overflow: scroll;
-    height: -moz-calc(100% - 125px);
-    height: -webkit-calc(100% - 125px);
-    /* height: 500px; */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
 }
-
-/* Sliders */
