@@ -21,6 +21,7 @@ const Eq = (props) => {
                 </label>
                 <input
                     id="eq.band1.gain"
+                    orient="vertical"
                     name="eq.band1.gain"
                     className="eqGain"
                     type="range"

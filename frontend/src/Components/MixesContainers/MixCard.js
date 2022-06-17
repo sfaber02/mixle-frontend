@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../../Styles/scss/MixCard.scss";
 import "../../Styles/mixCard.css"
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import Name from "./Name";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import artDB from "../../Actions/art";
@@ -121,13 +120,20 @@ export default function MixCard({
                             <ThumbUpAltIcon />
                         </div>
                     </div>
-                    <div className="mixCardInfo" >
-                        <Name name={effect.username} className={"username"} />
+                    <div className="mixCardInfo">
+                        {effect.username}
                         <p>
-                            {votes}{"   "}
+                            {votes}
+                            {"   "}
                             <i class="fa-solid fa-thumbs-up"></i>
                         </p>
-                        <button id="MixCardButton" className={effect.user_id} onClick={handlePlayClick}>Play</button>
+                        <button
+                            id="MixCardButton"
+                            className={effect.user_id}
+                            onClick={handlePlayClick}
+                        >
+                            <i className="fa-solid fa-play"></i>
+                        </button>
                     </div>
                 </>
             )}

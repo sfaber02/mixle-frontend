@@ -253,6 +253,7 @@ const Mixer = (props) => {
      * @param {object} e
      */
     const handleSetFx = (e) => {
+        let key = e.target.value.split('');
         setFx((prev) => {
             if (e.target.id.split(".").length === 3) {
                 return {
