@@ -77,15 +77,12 @@
     margin: 2px;
     border-radius: 5px;
     width: 20%;
-    /* width: -moz-calc(100% / 5);
-    width: -webkit-calc(100% / 5); */
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
         0 6px 20px 0 rgba(255, 255, 255, 0.19);
-    /* border: 1px solid yellow; */
 }
 
 .eqBand label {
@@ -93,8 +90,7 @@
 }
 
 .eqGain {
-    /* transform: rotate(0.75turn); */
-    -webkit-appearance: slider-vertical;
+    transform: rotate(270deg);
 }
 
 .eqGainLabel {
@@ -122,6 +118,31 @@
     border: 5px solid rgb(252, 113, 0);
     border-radius: 8px;
 }
+
+.eqGain {
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 200px;
+    height: 20px;
+    margin: 0px;
+    background: #000;
+    outline: none;
+    border: 5px solid rgb(252, 113, 0);
+    border-radius: 8px;
+}
+
+.eqGain::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 50px;
+    background: #000;
+    cursor: pointer;
+    border: 5px solid rgb(59, 252, 0);
+    border-radius: 4px;
+}
+
+
 
 /* BUTTONS */
 
