@@ -325,7 +325,6 @@ export default function MixesCard() {
      * @param {object} e
      */
     const setMasterVolume = (e) => {
-        console.log(e.target.value);
         setVolume(e.target.value);
     };
 
