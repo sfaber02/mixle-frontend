@@ -2,26 +2,26 @@
 #splashPageContainer{
   margin: 0;
   padding: 0;
-  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: black;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 25% 25%;
 }
 
-section .top_row{
+.top_row {
+  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .logo{
-  height: 60%;
+  margin: auto;
+  max-height: 70%;
+  height: auto;
 }
+
 .top_row img {
   animation: rotation 1.8s infinite linear;
 }
@@ -34,23 +34,14 @@ section .top_row{
   }
 }
 
-#splashButton {
+#splashButtonContainer {
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 10vh;
-  margin: 0 auto;
-  position:absolute;
-  bottom:0;
 }
 
-#splashButtonContainer {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+#splashButton {
+  min-height: 10vh;
+  margin: auto;
 }
 
 #splashButton, #splashButton::after {
@@ -97,11 +88,15 @@ section .top_row{
 }
 
 .low_row {
-  /* border: 1px solid white; */
+  display: flex;
+  height: 100%;
+  width: 100%;
   color: rgba(252,34,112,255);
-  padding-left: 10px;
-  position: absolute;
-  bottom: 82px;
+  margin: auto;
+}
+
+.low_row h2 {
+  margin: auto;
 }
 
 @keyframes glitch {
